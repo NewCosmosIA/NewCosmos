@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NewCosmos — Terapia Integrativa com IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --deep: #0a0e14;
+    --void: #060a0f;
+    --slate: #141c26;
+    --mist: #1e2a38;
+    --teal: #4ecdc4;
+    --teal-dim: #2a8c86;
+    --gold: #c9a96e;
+    --gold-dim: #8a6e3e;
+    --cream: #f0ebe2;
+    --fog: #a8b4c0;
+    --white: #ffffff;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--cream);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(6,10,15,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+
+  .nav-logo {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--teal); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--fog);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--teal);
+    color: var(--teal) !important;
+    padding: 0.5rem 1.4rem;
+    border-radius: 2px;
+    transition: all 0.3s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--teal) !important;
+    color: var(--deep) !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 3rem 4rem;
+  }
+
+  /* ANIMATED ORBS */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    animation: drift 20s ease-in-out infinite alternate;
+  }
+
+  .orb-1 {
+    width: 600px; height: 600px;
+    background: var(--teal);
+    top: -200px; right: -100px;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 400px; height: 400px;
+    background: var(--gold);
+    bottom: -100px; left: -100px;
+    animation-delay: -7s;
+    opacity: 0.08;
+  }
+
+  .orb-3 {
+    width: 300px; height: 300px;
+    background: #6e9ecf;
+    top: 50%; left: 40%;
+    animation-delay: -14s;
+    opacity: 0.06;
+  }
+
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(40px, -60px) scale(1.1); }
+  }
+
+  /* MANDALA SVG BG */
+  .mandala-bg {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 560px;
+    height: 560px;
+    opacity: 0.06;
+    animation: rotate-slow 60s linear infinite;
+  }
+
+  @keyframes rotate-slow {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--teal);
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .hero-title .gold { color: var(--gold); }
+
+  .hero-subtitle {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--fog);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  .hero-body {
+    font-size: 1rem;
+    color: var(--fog);
+    max-width: 480px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--teal);
+    color: var(--deep);
+    padding: 0.9rem 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+
+  .btn-primary:hover {
+    background: #5fddd4;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(78,205,196,0.3);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: transparent;
+    color: var(--cream);
+    padding: 0.9rem 2rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border: 1px solid rgba(240,235,226,0.2);
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(240,235,226,0.5);
+    background: rgba(240,235,226,0.04);
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(78,205,196,0.3), transparent);
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--teal);
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* COMO FUNCIONA */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .how-card {
+    background: var(--slate);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .how-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--teal), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .how-card:hover { background: var(--mist); }
+  .how-card:hover::before { opacity: 1; }
+
+  .how-number {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: rgba(78,205,196,0.12);
+    line-height: 1;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+  }
+
+  .how-card:hover .how-number { color: rgba(78,205,196,0.2); }
+
+  .how-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    color: var(--cream);
+  }
+
+  .how-desc {
+    font-size: 0.88rem;
+    color: var(--fog);
+    line-height: 1.7;
+  }
+
+  /* ABORDAGENS */
+  .approach-section { background: var(--slate); }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .approach-list { margin-top: 2rem; }
+
+  .approach-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    cursor: default;
+    transition: all 0.2s;
+  }
+
+  .approach-item:hover { padding-left: 0.5rem; }
+
+  .approach-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(78,205,196,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    color: var(--teal);
+    margin-top: 0.1rem;
+  }
+
+  .approach-name {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+    color: var(--cream);
+  }
+
+  .approach-desc {
+    font-size: 0.84rem;
+    color: var(--fog);
+    line-height: 1.6;
+  }
+
+  /* VISUAL ELEMENT RIGHT SIDE */
+  .approach-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+  }
+
+  .approach-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(78,205,196,0.15);
+    animation: pulse-ring 4s ease-in-out infinite;
+  }
+
+  .approach-circle:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
+  .approach-circle:nth-child(2) { width: 300px; height: 300px; animation-delay: 0.5s; }
+  .approach-circle:nth-child(3) { width: 380px; height: 380px; animation-delay: 1s; border-color: rgba(201,169,110,0.1); }
+
+  @keyframes pulse-ring {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.03); opacity: 1; }
+  }
+
+  .approach-center {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .approach-center-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .approach-center-text {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--fog);
+    letter-spacing: 0.05em;
+  }
+
+  /* PLANOS */
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .plan-card {
+    background: var(--slate);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: transform 0.3s;
+  }
+
+  .plan-card:hover { transform: translateY(-4px); }
+
+  .plan-card.featured {
+    background: linear-gradient(135deg, var(--mist) 0%, #1a2535 100%);
+    border: 1px solid rgba(78,205,196,0.25);
+  }
+
+  .plan-badge {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--teal);
+    color: var(--deep);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .plan-name {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fog);
+    margin-bottom: 1rem;
+  }
+
+  .plan-price {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .plan-price sup {
+    font-size: 1.2rem;
+    vertical-align: top;
+    margin-top: 0.5rem;
+    display: inline-block;
+    color: var(--fog);
+  }
+
+  .plan-period {
+    font-size: 0.8rem;
+    color: var(--fog);
+    margin-bottom: 2rem;
+  }
+
+  .plan-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-bottom: 1.5rem;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .plan-features li {
+    font-size: 0.85rem;
+    color: var(--fog);
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .plan-features li::before {
+    content: '✦';
+    color: var(--teal);
+    font-size: 0.6rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .plan-features li.muted { color: rgba(168,180,192,0.4); }
+  .plan-features li.muted::before { color: rgba(78,205,196,0.2); }
+
+  .btn-plan {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-plan-outline {
+    background: transparent;
+    border: 1px solid rgba(78,205,196,0.3);
+    color: var(--teal);
+  }
+
+  .btn-plan-outline:hover {
+    background: rgba(78,205,196,0.08);
+    border-color: var(--teal);
+  }
+
+  .btn-plan-filled {
+    background: var(--teal);
+    color: var(--deep);
+  }
+
+  .btn-plan-filled:hover {
+    background: #5fddd4;
+    box-shadow: 0 8px 30px rgba(78,205,196,0.3);
+  }
+
+  /* SESSÃO GRATUITA CTA */
+  .free-session {
+    background: linear-gradient(135deg, var(--slate) 0%, var(--mist) 100%);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 2px;
+    padding: 3rem;
+    text-align: center;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .free-session::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .free-tag {
+    display: inline-block;
+    background: rgba(201,169,110,0.1);
+    border: 1px solid rgba(201,169,110,0.3);
+    color: var(--gold);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .free-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+  }
+
+  .free-title em { font-style: italic; color: var(--gold); }
+
+  .free-desc {
+    font-size: 0.9rem;
+    color: var(--fog);
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  /* DEPOIMENTOS */
+  .testimonials-section { background: var(--void); }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .testimonial-card {
+    background: var(--slate);
+    padding: 2rem;
+    position: relative;
+  }
+
+  .testimonial-card::before {
+    content: '"';
+    font-family: var(--font-serif);
+    font-size: 5rem;
+    color: rgba(78,205,196,0.1);
+    position: absolute;
+    top: 0.5rem;
+    left: 1.5rem;
+    line-height: 1;
+  }
+
+  .testimonial-text {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonial-author {
+    font-size: 0.78rem;
+    color: var(--fog);
+    letter-spacing: 0.05em;
+  }
+
+  .testimonial-author strong {
+    display: block;
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8rem;
+  }
+
+  /* FAQ */
+  .faq-section { background: var(--slate); }
+
+  .faq-list { margin-top: 3rem; max-width: 720px; }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--cream);
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    text-align: left;
+    padding: 1.5rem 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--teal); }
+
+  .faq-icon {
+    font-size: 1.2rem;
+    color: var(--teal);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    font-style: normal;
+  }
+
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+    font-size: 0.88rem;
+    color: var(--fog);
+    line-height: 1.8;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 300px;
+    padding-bottom: 1.5rem;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    background: rgba(201,169,110,0.04);
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 2px;
+    padding: 1.5rem 2rem;
+    margin-top: 4rem;
+    font-size: 0.78rem;
+    color: rgba(168,180,192,0.6);
+    line-height: 1.6;
+    max-width: 720px;
+  }
+
+  .disclaimer strong { color: var(--gold); font-weight: 400; }
+
+  /* FOOTER */
+  footer {
+    background: var(--void);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+  }
+
+  .footer-logo span { color: var(--teal); }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    color: var(--fog);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--teal); }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(168,180,192,0.4);
+  }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .approach-visual { display: none; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    .mandala-bg { display: none; }
+    .how-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">New<span>Cosmos</span></a>
+  <ul class="nav-links">
+    <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#abordagens">Abordagens</a></li>
+    <li><a href="#planos">Planos</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#sessao-gratuita" class="nav-cta">Sessão gratuita</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- MANDALA SVG -->
+  <svg class="mandala-bg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="200" r="180" stroke="white" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="140" stroke="white" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="100" stroke="white" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="60" stroke="white" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="20" stroke="white" stroke-width="0.5"/>
+    <line x1="200" y1="20" x2="200" y2="380" stroke="white" stroke-width="0.5"/>
+    <line x1="20" y1="200" x2="380" y2="200" stroke="white" stroke-width="0.5"/>
+    <line x1="73" y1="73" x2="327" y2="327" stroke="white" stroke-width="0.5"/>
+    <line x1="327" y1="73" x2="73" y2="327" stroke="white" stroke-width="0.5"/>
+    <line x1="200" y1="20" x2="327" y2="327" stroke="white" stroke-width="0.3"/>
+    <line x1="200" y1="20" x2="73" y2="327" stroke="white" stroke-width="0.3"/>
+    <line x1="20" y1="200" x2="327" y2="73" stroke="white" stroke-width="0.3"/>
+    <line x1="20" y1="200" x2="327" y2="327" stroke="white" stroke-width="0.3"/>
+    <polygon points="200,40 340,280 60,280" stroke="white" stroke-width="0.5" fill="none"/>
+    <polygon points="200,360 60,120 340,120" stroke="white" stroke-width="0.5" fill="none"/>
+    <circle cx="200" cy="40" r="4" stroke="white" stroke-width="0.5" fill="none"/>
+    <circle cx="340" cy="280" r="4" stroke="white" stroke-width="0.5" fill="none"/>
+    <circle cx="60" cy="280" r="4" stroke="white" stroke-width="0.5" fill="none"/>
+    <circle cx="200" cy="360" r="4" stroke="white" stroke-width="0.5" fill="none"/>
+    <circle cx="60" cy="120" r="4" stroke="white" stroke-width="0.5" fill="none"/>
+    <circle cx="340" cy="120" r="4" stroke="white" stroke-width="0.5" fill="none"/>
+  </svg>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Bem-estar Integrativo com Inteligência Artificial</p>
+    <h1 class="hero-title">
+      Cura que une<br>
+      <em>ciência</em> e <span class="gold">alma</span>
+    </h1>
+    <p class="hero-subtitle">Um guia de bem-estar disponível para você, a qualquer hora.</p>
+    <p class="hero-body">
+      O NewCosmos integra práticas integrativas, autoconhecimento e desenvolvimento pessoal em encontros personalizados — conduzidos por inteligência artificial treinada com profundidade holística e sensibilidade humana.
+    </p>
+    <div class="hero-actions">
+      <a href="#sessao-gratuita" class="btn-primary">
+        Experimentar gratuitamente
+        <span>→</span>
+      </a>
+      <a href="#como-funciona" class="btn-ghost">
+        Como funciona
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">O processo</p>
+      <h2 class="section-title">Simples de começar.<br><em>Profundo de vivenciar.</em></h2>
+    </div>
+
+    <div class="how-grid reveal">
+      <div class="how-card">
+        <div class="how-number">01</div>
+        <h3 class="how-title">Agende seu encontro</h3>
+        <p class="how-desc">Escolha o dia e horário que melhor se encaixa na sua rotina. Primeiro encontro sempre gratuito, sem compromisso.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-number">02</div>
+        <h3 class="how-title">Conecte-se ao seu guia</h3>
+        <p class="how-desc">No horário agendado, acesse o chat diretamente pelo navegador — sem instalar nada, no celular ou computador.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-number">03</div>
+        <h3 class="how-title">Encontro personalizado</h3>
+        <p class="how-desc">Seu guia de bem-estar conduz o encontro com escuta ativa, práticas integrativas e protocolos adaptados ao seu momento.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-number">04</div>
+        <h3 class="how-title">Evolua com continuidade</h3>
+        <p class="how-desc">Cada encontro constrói sobre o anterior. Sua jornada e histórico são preservados para um acompanhamento real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ABORDAGENS -->
+<section id="abordagens" class="approach-section">
+  <div class="container">
+    <div class="approach-grid">
+      <div class="reveal">
+        <p class="section-label">Metodologia</p>
+        <h2 class="section-title">Práticas que <em>transformam</em></h2>
+        <p style="color: var(--fog); font-size: 0.9rem; line-height: 1.8; max-width: 440px;">
+          Treinado com uma biblioteca integrativa de conhecimento holístico — unindo o rigor das práticas baseadas em evidências com a profundidade das tradições de cura.
+        </p>
+
+        <div class="approach-list">
+          <div class="approach-item">
+            <div class="approach-icon">◈</div>
+            <div>
+              <div class="approach-name">Práticas Integrativas (PICs)</div>
+              <p class="approach-desc">Abordagens reconhecidas pelo Ministério da Saúde para promoção do bem-estar e equilíbrio mente-corpo.</p>
+            </div>
+          </div>
+          <div class="approach-item">
+            <div class="approach-icon">◉</div>
+            <div>
+              <div class="approach-name">Cuidado Holístico</div>
+              <p class="approach-desc">Protocolos que contemplam corpo, mente e energia — incluindo bioressonância e práticas complementares.</p>
+            </div>
+          </div>
+          <div class="approach-item">
+            <div class="approach-icon">✦</div>
+            <div>
+              <div class="approach-name">Espiritualidade Aplicada</div>
+              <p class="approach-desc">Meditação guiada, práticas contemplativas e perspectivas transpessoais sem dogmas religiosos.</p>
+            </div>
+          </div>
+          <div class="approach-item">
+            <div class="approach-icon">◎</div>
+            <div>
+              <div class="approach-name">Desenvolvimento Pessoal</div>
+              <p class="approach-desc">Ferramentas baseadas em evidências para regulação emocional, autoconhecimento e gestão do estresse.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="approach-visual reveal">
+        <div class="approach-circle"></div>
+        <div class="approach-circle"></div>
+        <div class="approach-circle"></div>
+        <div class="approach-center">
+          <span class="approach-center-icon">✦</span>
+          <p class="approach-center-text">Integração<br>mente · corpo · alma</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PLANOS -->
+<section id="planos">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Planos</p>
+      <h2 class="section-title">Invista no seu<br><em>bem-estar</em></h2>
+    </div>
+
+    <div class="plans-grid reveal">
+      <!-- SESSÃO AVULSA -->
+      <div class="plan-card">
+        <p class="plan-name">Encontro avulso</p>
+        <div class="plan-price"><sup>R$</sup>69</div>
+        <p class="plan-period">por encontro único</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>1 encontro de autoconhecimento completo</li>
+          <li>Até 60 minutos de conversa</li>
+          <li>Resumo do encontro por e-mail</li>
+          <li class="muted">Histórico entre encontros</li>
+          <li class="muted">Protocolos personalizados</li>
+          <li class="muted">Encontros recorrentes</li>
+        </ul>
+        <a href="#sessao-gratuita" class="btn-plan btn-plan-outline">Começar</a>
+      </div>
+
+      <!-- ESSENCIAL -->
+      <div class="plan-card featured">
+        <div class="plan-badge">Mais escolhido</div>
+        <p class="plan-name">Essencial</p>
+        <div class="plan-price"><sup>R$</sup>220</div>
+        <p class="plan-period">por mês · 4 encontros (1 por semana)</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>4 encontros por mês (1 por semana)</li>
+          <li>Histórico completo preservado</li>
+          <li>Protocolos de bem-estar personalizados</li>
+          <li>Resumo mensal da sua jornada</li>
+          <li>Práticas e exercícios entre encontros</li>
+          <li class="muted">Suporte prioritário</li>
+        </ul>
+        <a href="#sessao-gratuita" class="btn-plan btn-plan-filled">Assinar agora</a>
+      </div>
+
+      <!-- TRANSFORMAÇÃO -->
+      <div class="plan-card">
+        <p class="plan-name">Transformação</p>
+        <div class="plan-price"><sup>R$</sup>400</div>
+        <p class="plan-period">por mês · 8 encontros (2 por semana)</p>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>8 encontros por mês (2 por semana)</li>
+          <li>Tudo do plano Essencial</li>
+          <li>Protocolos de bioressonância QMR</li>
+          <li>Relatórios PDF detalhados da jornada</li>
+          <li>Acompanhamento de métricas de bem-estar</li>
+          <li>Suporte prioritário e acesso antecipado</li>
+        </ul>
+        <a href="#sessao-gratuita" class="btn-plan btn-plan-outline">Assinar agora</a>
+      </div>
+    </div>
+
+    <!-- SESSÃO GRATUITA CTA -->
+    <div class="free-session reveal" id="sessao-gratuita">
+      <div class="free-tag">✦ Oferta de boas-vindas</div>
+      <h3 class="free-title">Seu primeiro encontro é <em>gratuito</em></h3>
+      <p class="free-desc">Experimente sem compromisso. Agende agora seu encontro de 45 minutos e descubra como as práticas integrativas com IA podem transformar sua jornada de bem-estar.</p>
+      <a href="#" class="btn-primary" style="display: inline-flex;">
+        Agendar sessão gratuita
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- DEPOIMENTOS -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Experiências</p>
+      <h2 class="section-title">O que dizem<br><em>nossos clientes</em></h2>
+    </div>
+
+    <div class="testimonials-grid reveal">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Fiquei surpresa com a profundidade dos encontros. Não parece conversar com uma máquina — parece conversar com alguém que realmente me entende e me acolhe."</p>
+        <div class="testimonial-author">
+          <strong>Ana C.</strong>
+          Lisboa, Portugal
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Moro no exterior e não encontrava apoio em português com esse nível de qualidade. O NewCosmos preencheu essa lacuna de um jeito que não esperava."</p>
+        <div class="testimonial-author">
+          <strong>Rafael M.</strong>
+          Dublin, Irlanda
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Os protocolos personalizados me ajudaram muito com ansiedade e autoconhecimento. Consigo acessar a qualquer hora — isso faz toda a diferença."</p>
+        <div class="testimonial-author">
+          <strong>Marina L.</strong>
+          São Paulo, Brasil
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FAQ -->
+<section id="faq" class="faq-section">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Dúvidas</p>
+      <h2 class="section-title">Perguntas <em>frequentes</em></h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          O NewCosmos substitui um psicólogo ou médico?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-answer">
+          Não. O NewCosmos é um serviço de apoio ao bem-estar e desenvolvimento pessoal — não substitui acompanhamento médico ou psicológico profissional. Não realizamos diagnósticos, não prescrevemos medicamentos e não oferecemos tratamento clínico. Em situações de crise, sempre recomendamos buscar profissionais de saúde habilitados.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Minhas conversas são privadas e seguras?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-answer">
+          Sim. Todos os encontros são criptografados e seus dados são tratados com total confidencialidade, em conformidade com a LGPD (Lei Geral de Proteção de Dados). Suas conversas não são compartilhadas com terceiros.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Posso cancelar minha assinatura a qualquer momento?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-answer">
+          Sim, totalmente. Os planos Essencial e Transformação podem ser cancelados a qualquer momento sem multa, com efeito a partir do próximo ciclo de cobrança.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Como funciona o encontro gratuito?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-answer">
+          Você agenda pelo nosso sistema, recebe um link por e-mail e acessa o chat no horário marcado. O encontro dura até 45 minutos e é idêntico aos encontros pagos — sem limitações de conteúdo. Não é necessário cartão de crédito.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Preciso instalar algum aplicativo?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-answer">
+          Não. Os encontros acontecem diretamente no navegador — no celular ou computador. Basta clicar no link recebido por e-mail no horário agendado.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          O guia de bem-estar lembra dos encontros anteriores?
+          <i class="faq-icon">+</i>
+        </button>
+        <div class="faq-answer">
+          Sim, nos planos Essencial e Transformação. O histórico completo dos seus encontros é preservado, permitindo continuidade real no acompanhamento da sua jornada — cada encontro constrói sobre o anterior.
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer reveal">
+      <strong>Aviso importante:</strong> O NewCosmos é um serviço de bem-estar, autoconhecimento e práticas integrativas baseado em inteligência artificial. Não realizamos diagnósticos, não prescrevemos medicamentos e não substituímos profissionais de saúde habilitados (médicos, psicólogos, psiquiatras). As práticas oferecidas são de natureza complementar e educativa. Em situações de crise ou emergência, procure imediatamente o CVV (188), SAMU (192) ou serviços de saúde mental da sua região.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">New<span>Cosmos</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Termos de uso</a></li>
+    <li><a href="#">Privacidade</a></li>
+    <li><a href="#">Contato</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 NewCosmos Terapias Integrativas. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+  // FAQ TOGGLE
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
