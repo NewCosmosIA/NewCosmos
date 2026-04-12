@@ -159,7 +159,7 @@
     transform: translateY(-50%);
     width: 560px;
     height: 560px;
-    opacity: 0.06;
+    opacity: 0.35;
     animation: rotate-slow 60s linear infinite;
   }
 
@@ -457,13 +457,13 @@
   .approach-circle {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(78,205,196,0.15);
+    border: 1px solid rgba(78,205,196,0.45);
     animation: pulse-ring 4s ease-in-out infinite;
   }
 
   .approach-circle:nth-child(1) { width: 200px; height: 200px; animation-delay: 0s; }
   .approach-circle:nth-child(2) { width: 300px; height: 300px; animation-delay: 0.5s; }
-  .approach-circle:nth-child(3) { width: 380px; height: 380px; animation-delay: 1s; border-color: rgba(201,169,110,0.1); }
+  .approach-circle:nth-child(3) { width: 380px; height: 380px; animation-delay: 1s; border-color: rgba(201,169,110,0.35); }
 
   @keyframes pulse-ring {
     0%, 100% { transform: scale(1); opacity: 0.6; }
@@ -898,27 +898,27 @@
 
   <!-- MANDALA SVG -->
   <svg class="mandala-bg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="200" cy="200" r="180" stroke="white" stroke-width="0.5"/>
-    <circle cx="200" cy="200" r="140" stroke="white" stroke-width="0.5"/>
-    <circle cx="200" cy="200" r="100" stroke="white" stroke-width="0.5"/>
-    <circle cx="200" cy="200" r="60" stroke="white" stroke-width="0.5"/>
-    <circle cx="200" cy="200" r="20" stroke="white" stroke-width="0.5"/>
-    <line x1="200" y1="20" x2="200" y2="380" stroke="white" stroke-width="0.5"/>
-    <line x1="20" y1="200" x2="380" y2="200" stroke="white" stroke-width="0.5"/>
-    <line x1="73" y1="73" x2="327" y2="327" stroke="white" stroke-width="0.5"/>
-    <line x1="327" y1="73" x2="73" y2="327" stroke="white" stroke-width="0.5"/>
-    <line x1="200" y1="20" x2="327" y2="327" stroke="white" stroke-width="0.3"/>
-    <line x1="200" y1="20" x2="73" y2="327" stroke="white" stroke-width="0.3"/>
-    <line x1="20" y1="200" x2="327" y2="73" stroke="white" stroke-width="0.3"/>
-    <line x1="20" y1="200" x2="327" y2="327" stroke="white" stroke-width="0.3"/>
-    <polygon points="200,40 340,280 60,280" stroke="white" stroke-width="0.5" fill="none"/>
-    <polygon points="200,360 60,120 340,120" stroke="white" stroke-width="0.5" fill="none"/>
-    <circle cx="200" cy="40" r="4" stroke="white" stroke-width="0.5" fill="none"/>
-    <circle cx="340" cy="280" r="4" stroke="white" stroke-width="0.5" fill="none"/>
-    <circle cx="60" cy="280" r="4" stroke="white" stroke-width="0.5" fill="none"/>
-    <circle cx="200" cy="360" r="4" stroke="white" stroke-width="0.5" fill="none"/>
-    <circle cx="60" cy="120" r="4" stroke="white" stroke-width="0.5" fill="none"/>
-    <circle cx="340" cy="120" r="4" stroke="white" stroke-width="0.5" fill="none"/>
+    <circle cx="200" cy="200" r="180" stroke="#4ecdc4" stroke-width="0.8"/>
+    <circle cx="200" cy="200" r="140" stroke="#4ecdc4" stroke-width="0.8"/>
+    <circle cx="200" cy="200" r="100" stroke="#4ecdc4" stroke-width="0.8"/>
+    <circle cx="200" cy="200" r="60" stroke="#4ecdc4" stroke-width="0.8"/>
+    <circle cx="200" cy="200" r="20" stroke="#4ecdc4" stroke-width="0.8"/>
+    <line x1="200" y1="20" x2="200" y2="380" stroke="#4ecdc4" stroke-width="0.8"/>
+    <line x1="20" y1="200" x2="380" y2="200" stroke="#4ecdc4" stroke-width="0.8"/>
+    <line x1="73" y1="73" x2="327" y2="327" stroke="#4ecdc4" stroke-width="0.8"/>
+    <line x1="327" y1="73" x2="73" y2="327" stroke="#4ecdc4" stroke-width="0.8"/>
+    <line x1="200" y1="20" x2="327" y2="327" stroke="#4ecdc4" stroke-width="0.5"/>
+    <line x1="200" y1="20" x2="73" y2="327" stroke="#4ecdc4" stroke-width="0.5"/>
+    <line x1="20" y1="200" x2="327" y2="73" stroke="#4ecdc4" stroke-width="0.5"/>
+    <line x1="20" y1="200" x2="327" y2="327" stroke="#4ecdc4" stroke-width="0.5"/>
+    <polygon points="200,40 340,280 60,280" stroke="#c9a96e" stroke-width="0.8" fill="none"/>
+    <polygon points="200,360 60,120 340,120" stroke="#c9a96e" stroke-width="0.8" fill="none"/>
+    <circle cx="200" cy="40" r="4" stroke="#4ecdc4" stroke-width="0.8" fill="none"/>
+    <circle cx="340" cy="280" r="4" stroke="#4ecdc4" stroke-width="0.8" fill="none"/>
+    <circle cx="60" cy="280" r="4" stroke="#4ecdc4" stroke-width="0.8" fill="none"/>
+    <circle cx="200" cy="360" r="4" stroke="#4ecdc4" stroke-width="0.8" fill="none"/>
+    <circle cx="60" cy="120" r="4" stroke="#4ecdc4" stroke-width="0.8" fill="none"/>
+    <circle cx="340" cy="120" r="4" stroke="#4ecdc4" stroke-width="0.8" fill="none"/>
   </svg>
 
   <div class="hero-content">
@@ -1061,7 +1061,7 @@
           <li class="muted">Protocolos personalizados</li>
           <li class="muted">Encontros recorrentes</li>
         </ul>
-        <a href="https://pay.hotmart.com/H105351703F" target="_blank" class="btn-plan btn-plan-outline">Começar</a>
+        <a href="https://cal.com/newcosmos/encontro-gratuito" target="_blank" class="btn-plan btn-plan-outline">Começar</a>
       </div>
 
       <!-- ESSENCIAL -->
@@ -1079,7 +1079,7 @@
           <li>Práticas e exercícios entre encontros</li>
           <li class="muted">Suporte prioritário</li>
         </ul>
-        <a href="https://pay.hotmart.com/Y105301447T?off=rpd18egt&checkoutMode=10" target="_blank" class="btn-plan btn-plan-filled">Assinar agora</a>
+        <a href="https://cal.com/newcosmos/encontro-gratuito" target="_blank" class="btn-plan btn-plan-filled">Assinar agora</a>
       </div>
 
       <!-- TRANSFORMAÇÃO -->
@@ -1096,7 +1096,7 @@
           <li>Acompanhamento de métricas de bem-estar</li>
           <li>Suporte prioritário e acesso antecipado</li>
         </ul>
-        <a href="https://pay.hotmart.com/Y105301447T?off=c9txhfot&checkoutMode=10" target="_blank" class="btn-plan btn-plan-outline">Assinar agora</a>
+        <a href="https://cal.com/newcosmos/encontro-gratuito" target="_blank" class="btn-plan btn-plan-outline">Assinar agora</a>
       </div>
     </div>
 
