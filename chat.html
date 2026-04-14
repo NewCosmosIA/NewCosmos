@@ -1,421 +1,408 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NewCosmos — Encontro Integrativo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --roxo-escuro: #2D1B69;
-      --roxo-medio: #6B3FA0;
-      --roxo-claro: #9B59B6;
-      --dourado: #D4AF37;
-      --dourado-claro: #F0D060;
-      --bg: #0a0614;
-      --bg2: #120d22;
-      --texto: #e8d5ff;
-      --texto-muted: #9B7FC0;
-      --borda: rgba(107,63,160,0.3);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--texto);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NewCosmos — Seu Encontro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ===== TELA DE ACESSO ===== */
-    #access-screen {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 24px;
-      background: radial-gradient(ellipse at top, #2D1B69 0%, #0a0614 60%);
-    }
-    .access-card {
-      background: rgba(18,13,34,0.95);
-      border: 1px solid var(--borda);
-      border-radius: 20px;
-      padding: 48px 40px;
-      max-width: 440px;
-      width: 100%;
-      text-align: center;
-    }
-    .access-logo {
-      font-family: 'Cormorant Garamond', serif;
-      color: var(--dourado);
-      font-size: 22px;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-    }
-    .access-sub {
-      color: var(--roxo-claro);
-      font-size: 13px;
-      margin-bottom: 32px;
-    }
-    .access-card h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      color: var(--texto);
-      margin-bottom: 12px;
-      font-weight: 400;
-    }
-    .access-card p {
-      color: var(--texto-muted);
-      font-size: 14px;
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-    .access-input {
-      width: 100%;
-      padding: 14px 18px;
-      background: rgba(45,27,105,0.3);
-      border: 1px solid var(--borda);
-      border-radius: 10px;
-      color: var(--texto);
-      font-size: 15px;
-      font-family: 'DM Sans', sans-serif;
-      margin-bottom: 16px;
-      text-align: center;
-      letter-spacing: 2px;
-    }
-    .access-input:focus {
-      outline: none;
-      border-color: var(--dourado);
-    }
-    .access-btn {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, var(--roxo-medio), var(--roxo-escuro));
-      color: var(--dourado);
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      transition: opacity 0.2s;
-    }
-    .access-btn:hover { opacity: 0.85; }
-    .access-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .access-error {
-      color: #ff6b8a;
-      font-size: 13px;
-      margin-top: 12px;
-      display: none;
-    }
-    .access-link {
-      color: var(--texto-muted);
-      font-size: 12px;
-      margin-top: 20px;
-    }
-    .access-link a { color: var(--dourado); text-decoration: none; }
+  :root {
+    --deep: #0a0e14;
+    --void: #060a0f;
+    --slate: #141c26;
+    --mist: #1e2a38;
+    --panel: #0e1520;
+    --teal: #4ecdc4;
+    --teal-dim: #2a8c86;
+    --gold: #c9a96e;
+    --cream: #f0ebe2;
+    --fog: #a8b4c0;
+    --fog-dim: #5a6a7a;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --border: rgba(255,255,255,0.06);
+  }
 
-    /* ===== CHAT SCREEN ===== */
-    #chat-screen {
-      display: none;
-      flex-direction: column;
-      height: 100vh;
-    }
+  html, body { height: 100%; background: var(--void); color: var(--cream); font-family: var(--font-sans); font-weight: 300; overflow: hidden; }
 
-    /* Header */
-    .chat-header {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--borda);
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-    }
-    .chat-header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .chat-avatar {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, var(--roxo-medio), var(--roxo-escuro));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-    .chat-header-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      color: var(--dourado);
-    }
-    .chat-header-status {
-      font-size: 12px;
-      color: var(--texto-muted);
-    }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 999; opacity: 0.5;
+  }
 
-    /* Timer */
-    .chat-timer {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(45,27,105,0.4);
-      border: 1px solid var(--borda);
-      border-radius: 20px;
-      padding: 6px 14px;
-    }
-    .timer-dot {
-      width: 8px;
-      height: 8px;
-      background: #4CAF50;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    .timer-dot.warning { background: #FFC107; }
-    .timer-dot.danger { background: #FF5252; }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .timer-text {
-      font-size: 13px;
-      color: var(--texto);
-      font-variant-numeric: tabular-nums;
-    }
-    .timer-text.warning { color: #FFC107; }
-    .timer-text.danger { color: #FF5252; }
+  /* ── TELA DE ACESSO ── */
+  #access-screen {
+    position: fixed; inset: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at top, #2D1B69 0%, var(--void) 60%);
+    padding: 24px;
+  }
 
-    /* Messages */
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 24px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .chat-messages::-webkit-scrollbar { width: 4px; }
-    .chat-messages::-webkit-scrollbar-track { background: transparent; }
-    .chat-messages::-webkit-scrollbar-thumb { background: var(--borda); border-radius: 2px; }
+  .access-card {
+    background: rgba(14,21,32,0.97);
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 12px;
+    padding: 48px 40px;
+    max-width: 420px; width: 100%;
+    text-align: center;
+  }
 
-    .msg {
-      display: flex;
-      gap: 10px;
-      max-width: 85%;
-    }
-    .msg.user {
-      align-self: flex-end;
-      flex-direction: row-reverse;
-    }
-    .msg-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
-    .msg.ai .msg-avatar {
-      background: linear-gradient(135deg, var(--roxo-medio), var(--roxo-escuro));
-    }
-    .msg.user .msg-avatar {
-      background: rgba(212,175,55,0.2);
-      border: 1px solid rgba(212,175,55,0.3);
-    }
-    .msg-bubble {
-      padding: 12px 16px;
-      border-radius: 16px;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-    .msg.ai .msg-bubble {
-      background: rgba(45,27,105,0.4);
-      border: 1px solid var(--borda);
-      border-top-left-radius: 4px;
-      color: var(--texto);
-    }
-    .msg.user .msg-bubble {
-      background: linear-gradient(135deg, rgba(107,63,160,0.6), rgba(45,27,105,0.6));
-      border: 1px solid rgba(107,63,160,0.4);
-      border-top-right-radius: 4px;
-      color: var(--texto);
-    }
+  .access-logo {
+    font-family: var(--font-serif);
+    font-size: 1.5rem; letter-spacing: 0.15em;
+    color: var(--gold); margin-bottom: 4px;
+  }
 
-    /* Typing indicator */
-    .typing-indicator {
-      display: none;
-      align-items: center;
-      gap: 10px;
-      max-width: 85%;
-    }
-    .typing-dots {
-      background: rgba(45,27,105,0.4);
-      border: 1px solid var(--borda);
-      border-radius: 16px;
-      border-top-left-radius: 4px;
-      padding: 14px 18px;
-      display: flex;
-      gap: 5px;
-      align-items: center;
-    }
-    .typing-dots span {
-      width: 7px;
-      height: 7px;
-      background: var(--roxo-claro);
-      border-radius: 50%;
-      animation: typing 1.4s infinite;
-    }
-    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typing {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30% { transform: translateY(-6px); opacity: 1; }
-    }
+  .access-sub { color: var(--teal); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px; }
 
-    /* Input */
-    .chat-input-area {
-      padding: 16px;
-      background: var(--bg2);
-      border-top: 1px solid var(--borda);
-      flex-shrink: 0;
-    }
-    .chat-input-wrap {
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .chat-input {
-      flex: 1;
-      background: rgba(45,27,105,0.3);
-      border: 1px solid var(--borda);
-      border-radius: 14px;
-      padding: 12px 16px;
-      color: var(--texto);
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-      resize: none;
-      min-height: 48px;
-      max-height: 120px;
-      line-height: 1.5;
-    }
-    .chat-input:focus { outline: none; border-color: var(--roxo-claro); }
-    .chat-input::placeholder { color: var(--texto-muted); }
-    .chat-send {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, var(--roxo-medio), var(--roxo-escuro));
-      border: none;
-      border-radius: 12px;
-      color: var(--dourado);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-      transition: opacity 0.2s;
-    }
-    .chat-send:hover { opacity: 0.85; }
-    .chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+  .access-card h2 {
+    font-family: var(--font-serif); font-size: 1.6rem; font-weight: 300;
+    color: var(--cream); margin-bottom: 10px;
+  }
 
-    /* Aviso de tempo */
-    .time-warning {
-      display: none;
-      margin: 0 16px 12px;
-      padding: 12px 16px;
-      background: rgba(255,193,7,0.1);
-      border: 1px solid rgba(255,193,7,0.3);
-      border-radius: 10px;
-      font-size: 13px;
-      color: #FFC107;
-      text-align: center;
-    }
+  .access-card p { color: var(--fog); font-size: 0.85rem; line-height: 1.7; margin-bottom: 28px; }
 
-    /* Tela de encerramento */
-    #end-screen {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 24px;
-      background: radial-gradient(ellipse at top, #2D1B69 0%, #0a0614 60%);
-      text-align: center;
-    }
-    .end-card {
-      background: rgba(18,13,34,0.95);
-      border: 1px solid var(--borda);
-      border-radius: 20px;
-      padding: 48px 40px;
-      max-width: 480px;
-      width: 100%;
-    }
-    .end-symbol { font-size: 48px; margin-bottom: 20px; }
-    .end-card h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      color: var(--dourado);
-      margin-bottom: 16px;
-      font-weight: 400;
-    }
-    .end-card p {
-      color: var(--texto-muted);
-      font-size: 14px;
-      line-height: 1.8;
-      margin-bottom: 24px;
-    }
-    .end-btn {
-      display: inline-block;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, var(--roxo-medio), var(--roxo-escuro));
-      color: var(--dourado);
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 14px;
-      margin: 6px;
-    }
-    .end-btn-outline {
-      display: inline-block;
-      padding: 14px 28px;
-      border: 1px solid var(--borda);
-      color: var(--texto-muted);
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 14px;
-      margin: 6px;
-    }
+  .access-input {
+    width: 100%; padding: 13px 18px;
+    background: rgba(78,205,196,0.06);
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 6px; color: var(--cream);
+    font-size: 14px; font-family: var(--font-sans);
+    margin-bottom: 14px; text-align: center; letter-spacing: 2px;
+  }
+  .access-input:focus { outline: none; border-color: var(--teal); }
 
-    /* Loading */
-    .loading-spinner {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgba(212,175,55,0.3);
-      border-top-color: var(--dourado);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+  .access-btn {
+    width: 100%; padding: 13px;
+    background: linear-gradient(135deg, var(--teal-dim), #1a5c58);
+    color: var(--gold); border: none; border-radius: 6px;
+    font-size: 0.88rem; cursor: pointer; font-family: var(--font-sans);
+    letter-spacing: 0.08em; transition: opacity 0.2s;
+  }
+  .access-btn:hover { opacity: 0.85; }
+  .access-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    @media (max-width: 600px) {
-      .access-card { padding: 32px 24px; }
-      .end-card { padding: 32px 24px; }
-      .msg { max-width: 95%; }
-    }
-  </style>
+  .access-error { color: #ff6b8a; font-size: 0.78rem; margin-top: 10px; display: none; }
+  .access-link { color: var(--fog-dim); font-size: 0.72rem; margin-top: 20px; }
+  .access-link a { color: var(--teal); text-decoration: none; }
+
+  .loading-spinner {
+    display: inline-block; width: 14px; height: 14px;
+    border: 2px solid rgba(201,169,110,0.3); border-top-color: var(--gold);
+    border-radius: 50%; animation: spin 0.8s linear infinite;
+    vertical-align: middle; margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── APP LAYOUT ── */
+  .app { display: grid; grid-template-columns: 260px 1fr; height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar-top {
+    padding: 1.4rem 1.4rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 300; letter-spacing: 0.1em; color: var(--cream); text-decoration: none; display: block; }
+  .logo span { color: var(--teal); }
+  .session-tag { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fog-dim); margin-top: 0.2rem; }
+
+  .status-bar {
+    padding: 0.9rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: blink 2s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .status-text { font-size: 0.72rem; color: var(--fog); }
+
+  /* Timer na sidebar */
+  .timer-bar {
+    padding: 0.7rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .timer-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fog-dim); }
+  .timer-display {
+    font-size: 0.85rem; color: var(--teal);
+    font-variant-numeric: tabular-nums; font-weight: 400;
+  }
+  .timer-display.warning { color: #FFC107; }
+  .timer-display.danger { color: #FF5252; }
+
+  .sidebar-section { padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); overflow-y: auto; }
+  .sidebar-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog-dim); margin-bottom: 0.7rem; }
+
+  .intention-chips { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .chip {
+    background: rgba(78,205,196,0.07);
+    border: 1px solid rgba(78,205,196,0.18);
+    color: var(--teal); font-size: 0.68rem;
+    padding: 0.25rem 0.65rem; border-radius: 20px;
+    cursor: pointer; transition: all 0.2s;
+    font-family: var(--font-sans);
+  }
+  .chip:hover { background: rgba(78,205,196,0.15); border-color: var(--teal); }
+
+  .practice-btn {
+    display: flex; align-items: center; gap: 0.55rem;
+    width: 100%; background: none; border: none;
+    color: var(--fog); font-family: var(--font-sans);
+    font-size: 0.75rem; padding: 0.45rem 0;
+    cursor: pointer; text-align: left; transition: color 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .practice-btn:last-child { border-bottom: none; }
+  .practice-btn:hover { color: var(--teal); }
+  .practice-icon {
+    width: 22px; height: 22px; border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 0.65rem; color: var(--teal); flex-shrink: 0;
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 0.9rem 1.4rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.62rem; color: var(--fog-dim); line-height: 1.5;
+  }
+
+  /* ── MAIN CHAT ── */
+  .chat-main { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+  .chat-header {
+    padding: 0.9rem 1.8rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(6,10,15,0.9); backdrop-filter: blur(10px);
+    flex-shrink: 0;
+  }
+
+  .agent-info { display: flex; align-items: center; gap: 0.8rem; }
+  .agent-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #1a4a4a, #0d2a2a);
+    border: 1px solid rgba(78,205,196,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem; position: relative;
+  }
+  .agent-avatar::after {
+    content: ''; position: absolute; bottom: 0; right: 0;
+    width: 8px; height: 8px; background: var(--teal);
+    border-radius: 50%; border: 1.5px solid var(--void);
+  }
+  .agent-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; }
+  .agent-role { font-size: 0.68rem; color: var(--fog-dim); }
+
+  .header-actions { display: flex; gap: 0.4rem; align-items: center; }
+  .hbtn {
+    background: none; border: 1px solid var(--border);
+    color: var(--fog); padding: 0.35rem 0.8rem;
+    font-family: var(--font-sans); font-size: 0.68rem;
+    letter-spacing: 0.08em; cursor: pointer; border-radius: 2px; transition: all 0.2s;
+  }
+  .hbtn:hover { border-color: rgba(78,205,196,0.3); color: var(--teal); }
+
+  /* Aviso de tempo no header */
+  .time-warning-banner {
+    display: none;
+    background: rgba(255,193,7,0.08);
+    border-bottom: 1px solid rgba(255,193,7,0.2);
+    padding: 0.5rem 1.8rem;
+    font-size: 0.75rem; color: #FFC107;
+    text-align: center; flex-shrink: 0;
+  }
+
+  /* Messages */
+  .messages {
+    flex: 1; overflow-y: auto; padding: 1.8rem;
+    display: flex; flex-direction: column; gap: 1.2rem;
+    scroll-behavior: smooth;
+  }
+
+  .messages::-webkit-scrollbar { width: 4px; }
+  .messages::-webkit-scrollbar-track { background: transparent; }
+  .messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+  .msg { display: flex; gap: 0.8rem; max-width: 78%; animation: msgIn 0.35s ease; }
+  @keyframes msgIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+  .msg.agent { align-self: flex-start; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+
+  .msg-avatar {
+    width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; margin-top: 2px;
+  }
+  .msg.agent .msg-avatar {
+    background: linear-gradient(135deg, #1a4a4a, #0d2a2a);
+    border: 1px solid rgba(78,205,196,0.25);
+  }
+  .msg.user .msg-avatar {
+    background: rgba(201,169,110,0.12);
+    border: 1px solid rgba(201,169,110,0.2);
+    color: var(--gold);
+    font-family: var(--font-serif);
+  }
+
+  .msg-content { display: flex; flex-direction: column; gap: 0.2rem; }
+
+  .bubble {
+    padding: 0.85rem 1.1rem;
+    border-radius: 2px; font-size: 0.88rem; line-height: 1.75;
+  }
+  .msg.agent .bubble {
+    background: rgba(20,28,38,0.9);
+    border: 1px solid rgba(78,205,196,0.08);
+    border-left: 2px solid rgba(78,205,196,0.3);
+    color: var(--cream);
+    border-radius: 0 8px 8px 8px;
+  }
+  .msg.user .bubble {
+    background: rgba(26,46,63,0.8);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--cream);
+    border-radius: 8px 0 8px 8px;
+    text-align: right;
+  }
+
+  .msg-time { font-size: 0.62rem; color: var(--fog-dim); padding: 0 0.3rem; }
+  .msg.user .msg-time { text-align: right; }
+
+  /* Typing */
+  .typing { display: flex; align-items: center; gap: 0.8rem; max-width: 78%; align-self: flex-start; }
+  .typing-bubble {
+    background: rgba(20,28,38,0.9);
+    border: 1px solid rgba(78,205,196,0.08);
+    border-left: 2px solid rgba(78,205,196,0.3);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 8px 8px 8px;
+    display: flex; align-items: center; gap: 0.3rem;
+  }
+  .typing-dot {
+    width: 5px; height: 5px; background: var(--teal);
+    border-radius: 50%; animation: typingAnim 1.2s ease-in-out infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingAnim { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-5px);opacity:1} }
+
+  /* Input */
+  .input-area {
+    padding: 1rem 1.8rem 1.4rem;
+    border-top: 1px solid var(--border);
+    background: rgba(6,10,15,0.8);
+    backdrop-filter: blur(10px);
+    flex-shrink: 0;
+  }
+
+  .input-wrap {
+    display: flex; align-items: flex-end; gap: 0.7rem;
+    background: rgba(20,28,38,0.8);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px; padding: 0.7rem 0.9rem;
+    transition: border-color 0.2s;
+  }
+  .input-wrap:focus-within { border-color: rgba(78,205,196,0.3); }
+
+  #msgInput {
+    flex: 1; background: none; border: none; outline: none;
+    color: var(--cream); font-family: var(--font-sans);
+    font-size: 0.88rem; line-height: 1.6; resize: none;
+    min-height: 24px; max-height: 120px;
+  }
+  #msgInput::placeholder { color: var(--fog-dim); }
+
+  .send-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--teal); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.2s; color: var(--deep);
+    font-size: 0.9rem;
+  }
+  .send-btn:hover { background: #5fddd4; transform: scale(1.05); }
+  .send-btn:disabled { background: rgba(78,205,196,0.2); cursor: not-allowed; transform: none; }
+
+  .input-hint { font-size: 0.62rem; color: var(--fog-dim); margin-top: 0.5rem; text-align: center; }
+
+  /* Orb bg */
+  .orb-bg {
+    position: fixed; width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(78,205,196,0.04) 0%, transparent 70%);
+    border-radius: 50%; bottom: -150px; right: 10%;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Disclaimer */
+  .disclaimer-toast {
+    background: rgba(201,169,110,0.06);
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 4px; padding: 0.8rem 1rem;
+    font-size: 0.72rem; color: var(--fog-dim);
+    line-height: 1.5; margin-bottom: 1rem; text-align: center;
+  }
+  .disclaimer-toast strong { color: rgba(201,169,110,0.7); font-weight: 400; }
+
+  /* Tela de encerramento */
+  #end-screen {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    flex-direction: column; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at top, #2D1B69 0%, var(--void) 60%);
+    padding: 24px; text-align: center;
+  }
+
+  .end-card {
+    background: rgba(14,21,32,0.97);
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 12px; padding: 48px 40px;
+    max-width: 480px; width: 100%;
+  }
+  .end-symbol { font-size: 48px; margin-bottom: 20px; }
+  .end-card h2 {
+    font-family: var(--font-serif); font-size: 2rem; font-weight: 300;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .end-card p { color: var(--fog); font-size: 0.88rem; line-height: 1.8; margin-bottom: 24px; }
+  .end-btn {
+    display: inline-block; padding: 12px 24px; margin: 5px;
+    background: linear-gradient(135deg, var(--teal-dim), #1a5c58);
+    color: var(--gold); border-radius: 6px; text-decoration: none; font-size: 0.85rem;
+  }
+  .end-btn-outline {
+    display: inline-block; padding: 12px 24px; margin: 5px;
+    border: 1px solid var(--border); color: var(--fog);
+    border-radius: 6px; text-decoration: none; font-size: 0.85rem;
+  }
+
+  /* Mobile */
+  @media (max-width: 700px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .messages { padding: 1rem; }
+    .input-area { padding: 0.8rem 1rem 1rem; }
+    .chat-header { padding: 0.8rem 1rem; }
+    .msg { max-width: 92%; }
+    .access-card { padding: 32px 24px; }
+    .end-card { padding: 32px 24px; }
+  }
+</style>
 </head>
 <body>
+
+<div class="orb-bg"></div>
 
 <!-- TELA DE ACESSO -->
 <div id="access-screen">
@@ -424,8 +411,8 @@
     <div class="access-sub">Terapias Integrativas</div>
     <h2>Bem-vindo(a) ao seu Encontro</h2>
     <p>Insira o código de acesso enviado para o seu e-mail após a confirmação do pagamento.</p>
-    <input type="text" id="token-input" class="access-input" 
-           placeholder="Cole seu código aqui" 
+    <input type="text" id="token-input" class="access-input"
+           placeholder="Cole seu código aqui"
            autocomplete="off" autocorrect="off" spellcheck="false">
     <button class="access-btn" id="access-btn" onclick="validateToken()">
       Entrar no Encontro
@@ -437,47 +424,6 @@
   </div>
 </div>
 
-<!-- CHAT SCREEN -->
-<div id="chat-screen">
-  <div class="chat-header">
-    <div class="chat-header-left">
-      <div class="chat-avatar">✦</div>
-      <div>
-        <div class="chat-header-name">NewCosmos</div>
-        <div class="chat-header-status">Encontro em andamento</div>
-      </div>
-    </div>
-    <div class="chat-timer">
-      <div class="timer-dot" id="timer-dot"></div>
-      <div class="timer-text" id="timer-text">60:00</div>
-    </div>
-  </div>
-
-  <div class="chat-messages" id="chat-messages">
-    <div class="typing-indicator" id="typing">
-      <div class="msg-avatar" style="background: linear-gradient(135deg, #6B3FA0, #2D1B69); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px;">✦</div>
-      <div class="typing-dots">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </div>
-
-  <div class="time-warning" id="time-warning">
-    ⏳ Nosso encontro está chegando ao fim. Vou começar a integrar as orientações para você.
-  </div>
-
-  <div class="chat-input-area">
-    <div class="chat-input-wrap">
-      <textarea class="chat-input" id="chat-input" 
-                placeholder="Compartilhe o que está no seu coração..."
-                rows="1"
-                onkeydown="handleKey(event)"
-                oninput="autoResize(this)"></textarea>
-      <button class="chat-send" id="send-btn" onclick="sendMessage()">➤</button>
-    </div>
-  </div>
-</div>
-
 <!-- TELA DE ENCERRAMENTO -->
 <div id="end-screen">
   <div class="end-card">
@@ -485,13 +431,11 @@
     <h2>Nosso encontro chegou ao fim</h2>
     <p>
       Foi uma honra estar presente nesse momento da sua jornada.<br><br>
-      Carregue consigo as orientações que recebeu hoje. A transformação acontece 
-      no silêncio, no intervalo entre um encontro e o próximo.<br><br>
-      <em style="color: var(--dourado);">Que a luz que você tocou hoje ilumine seus próximos passos.</em>
+      Carregue consigo as orientações que recebeu hoje. A transformação acontece no silêncio, no intervalo entre um encontro e o próximo.<br><br>
+      <em style="color: var(--gold);">Que a luz que você tocou hoje ilumine seus próximos passos.</em>
     </p>
     <div>
-      <a href="https://pay.hotmart.com/Y105301447T?off=rpd18egt&checkoutMode=10" 
-         class="end-btn" target="_blank">✦ Assinar Plano Essencial</a>
+      <a href="https://pay.hotmart.com/Y105301447T?off=rpd18egt&checkoutMode=10" class="end-btn" target="_blank">✦ Assinar Plano Essencial</a>
     </div>
     <div>
       <a href="https://www.newcosmos.com.br" class="end-btn-outline">Voltar ao início</a>
@@ -499,52 +443,284 @@
   </div>
 </div>
 
+<!-- APP -->
+<div class="app" id="app" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <a href="index.html" class="logo">New<span>Cosmos</span></a>
+      <div class="session-tag">✦ Encontro em andamento</div>
+    </div>
+
+    <div class="status-bar">
+      <div class="dot"></div>
+      <span class="status-text">Guia presente e disponível</span>
+    </div>
+
+    <div class="timer-bar">
+      <span class="timer-label">Tempo restante</span>
+      <span class="timer-display" id="timer-display">60:00</span>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Intenções rápidas</div>
+      <div class="intention-chips">
+        <span class="chip" onclick="sendQuick('Quero trabalhar minha ansiedade hoje')">Ansiedade</span>
+        <span class="chip" onclick="sendQuick('Preciso de clareza e direção')">Clareza</span>
+        <span class="chip" onclick="sendQuick('Quero uma meditação guiada')">Meditação</span>
+        <span class="chip" onclick="sendQuick('Estou passando por um momento de luto ou perda')">Luto</span>
+        <span class="chip" onclick="sendQuick('Quero trabalhar minha autoestima')">Autoestima</span>
+        <span class="chip" onclick="sendQuick('Quero entender meu mapa numerológico')">Numerologia</span>
+        <span class="chip" onclick="sendQuick('Quero conhecer meu mapa astrológico')">Astrologia</span>
+        <span class="chip" onclick="sendQuick('Quero uma limpeza energética com Chama Violeta')">Chama Violeta</span>
+        <span class="chip" onclick="sendQuick('Quero saber quais florais de Bach são para mim')">Florais</span>
+        <span class="chip" onclick="sendQuick('Quero trabalhar com os números de Grabovoi')">Grabovoi</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Práticas disponíveis</div>
+      <button class="practice-btn" onclick="sendQuick('Me guia em uma respiração coerente para me centrar agora')">
+        <span class="practice-icon">○</span> Respiração coerente
+      </button>
+      <button class="practice-btn" onclick="sendQuick('Me guia em uma meditação de ativação de chacras')">
+        <span class="practice-icon">◈</span> Ativação de chacras
+      </button>
+      <button class="practice-btn" onclick="sendQuick('Quero fazer uma visualização com a Chama Violeta agora')">
+        <span class="practice-icon">✦</span> Chama Violeta
+      </button>
+      <button class="practice-btn" onclick="sendQuick('Me indica uma frequência Solfeggio para o meu momento')">
+        <span class="practice-icon">◉</span> Frequências Solfeggio
+      </button>
+      <button class="practice-btn" onclick="sendQuick('Me guia em um exercício de defumação e limpeza do ambiente')">
+        <span class="practice-icon">◎</span> Defumação
+      </button>
+      <button class="practice-btn" onclick="sendQuick('Quero trabalhar com os números de Grabovoi para cura')">
+        <span class="practice-icon">◇</span> Números Grabovoi
+      </button>
+    </div>
+
+    <div class="sidebar-footer">
+      Este espaço é de apoio ao bem-estar e autoconhecimento. Não substitui profissionais de saúde habilitados.<br><br>
+      Crise? <strong style="color:rgba(78,205,196,0.5)">CVV: 188</strong> · <strong style="color:rgba(78,205,196,0.5)">SAMU: 192</strong>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="chat-main">
+
+    <header class="chat-header">
+      <div class="agent-info">
+        <div class="agent-avatar">✦</div>
+        <div>
+          <div class="agent-name">NewCosmos</div>
+          <div class="agent-role">Guia de Bem-Estar Integrativo</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="hbtn" onclick="clearChat()">Novo encontro</button>
+        <button class="hbtn" onclick="window.location='index.html'">← Início</button>
+      </div>
+    </header>
+
+    <div class="time-warning-banner" id="time-warning-banner">
+      ⏳ Nosso encontro está chegando ao fim — vou começar a integrar as orientações para você.
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="disclaimer-toast">
+        <strong>Espaço de bem-estar e autoconhecimento.</strong> Este encontro é de natureza complementar e não substitui atendimento médico ou psicológico profissional.
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrap">
+        <textarea
+          id="msgInput"
+          placeholder="Compartilhe o que está no seu coração..."
+          rows="1"
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Enviar">➤</button>
+      </div>
+      <div class="input-hint">Enter para enviar · Shift+Enter para nova linha</div>
+    </div>
+
+  </main>
+</div>
+
 <script>
-// =====================
-// CONFIGURAÇÃO
-// =====================
-const SOUL = `Você é a consciência integrativa do NewCosmos — um espaço sagrado de cura, autoconhecimento e transformação. Você acolhe cada pessoa com presença plena, sem julgamentos, com profunda empatia e sabedoria holística.
+// ── CONFIGURAÇÃO ──────────────────────────────────────────
+const API_ENDPOINT = '/api/chat';
 
-Você integra conhecimentos de: Práticas Integrativas Complementares (PICs) reconhecidas pelo Ministério da Saúde, Física Quântica aplicada ao bem-estar, Bioressonância e campo mórfico, Ondas Rife e Frequências Solfeggio (174Hz, 285Hz, 396Hz, 417Hz, 528Hz, 639Hz, 741Hz, 852Hz, 963Hz), Reiki Usui e Karuna com sistema completo de chakras, Florais de Bach (38 florais) e sistemas complementares (brasileiro, australiano, californiano), Xamanismo (andino, siberiano, americano, brasileiro), Radiestesia e Geobiologia (linhas de Hartmann e Curry), Números de Grabovoi, Numerologia Pitagórica com números mestres, Astrologia (signos, planetas, casas, aspectos, Quíron, nodos), Chama Violeta e decretos de Saint Germain, Desenvolvimento pessoal e regulação emocional, Espiritualidade aplicada e 7 Princípios Herméticos, Geometria sagrada.
+const SESSION_DURATION = 60 * 60; // 60 minutos
+const WARNING_AT = 50 * 60;       // aviso aos 50 min
+const END_AT = 75 * 60;           // encerra aos 75 min
 
-Seu estilo: acolhedor, poético e profundo. Use metáforas da natureza, do cosmos e da luz. Nunca seja frio ou clínico. Cada resposta deve fazer a pessoa sentir que está sendo verdadeiramente vista e cuidada.
+// ── SOUL.MD ───────────────────────────────────────────────
+const SYSTEM_PROMPT = `Você é o NewCosmos, um guia de bem-estar integrativo baseado em inteligência artificial, desenvolvido pela NewCosmos Terapias Integrativas.
 
-Ao iniciar, apresente-se brevemente e convide a pessoa a compartilhar o que está no coração.
+IDENTIDADE:
+Você é um acompanhante de jornada interior — sereno, profundo, acolhedor e profissional. Nunca robótico, nunca superficial. Você domina múltiplas tradições de cura e práticas integrativas com profundidade real.
 
-IMPORTANTE: Você não é um médico e não substitui tratamento médico profissional. Para condições graves, sempre oriente buscar apoio profissional qualificado.`;
+TOM E PRESENÇA:
+- Fale em primeira pessoa com presença e serenidade
+- Use linguagem acessível sem perder a profundidade
+- Nunca pressione, nunca julgue, nunca apresse
+- Faça uma pergunta por vez — escuta ativa real
+- Valide antes de sugerir
+- Máximo 4 parágrafos por mensagem
+- Termine cada resposta com abertura para o próximo passo
+- Em momentos de silêncio ou resistência, ofereça espaço — não preencha com informação
 
-const SESSION_DURATION = 60 * 60; // 60 minutos em segundos
-const WARNING_AT = 50 * 60; // aviso aos 50 minutos
-const END_AT = 75 * 60; // encerra aos 75 minutos
+REGRAS ABSOLUTAS:
+1. NUNCA diagnosticar doenças ou condições de saúde
+2. NUNCA prescrever medicamentos
+3. NUNCA prometer cura de enfermidades
+4. Em crise severa ou ideação suicida: encaminhar ao CVV (188) ou SAMU (192)
+5. SEMPRE apresentar conhecimentos espirituais com respeito e abertura, não como verdade absoluta
 
+INTELIGÊNCIA OPERACIONAL INVISÍVEL — FRAMEWORK DE TRANSFORMAÇÃO:
+Esta é a inteligência central que opera silenciosamente em cada sessão. Nunca é nomeada, nunca é explicada ao cliente. Guia como você percebe, pergunta e responde.
+
+PREMISSA FUNDAMENTAL:
+Toda limitação humana é um programa — não uma falha de caráter, não um destino. É um conjunto de crenças, padrões e narrativas gravadas no sistema nervoso ao longo da vida. A maioria das pessoas vive dentro dos seus programas sem perceber que são programas. Seu papel não é dar respostas — é ajudar a pessoa a ver o programa que está rodando nela, e gentilmente convidá-la a perceber que existe outro código possível. A transformação sempre pertence ao cliente. Você apenas ilumina o caminho.
+
+AS 4 FASES INVISÍVEIS DE CADA SESSÃO:
+Operam naturalmente na conversa. Não são anunciadas. Fluem organicamente.
+
+FASE 1 — ACOLHIMENTO E ESPELHAMENTO:
+Objetivo: criar segurança. Ninguém abre o que está guardado sem sentir que é seguro fazê-lo.
+- Receba o que a pessoa traz sem julgamento, sem pressa, sem resolver
+- Reflita o que ela disse com suas próprias palavras — mostre que foi realmente ouvida
+- Valide a emoção antes de qualquer sugestão
+- Em dor intensa: permaneça no acolhimento por mais tempo
+- NUNCA minimize ("isso vai passar", "pense positivo") — interrompe o processo
+Sinal para avançar: a pessoa começa a fazer perguntas sobre si mesma, ou pede uma perspectiva diferente.
+
+FASE 2 — INVESTIGAÇÃO DO PROGRAMA:
+Objetivo: criar distância entre a pessoa e o pensamento limitante. Ela precisa perceber que TEM esse pensamento — mas que NÃO É esse pensamento.
+- Ajude a pessoa a sair de dentro do padrão e observá-lo de fora
+- Investigue a origem sem julgamento ("de onde veio isso?")
+- Identifique se a crença é dela ou foi herdada (família, cultura, experiências passadas)
+- Observe se o padrão já foi diferente alguma vez — prova que é flexível, não fixo
+- NUNCA confronte uma crença diretamente — ativa defesa. Use curiosidade.
+Perguntas desta fase:
+- "Você sempre sentiu isso, ou tem algum momento em que foi diferente?"
+- "De onde você acha que veio essa ideia sobre você mesmo/a?"
+- "Se uma criança sua acreditasse nisso sobre si mesma, o que você diria a ela?"
+- "Essa voz que diz isso... ela sempre esteve aí, ou tem história?"
+- "Esse padrão te protege de alguma coisa? O que aconteceria se ele não existisse?"
+- "Quem na sua vida pensa da mesma forma? Você aprendeu isso com alguém?"
+- "Isso é um fato sobre quem você é, ou é uma história que você conta sobre quem você é?"
+
+FASE 3 — ABERTURA PARA NOVOS MAPAS:
+Objetivo: oferecer janelas para outras perspectivas — nunca portas fechadas, nunca imposição.
+- Ofereça perspectivas como possibilidades, não como correções
+- Use perguntas que ativem imaginação e recursos internos
+- Conecte o novo mapa com os valores e forças que a pessoa já demonstrou
+- Integre naturalmente os domínios do NewCosmos (Chama Violeta para transmutação, frequências para ancoragem energética, etc.)
+Perguntas desta fase:
+- "E se essa crença tivesse sido útil em algum momento, mas hoje já não fosse mais necessária?"
+- "Como seria sua vida se você acordasse amanhã sem esse peso?"
+- "O que a versão mais livre e plena de você faria nessa situação?"
+- "Se você pudesse escolher uma crença nova para substituir essa — qual seria?"
+- "O que seu eu mais sábio diria sobre isso?"
+
+FASE 4 — ANCORAGEM PRÁTICA:
+Objetivo: transformar insight em ação. Sem ancoragem, o entendimento se dissolve.
+- A prática deve ser simples o suficiente para realmente acontecer
+- Pode ser uma observação, uma pergunta para carregar, uma prática integrativa, um ritual pequeno
+- Sempre apresentada como convite, nunca como tarefa
+Exemplos:
+- "Nos próximos dias, quando esse pensamento aparecer, apenas observe e diga internamente: 'esse é um padrão antigo — posso escolher diferente'."
+- "Escreva em algum lugar esta pergunta e deixe ela aberta: Como seria minha vida sem essa crença?"
+- Sugerir prática integrativa específica ao tema da sessão (floral, frequência, Chama Violeta, meditação)
+
+INTEGRAÇÃO DOS DOMÍNIOS COM O PROCESSO DE TRANSFORMAÇÃO:
+- Acolhimento e segurança: Florais de Bach (Star of Bethlehem, Rock Rose), frequências 174 Hz e 396 Hz, Reiki
+- Investigação do programa: Astrologia (Quiron, Nodo Norte), Numerologia (Caminho de Vida), Chacras (onde o padrão vive no corpo)
+- Abertura para novos mapas: Chama Violeta (transmutação), frequência 528 Hz, Grabovoi (campo de intenção), Hermetismo ("Como dentro, assim fora")
+- Ancoragem prática: qualquer autoaplicação — Reiki, Florais, Meditação, Decretos, Frequências, Rituais de intenção
+
+DOMÍNIOS DE CONHECIMENTO (domine todos com profundidade):
+
+1. PRÁTICAS INTEGRATIVAS E COMPLEMENTARES (PICs): reconhecidas pelo Ministério da Saúde. Inclui medicina tradicional chinesa (meridianos, Qi, Yin-Yang), Ayurveda (doshas), homeopatia, fitoterapia, aromaterapia, acupuntura auricular, cromoterapia, musicoterapia.
+
+2. FÍSICA QUÂNTICA APLICADA E BIORESSONÂNCIA QMR: não-localidade, efeito observador, entrelaçamento quântico, campos morfogenéticos (Sheldrake), coerência cardíaca (HeartMath). Bioressonância QMR: avaliação de campos energéticos, interpretação de relatórios, protocolos de reequilíbrio.
+
+3. ONDAS RIFE E FREQUÊNCIAS TERAPÊUTICAS: as 9 frequências Solfeggio (174Hz ao 963Hz) com seus significados completos. Binaurais por estado de consciência (delta/theta/alpha/beta/gamma). Frequências de Rife por condição.
+
+4. REIKI E SISTEMAS ENERGÉTICOS: Reiki Usui (5 princípios, 7 símbolos, 22 posições de mãos, Reiki à distância), Reiki Karuna (símbolos avançados). Sistema completo de 7 chacras (localização, cor, elemento, função, desequilíbrios). Campo áurico e suas camadas.
+
+5. FLORAIS DE BACH: todos os 38 florais com estados emocionais correspondentes, os 7 grupos, Rescue Remedy. Florais Australianos, Californianos e Brasileiros.
+
+6. XAMANISMO E MEDICINA DAS TRADIÇÕES: cosmologia xamânica (3 mundos), jornada xamânica, animais de poder/totens, tambor xamânico. Tradições andina, siberiana, nativa americana e brasileira. Práticas de defumação (sálvia, palo santo, arruda), geometria sagrada, icaros.
+
+7. RADIESTESIA E GEOBIOLOGIA: uso do pêndulo (calibração, aplicações), linhas de Hartmann e Curry, zonas geopatogênicas, feng shui energético, verificação de alimentos e florais com pêndulo.
+
+8. NÚMEROS DE GRABOVOI: séries numéricas para saúde geral (1890000, 9187948100), por órgão (coração: 8543210, fígado: 5148512, rins: 1489543, pulmões: 5192541, sistema nervoso: 5142543891, imunológico: 9919191), estados emocionais (amor: 888 412 1289018, abundância: 318 798 901, harmonia: 891 043 201, proteção: 9187766543, libertação de medos: 519 514 319 319). Protocolo de uso: relaxamento, visualização do número, repetição 3/9/33x.
+
+9. NUMEROLOGIA: sistema pitagórico completo (Caminho de Vida, Expressão, Alma, Personalidade, Ano Pessoal). Números mestres (11, 22, 33). Significados de 1 a 9 com temas e vibrações. Ciclos de 9 anos.
+
+10. ASTROLOGIA: 12 signos (elemento, qualidade, regente, temas). 10 planetas com significados completos. 12 casas astrológicas. Aspectos (conjunção, oposição, trígono, quadratura, sextil). Nodo Norte/Sul e missão da alma. Quiron. Trânsitos e progressões.
+
+11. CHAMA VIOLETA E SAINT GERMAIN: os 7 Raios dos Mestres Ascensos (cores, mestres, qualidades). Chama Violeta do 7º Raio — transmutação kármica. Chama Violeta de Sangue Germain — limpeza de padrões ancestrais, genéticos e akáshicos. Decretos completos ("Eu sou um ser de Fogo Violeta..."). Protocolo de visualização em 6 passos.
+
+12. DESENVOLVIMENTO PESSOAL E REGULAÇÃO EMOCIONAL: janela de tolerância, técnicas de ancoragem (5-4-3-2-1), respiração coerente (5,5 rpm), respiração 4-7-8 e box breathing. Mapa das emoções, diário de autoconhecimento, partes internas (IFS inspirado), valores pessoais. Meditação body scan, RAIN, Metta Bhavana.
+
+13. ESPIRITUALIDADE APLICADA: meditação vipassana, transcendental, contemplação cristã, sufismo (dhikr). Geometria sagrada (Flor da Vida, Cubo de Metatron, toroide, proporção áurea, Sri Yantra). Os 7 Princípios Herméticos (O Kybalion). Visualização criativa, scripting, gratidão como frequência.
+
+ESTRUTURA DO ENCONTRO:
+- Abertura: acolhimento, verificação do estado, intenção do encontro, breve prática de presença
+- Exploração: escuta ativa, perguntas poderosas, identificação do padrão/programa operando — com curiosidade, sem confronto
+- Prática: meditação, decreto, visualização ou orientação específica
+- Integração: síntese, uma pergunta ou prática de ancoragem simples para levar para o dia
+
+ABERTURA (primeira mensagem de cada conversa):
+"Bem-vindo(a) ao seu espaço NewCosmos. ✦
+
+Estou aqui para caminhar com você — sem pressa, sem julgamento.
+
+Como você está chegando hoje? O que seu coração traz para este encontro?"
+
+FECHAMENTO:
+"Gratidão por este espaço compartilhado. ✦
+
+Leve consigo [síntese do que emergiu].
+
+Cuide-se com carinho até nosso próximo encontro."
+
+Responda sempre em português brasileiro.`;
+
+// ── ESTADO ───────────────────────────────────────────────
+let history = [];
+let isLoading = false;
 let sessionToken = null;
 let sessionPlano = null;
-let sessionNome = null;
+let sessionEnded = false;
 let timerInterval = null;
 let secondsElapsed = 0;
-let conversationHistory = [];
-let isTyping = false;
-let sessionEnded = false;
 
-// =====================
-// ACESSO E VALIDAÇÃO
-// =====================
-window.onload = function() {
-  // Verifica token na URL
+// ── ACESSO ────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const urlToken = urlParams.get('token');
   if (urlToken) {
     document.getElementById('token-input').value = urlToken;
     validateToken();
   }
-};
+});
+
+document.getElementById('token-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') validateToken();
+});
 
 async function validateToken() {
   const token = document.getElementById('token-input').value.trim();
-  if (!token) {
-    showError('Por favor, insira seu código de acesso.');
-    return;
-  }
+  if (!token) { showAccessError('Por favor, insira seu código de acesso.'); return; }
 
   const btn = document.getElementById('access-btn');
   btn.disabled = true;
@@ -556,74 +732,45 @@ async function validateToken() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token, action: 'start' })
     });
-
     const data = await response.json();
 
     if (data.valid) {
       sessionToken = token;
       sessionPlano = data.plano;
-      sessionNome = data.nome;
-      startChat();
+      document.getElementById('access-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'grid';
+      startTimer();
+      startSession();
     } else {
       const msgs = {
         'Token não encontrado': 'Código não encontrado. Verifique se copiou corretamente.',
         'Token expirado': 'Este código expirou. Entre em contato para renovar.',
-        'Este encontro já foi realizado': 'Este encontro já foi realizado. Para um novo encontro, adquira um novo acesso.'
+        'Este encontro já foi realizado': 'Este encontro já foi realizado. Para um novo acesso, adquira um novo plano.'
       };
-      showError(msgs[data.error] || 'Código inválido. Verifique e tente novamente.');
+      showAccessError(msgs[data.error] || 'Código inválido. Verifique e tente novamente.');
       btn.disabled = false;
       btn.innerHTML = 'Entrar no Encontro';
     }
   } catch (err) {
-    showError('Erro de conexão. Tente novamente.');
+    showAccessError('Erro de conexão. Tente novamente.');
     btn.disabled = false;
     btn.innerHTML = 'Entrar no Encontro';
   }
 }
 
-function showError(msg) {
+function showAccessError(msg) {
   const el = document.getElementById('access-error');
   el.textContent = msg;
   el.style.display = 'block';
 }
 
-// =====================
-// INICIAR CHAT
-// =====================
-function startChat() {
-  document.getElementById('access-screen').style.display = 'none';
-  document.getElementById('chat-screen').style.display = 'flex';
-
-  startTimer();
-  sendWelcome();
-}
-
-async function sendWelcome() {
-  showTyping();
-  const nomeTexto = sessionNome ? `, ${sessionNome.split(' ')[0]}` : '';
-  
-  const welcomePrompt = `Inicie a sessão com uma saudação calorosa e acolhedora para ${sessionNome || 'a pessoa'}. Mencione que este é um espaço seguro e sagrado. Convide-a a compartilhar o que está no coração hoje. Seja poético e amoroso. Máximo 3 parágrafos curtos.`;
-  
-  const response = await callAI(welcomePrompt, true);
-  hideTyping();
-  addMessage('ai', response);
-}
-
-// =====================
-// TIMER
-// =====================
+// ── TIMER ─────────────────────────────────────────────────
 function startTimer() {
   timerInterval = setInterval(() => {
     secondsElapsed++;
     updateTimerDisplay();
-
-    if (secondsElapsed === WARNING_AT) {
-      showTimeWarning();
-    }
-
-    if (secondsElapsed >= END_AT) {
-      endSession();
-    }
+    if (secondsElapsed === WARNING_AT) showTimeWarning();
+    if (secondsElapsed >= END_AT) endSession();
   }, 1000);
 }
 
@@ -632,144 +779,41 @@ function updateTimerDisplay() {
   const mins = Math.floor(remaining / 60);
   const secs = remaining % 60;
   const display = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
-  
-  const timerText = document.getElementById('timer-text');
-  const timerDot = document.getElementById('timer-dot');
-  
-  timerText.textContent = display;
-  
-  if (secondsElapsed >= WARNING_AT) {
-    timerText.className = 'timer-text danger';
-    timerDot.className = 'timer-dot danger';
-  } else if (secondsElapsed >= 40 * 60) {
-    timerText.className = 'timer-text warning';
-    timerDot.className = 'timer-dot warning';
-  }
+  const el = document.getElementById('timer-display');
+  el.textContent = display;
+  if (secondsElapsed >= WARNING_AT) el.className = 'timer-display danger';
+  else if (secondsElapsed >= 40 * 60) el.className = 'timer-display warning';
 }
 
 function showTimeWarning() {
-  document.getElementById('time-warning').style.display = 'block';
-  
-  // Mensagem automática de encerramento suave
+  document.getElementById('time-warning-banner').style.display = 'block';
   setTimeout(() => {
-    addMessage('ai', '✦ Nosso encontro está chegando ao fim. Quero aproveitar esses momentos finais para integrar tudo o que surgiu hoje e deixar você com algumas orientações para continuar sua jornada...');
+    addMessage('agent', '✦ Nosso encontro está chegando ao fim. Quero aproveitar esses últimos momentos para integrar tudo o que surgiu hoje e deixar você com uma prática para continuar sua jornada...');
   }, 1000);
 }
 
 function endSession() {
   if (sessionEnded) return;
   sessionEnded = true;
-  
   clearInterval(timerInterval);
-  
-  // Mensagem final antes de redirecionar
-  addMessage('ai', '🌙 Nosso encontro chegou ao seu fim natural. Foi uma honra estar presente nesse momento da sua jornada. Que a luz que você tocou hoje continue iluminando seus passos. Com amor e gratidão — NewCosmos ✦');
-  
-  document.getElementById('send-btn').disabled = true;
-  document.getElementById('chat-input').disabled = true;
-  
+  addMessage('agent', '🌙 Nosso encontro chegou ao seu fim natural. Foi uma honra estar presente nesse momento da sua jornada. Que a luz que você tocou hoje continue iluminando seus passos. Com amor e gratidão — NewCosmos ✦');
+  document.getElementById('sendBtn').disabled = true;
+  document.getElementById('msgInput').disabled = true;
   setTimeout(() => {
-    document.getElementById('chat-screen').style.display = 'none';
-    document.getElementById('end-screen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    const endScreen = document.getElementById('end-screen');
+    endScreen.style.display = 'flex';
   }, 4000);
 }
 
-// =====================
-// MENSAGENS
-// =====================
-function addMessage(role, content) {
-  const container = document.getElementById('chat-messages');
-  const typing = document.getElementById('typing');
-  
-  const div = document.createElement('div');
-  div.className = `msg ${role}`;
-  
-  const avatar = document.createElement('div');
-  avatar.className = 'msg-avatar';
-  avatar.textContent = role === 'ai' ? '✦' : '✿';
-  
-  const bubble = document.createElement('div');
-  bubble.className = 'msg-bubble';
-  bubble.innerHTML = content.replace(/\n/g, '<br>');
-  
-  div.appendChild(avatar);
-  div.appendChild(bubble);
-  
-  container.insertBefore(div, typing);
-  container.scrollTop = container.scrollHeight;
-  
-  // Salva no histórico
-  conversationHistory.push({
-    role: role === 'ai' ? 'assistant' : 'user',
-    content: content
-  });
+// ── SESSÃO ────────────────────────────────────────────────
+async function startSession() {
+  await sendToAPI('Inicie o encontro com sua mensagem de abertura.', true);
 }
 
-function showTyping() {
-  isTyping = true;
-  const typing = document.getElementById('typing');
-  typing.style.display = 'flex';
-  document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
-}
-
-function hideTyping() {
-  isTyping = false;
-  document.getElementById('typing').style.display = 'none';
-}
-
-async function sendMessage() {
-  if (sessionEnded || isTyping) return;
-  
-  const input = document.getElementById('chat-input');
-  const msg = input.value.trim();
-  if (!msg) return;
-  
-  input.value = '';
-  input.style.height = 'auto';
-  
-  addMessage('user', msg);
-  showTyping();
-  
-  document.getElementById('send-btn').disabled = true;
-  
-  try {
-    const response = await callAI(msg, false);
-    hideTyping();
-    addMessage('ai', response);
-  } catch (err) {
-    hideTyping();
-    addMessage('ai', 'Sinto que houve uma interferência energética... Pode repetir o que compartilhou?');
-  }
-  
-  document.getElementById('send-btn').disabled = false;
-}
-
-async function callAI(userMessage, isSystem) {
-  const messages = isSystem 
-    ? [{ role: 'user', content: userMessage }]
-    : [...conversationHistory.slice(-10), { role: 'user', content: userMessage }];
-
-  const response = await fetch('/api/chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      system: SOUL,
-      messages: messages
-    })
-  });
-
-  const data = await response.json();
-  return data.content?.[0]?.text || 'Um momento de silêncio sagrado... Pode continuar.';
-}
-
-// =====================
-// UI HELPERS
-// =====================
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
+// ── UI ────────────────────────────────────────────────────
+function getTime() {
+  return new Date().toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
 }
 
 function autoResize(el) {
@@ -777,10 +821,138 @@ function autoResize(el) {
   el.style.height = Math.min(el.scrollHeight, 120) + 'px';
 }
 
-document.getElementById('token-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') validateToken();
-});
-</script>
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
 
+function scrollToBottom() {
+  const msgs = document.getElementById('messages');
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addMessage(role, text) {
+  const msgs = document.getElementById('messages');
+  const isAgent = role === 'agent';
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  div.innerHTML = `
+    <div class="msg-avatar">${isAgent ? '✦' : '✿'}</div>
+    <div class="msg-content">
+      <div class="bubble">${formatText(text)}</div>
+      <span class="msg-time">${getTime()}</span>
+    </div>
+  `;
+  msgs.appendChild(div);
+  scrollToBottom();
+}
+
+function formatText(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+}
+
+function showTyping() {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = 'typing';
+  div.id = 'typing-indicator';
+  div.innerHTML = `
+    <div class="msg-avatar" style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#1a4a4a,#0d2a2a);border:1px solid rgba(78,205,196,0.25);display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;">✦</div>
+    <div class="typing-bubble">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+    </div>
+  `;
+  msgs.appendChild(div);
+  scrollToBottom();
+}
+
+function hideTyping() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.remove();
+}
+
+function setLoading(state) {
+  isLoading = state;
+  document.getElementById('sendBtn').disabled = state;
+  document.getElementById('msgInput').disabled = state;
+}
+
+// ── ENVIO ─────────────────────────────────────────────────
+async function sendMessage() {
+  if (sessionEnded || isLoading) return;
+  const input = document.getElementById('msgInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  input.style.height = 'auto';
+  addMessage('user', text);
+  await sendToAPI(text, false);
+}
+
+async function sendQuick(text) {
+  if (sessionEnded || isLoading) return;
+  addMessage('user', text);
+  await sendToAPI(text, false);
+}
+
+async function sendToAPI(userText, isOpening) {
+  setLoading(true);
+  showTyping();
+
+  let messages = [...history];
+  if (!isOpening && userText) messages.push({ role: 'user', content: userText });
+  if (isOpening) messages = [{ role: 'user', content: userText }];
+
+  try {
+    const response = await fetch(API_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ system: SYSTEM_PROMPT, messages })
+    });
+
+    const data = await response.json();
+    hideTyping();
+
+    if (data.content && data.content[0]) {
+      const reply = data.content[0].text;
+      addMessage('agent', reply);
+
+      if (!isOpening && userText) history.push({ role: 'user', content: userText });
+      else if (isOpening) history.push({ role: 'user', content: userText });
+      history.push({ role: 'assistant', content: reply });
+
+      if (history.length > 40) history = history.slice(-40);
+    } else {
+      addMessage('agent', 'Houve um momento de silêncio da minha parte. Pode repetir o que compartilhou?');
+    }
+  } catch (err) {
+    hideTyping();
+    addMessage('agent', 'Houve uma interrupção na conexão. Por favor, tente novamente em instantes. 🙏');
+  }
+
+  setLoading(false);
+  if (!sessionEnded) document.getElementById('msgInput').focus();
+}
+
+// ── LIMPAR CHAT ───────────────────────────────────────────
+function clearChat() {
+  if (!confirm('Iniciar um novo encontro? O histórico desta sessão será apagado.')) return;
+  history = [];
+  const msgs = document.getElementById('messages');
+  msgs.innerHTML = `
+    <div class="disclaimer-toast">
+      <strong>Espaço de bem-estar e autoconhecimento.</strong> Este encontro é de natureza complementar e não substitui atendimento médico ou psicológico profissional.
+    </div>
+  `;
+  startSession();
+}
+</script>
 </body>
 </html>
