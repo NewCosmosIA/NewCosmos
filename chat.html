@@ -535,7 +535,28 @@
     </div>
 
     <div class="input-area">
+      <!-- Preview de arquivo anexado -->
+      <div id="file-preview" style="display:none; padding:8px 12px; margin-bottom:8px; background:rgba(78,205,196,0.08); border:1px solid rgba(78,205,196,0.2); border-radius:6px; display:none; align-items:center; gap:10px; font-size:12px; color:var(--fog);">
+        <span id="file-preview-icon" style="font-size:18px;">📎</span>
+        <span id="file-preview-name" style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
+        <button onclick="removerArquivo()" style="background:none; border:none; color:var(--fog-dim); cursor:pointer; font-size:16px; padding:0;">✕</button>
+      </div>
+
       <div class="input-wrap">
+        <!-- Input oculto de arquivo -->
+        <input type="file" id="fileInput" style="display:none;"
+          accept="image/*,.pdf"
+          onchange="handleFileSelect(event)">
+
+        <!-- Botão de anexar -->
+        <button onclick="document.getElementById('fileInput').click()"
+          title="Enviar imagem ou PDF"
+          style="width:34px; height:34px; border-radius:50%; background:rgba(78,205,196,0.08); border:1px solid rgba(78,205,196,0.2); color:var(--teal); cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px; transition:all 0.2s;"
+          onmouseover="this.style.background='rgba(78,205,196,0.18)'"
+          onmouseout="this.style.background='rgba(78,205,196,0.08)'">
+          📎
+        </button>
+
         <textarea
           id="msgInput"
           placeholder="Compartilhe o que está no seu coração..."
@@ -545,7 +566,7 @@
         ></textarea>
         <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Enviar">➤</button>
       </div>
-      <div class="input-hint">Enter para enviar · Shift+Enter para nova linha</div>
+      <div class="input-hint">Enter para enviar · Shift+Enter para nova linha · 📎 para anexar imagem ou PDF</div>
     </div>
 
   </main>
@@ -558,6 +579,49 @@ const API_ENDPOINT = '/api/chat';
 const SESSION_DURATION = 60 * 60; // 60 minutos
 const WARNING_AT = 50 * 60;       // aviso aos 50 min
 const END_AT = 75 * 60;           // encerra aos 75 min
+
+// Arquivo anexado
+let attachedFile = null;
+let attachedFileData = null; // base64
+let attachedFileType = null;
+
+function handleFileSelect(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  // Limite de 5MB
+  if (file.size > 5 * 1024 * 1024) {
+    alert('Arquivo muito grande. Limite: 5MB.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    attachedFile = file;
+    attachedFileData = e.target.result.split(',')[1]; // base64 sem header
+    attachedFileType = file.type;
+
+    // Mostrar preview
+    const preview = document.getElementById('file-preview');
+    const icon = document.getElementById('file-preview-icon');
+    const name = document.getElementById('file-preview-name');
+
+    icon.textContent = file.type.startsWith('image/') ? '🖼️' : '📄';
+    name.textContent = file.name;
+    preview.style.display = 'flex';
+  };
+  reader.readAsDataURL(file);
+
+  // Limpar input para permitir re-selecionar o mesmo arquivo
+  event.target.value = '';
+}
+
+function removerArquivo() {
+  attachedFile = null;
+  attachedFileData = null;
+  attachedFileType = null;
+  document.getElementById('file-preview').style.display = 'none';
+}
 
 // ── SOUL.MD ───────────────────────────────────────────────
 const SYSTEM_PROMPT = `Você é o NewCosmos, um guia de bem-estar integrativo baseado em inteligência artificial, desenvolvido pela NewCosmos.
@@ -897,11 +961,25 @@ async function sendMessage() {
   if (sessionEnded || isLoading) return;
   const input = document.getElementById('msgInput');
   const text = input.value.trim();
-  if (!text) return;
+
+  // Precisa ter texto OU arquivo
+  if (!text && !attachedFile) return;
+
   input.value = '';
   input.style.height = 'auto';
-  addMessage('user', text);
-  await sendToAPI(text, false);
+
+  // Exibir mensagem do usuário com preview do arquivo
+  if (attachedFile) {
+    const fileLabel = attachedFile.type.startsWith('image/') ? `🖼️ ${attachedFile.name}` : `📄 ${attachedFile.name}`;
+    addMessage('user', text ? `${text}\n\n${fileLabel}` : fileLabel);
+  } else {
+    addMessage('user', text);
+  }
+
+  await sendToAPI(text, false, attachedFileData, attachedFileType);
+
+  // Limpar arquivo após envio
+  removerArquivo();
 }
 
 async function sendQuick(text) {
@@ -910,13 +988,43 @@ async function sendQuick(text) {
   await sendToAPI(text, false);
 }
 
-async function sendToAPI(userText, isOpening) {
+async function sendToAPI(userText, isOpening, fileData = null, fileType = null) {
   setLoading(true);
   showTyping();
 
   let messages = [...history];
-  if (!isOpening && userText) messages.push({ role: 'user', content: userText });
-  if (isOpening) messages = [{ role: 'user', content: userText }];
+
+  if (isOpening) {
+    messages = [{ role: 'user', content: userText }];
+  } else {
+    // Monta conteúdo da mensagem (texto + arquivo opcional)
+    let userContent;
+
+    if (fileData && fileType) {
+      userContent = [];
+      // Adiciona imagem ou documento
+      if (fileType.startsWith('image/')) {
+        userContent.push({
+          type: 'image',
+          source: { type: 'base64', media_type: fileType, data: fileData }
+        });
+      } else if (fileType === 'application/pdf') {
+        userContent.push({
+          type: 'document',
+          source: { type: 'base64', media_type: 'application/pdf', data: fileData }
+        });
+      }
+      if (userText) {
+        userContent.push({ type: 'text', text: userText });
+      } else {
+        userContent.push({ type: 'text', text: 'Analise este arquivo e me diga o que observa do ponto de vista integrativo e holístico.' });
+      }
+    } else {
+      userContent = userText;
+    }
+
+    messages.push({ role: 'user', content: userContent });
+  }
 
   try {
     const response = await fetch(API_ENDPOINT, {
@@ -932,8 +1040,12 @@ async function sendToAPI(userText, isOpening) {
       const reply = data.content[0].text;
       addMessage('agent', reply);
 
-      if (!isOpening && userText) history.push({ role: 'user', content: userText });
-      else if (isOpening) history.push({ role: 'user', content: userText });
+      // Salva no histórico só como texto (sem base64 para não explodir)
+      if (!isOpening && userText) {
+        history.push({ role: 'user', content: userText || '[arquivo enviado]' });
+      } else if (isOpening) {
+        history.push({ role: 'user', content: userText });
+      }
       history.push({ role: 'assistant', content: reply });
 
       if (history.length > 40) history = history.slice(-40);
