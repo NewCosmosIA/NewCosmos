@@ -874,6 +874,60 @@
     .mandala-bg { display: none; }
     .how-grid { grid-template-columns: 1fr; }
   }
+
+  /* SELETOR DE IDIOMA */
+  .lang-selector {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+  .lang-btn {
+    background: none;
+    border: 1px solid rgba(78,205,196,0.25);
+    color: var(--fog);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .lang-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .lang-dropdown {
+    display: none;
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background: #0e1520;
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 200;
+    min-width: 130px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .lang-selector:hover .lang-dropdown { display: block; }
+  .lang-option {
+    padding: 9px 14px;
+    font-size: 0.78rem;
+    color: var(--fog);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+  .lang-option:hover { background: rgba(78,205,196,0.08); color: var(--teal); }
+  .lang-option.active { color: var(--teal); }
 </style>
 </head>
 <body>
@@ -909,6 +963,15 @@
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#" onclick="abrirModal(); return false;" style="color:#a8b4c0; text-decoration:none; font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; transition:color 0.3s;">Já sou cliente</a></li>
     <li><a href="https://cal.com/newcosmos/encontro-gratuito" target="_blank" class="nav-cta">Sessão gratuita</a></li>
+    <li class="lang-selector">
+      <button class="lang-btn" id="lang-current">🌐 PT</button>
+      <div class="lang-dropdown">
+        <button class="lang-option active" onclick="setLang('pt')">🇧🇷 Português</button>
+        <button class="lang-option" onclick="setLang('en')">🇬🇧 English</button>
+        <button class="lang-option" onclick="setLang('es')">🇪🇸 Español</button>
+        <button class="lang-option" onclick="setLang('it')">🇮🇹 Italiano</button>
+      </div>
+    </li>
   </ul>
 </nav>
 
@@ -944,12 +1007,12 @@
   </svg>
 
   <div class="hero-content">
-    <p class="hero-eyebrow">Bem-estar Integrativo com Inteligência Artificial</p>
+    <p class="hero-eyebrow" data-i18n="hero_eyebrow">Bem-estar Integrativo com Inteligência Artificial</p>
     <h1 class="hero-title">
       Cura que une<br>
       <em>ciência</em> e <span class="gold">alma</span>
     </h1>
-    <p class="hero-subtitle">Um guia de bem-estar disponível para você, a qualquer hora.</p>
+    <p class="hero-subtitle" data-i18n="hero_subtitle">Um guia de bem-estar disponível para você, a qualquer hora.</p>
     <p class="hero-body">
       O NewCosmos integra práticas integrativas, autoconhecimento e desenvolvimento pessoal em encontros personalizados — conduzidos por inteligência artificial treinada com profundidade holística e sensibilidade humana.
     </p>
@@ -1343,5 +1406,689 @@
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+
+<script>
+const i18n = {
+  pt: {
+    // NAV
+    nav_como_funciona: "Como funciona",
+    nav_abordagens: "Abordagens",
+    nav_planos: "Planos",
+    nav_faq: "FAQ",
+    nav_cliente: "Já sou cliente",
+    nav_sessao_gratuita: "Sessão gratuita",
+
+    // MODAL ACESSO
+    modal_titulo: "Acessar meu Encontro",
+    modal_texto: "Insira o código de acesso enviado para o seu e-mail após a confirmação do pagamento.",
+    modal_placeholder: "Cole seu código aqui",
+    modal_btn: "Entrar no meu Espaço ✦",
+    modal_verificando: "Verificando...",
+    modal_sem_email: "Não recebeu o e-mail?",
+    modal_contato: "Entre em contato",
+    modal_erro_vazio: "Por favor, insira seu código de acesso.",
+    modal_erro_nao_encontrado: "Código não encontrado. Verifique se copiou corretamente.",
+    modal_erro_expirado: "Este código expirou. Entre em contato para renovar.",
+    modal_erro_usado: "Este encontro já foi realizado. Adquira um novo acesso.",
+    modal_erro_conexao: "Erro de conexão. Tente novamente.",
+    modal_erro_invalido: "Código inválido. Tente novamente.",
+
+    // HERO
+    hero_eyebrow: "Bem-estar Integrativo com Inteligência Artificial",
+    hero_title1: "Cura que une",
+    hero_title2: "ciência",
+    hero_title3: "e",
+    hero_title4: "alma",
+    hero_subtitle: "Um guia de bem-estar disponível para você, a qualquer hora.",
+    hero_body: "O NewCosmos integra práticas integrativas, autoconhecimento e desenvolvimento pessoal em encontros personalizados — conduzidos por inteligência artificial treinada com profundidade holística e sensibilidade humana.",
+    hero_btn_primary: "Experimentar gratuitamente",
+    hero_btn_ghost: "Como funciona",
+    hero_btn_cliente: "✦ Já sou cliente",
+
+    // COMO FUNCIONA
+    section_processo: "O processo",
+    como_title: "Simples de começar.",
+    como_title_em: "Profundo de vivenciar.",
+    como_1_title: "Agende seu encontro",
+    como_1_desc: "Escolha o dia e horário que melhor se encaixa na sua rotina. Primeiro encontro sempre gratuito, sem compromisso.",
+    como_2_title: "Conecte-se ao seu guia",
+    como_2_desc: "No horário agendado, acesse o chat diretamente pelo navegador — sem instalar nada, no celular ou computador.",
+    como_3_title: "Encontro personalizado",
+    como_3_desc: "Seu guia de bem-estar conduz o encontro com escuta ativa, práticas integrativas e protocolos adaptados ao seu momento.",
+    como_4_title: "Evolua com continuidade",
+    como_4_desc: "Cada encontro constrói sobre o anterior. Sua jornada e histórico são preservados para um acompanhamento real.",
+
+    // ABORDAGENS
+    section_metodologia: "Metodologia",
+    abord_title: "Práticas que",
+    abord_title_em: "transformam",
+    abord_desc: "Treinado com uma biblioteca integrativa de conhecimento holístico — unindo o rigor das práticas baseadas em evidências com a profundidade das tradições de cura.",
+    abord_1_name: "Práticas Integrativas (PICs)",
+    abord_1_desc: "Abordagens reconhecidas pelo Ministério da Saúde para promoção do bem-estar e equilíbrio mente-corpo.",
+    abord_2_name: "Cuidado Holístico",
+    abord_2_desc: "Protocolos que contemplam corpo, mente e energia — incluindo bioressonância e práticas complementares.",
+    abord_3_name: "Espiritualidade Aplicada",
+    abord_3_desc: "Meditação guiada, práticas contemplativas e perspectivas transpessoais sem dogmas religiosos.",
+    abord_4_name: "Desenvolvimento Pessoal",
+    abord_4_desc: "Ferramentas baseadas em evidências para regulação emocional, autoconhecimento e gestão do estresse.",
+    abord_center: "Integração\nmente · corpo · alma",
+
+    // PLANOS
+    section_planos: "Planos",
+    planos_title: "Invista no seu",
+    planos_title_em: "bem-estar",
+    plano_avulso_nome: "Encontro avulso",
+    plano_avulso_periodo: "por encontro único",
+    plano_avulso_f1: "1 encontro de autoconhecimento completo",
+    plano_avulso_f2: "Até 60 minutos de conversa",
+    plano_avulso_f3: "eBook \"7 Práticas Holísticas\" de bônus",
+    plano_avulso_btn: "Começar",
+    plano_essencial_nome: "Essencial",
+    plano_essencial_badge: "Mais escolhido",
+    plano_essencial_periodo: "por mês · 4 encontros (1 por semana)",
+    plano_essencial_f1: "4 encontros por mês (1 por semana)",
+    plano_essencial_f2: "Histórico completo preservado",
+    plano_essencial_f3: "Protocolos de bem-estar personalizados",
+    plano_essencial_f4: "Resumo mensal da sua jornada",
+    plano_essencial_f5: "Práticas e exercícios entre encontros",
+    plano_essencial_btn: "Assinar agora",
+    plano_transf_nome: "Transformação",
+    plano_transf_periodo: "por mês · 8 encontros (2 por semana)",
+    plano_transf_f1: "8 encontros por mês (2 por semana)",
+    plano_transf_f2: "Tudo do plano Essencial",
+    plano_transf_f3: "Protocolos de bioressonância QMR",
+    plano_transf_f4: "Relatórios PDF detalhados da jornada",
+    plano_transf_f5: "Acompanhamento de métricas de bem-estar",
+    plano_transf_f6: "Suporte prioritário e acesso antecipado",
+    plano_transf_btn: "Assinar agora",
+    free_tag: "✦ Oferta de boas-vindas",
+    free_title: "Seu primeiro encontro é",
+    free_title_em: "gratuito",
+    free_desc: "Experimente sem compromisso. Agende agora seu encontro de 45 minutos e descubra como as práticas integrativas com IA podem transformar sua jornada de bem-estar.",
+    free_btn: "Agendar sessão gratuita",
+
+    // DEPOIMENTOS
+    section_experiencias: "Experiências",
+    dep_title: "O que dizem",
+    dep_title_em: "nossos clientes",
+
+    // FAQ
+    section_duvidas: "Dúvidas",
+    faq_title: "Perguntas",
+    faq_title_em: "frequentes",
+    faq_1_q: "O NewCosmos substitui um psicólogo ou médico?",
+    faq_1_a: "Não. O NewCosmos é um serviço de apoio ao bem-estar e desenvolvimento pessoal — não substitui acompanhamento médico ou psicológico profissional. Não realizamos diagnósticos, não prescrevemos medicamentos e não oferecemos tratamento clínico. Em situações de crise, sempre recomendamos buscar profissionais de saúde habilitados.",
+    faq_2_q: "Minhas conversas são privadas e seguras?",
+    faq_2_a: "Sim. Todos os encontros são criptografados e seus dados são tratados com total confidencialidade, em conformidade com a LGPD. Suas conversas não são compartilhadas com terceiros.",
+    faq_3_q: "Posso cancelar minha assinatura a qualquer momento?",
+    faq_3_a: "Sim, totalmente. Os planos Essencial e Transformação podem ser cancelados a qualquer momento sem multa, com efeito a partir do próximo ciclo de cobrança.",
+    faq_4_q: "Como funciona o encontro gratuito?",
+    faq_4_a: "Você agenda pelo nosso sistema, recebe um link por e-mail e acessa o chat no horário marcado. O encontro dura até 45 minutos e é idêntico aos encontros pagos — sem limitações de conteúdo. Não é necessário cartão de crédito.",
+    faq_5_q: "Preciso instalar algum aplicativo?",
+    faq_5_a: "Não. Os encontros acontecem diretamente no navegador — no celular ou computador. Basta clicar no link recebido por e-mail no horário agendado.",
+    faq_6_q: "O guia de bem-estar lembra dos encontros anteriores?",
+    faq_6_a: "Sim, nos planos Essencial e Transformação. O histórico completo dos seus encontros é preservado, permitindo continuidade real no acompanhamento da sua jornada.",
+    disclaimer: "Aviso importante: O NewCosmos é um serviço de bem-estar, autoconhecimento e práticas integrativas baseado em inteligência artificial. Não realizamos diagnósticos, não prescrevemos medicamentos e não substituímos profissionais de saúde habilitados. Em situações de crise ou emergência, procure imediatamente o CVV (188), SAMU (192) ou serviços de saúde mental da sua região.",
+
+    // FOOTER
+    footer_termos: "Termos de uso",
+    footer_privacidade: "Privacidade",
+    footer_contato: "Contato",
+    footer_copy: "© 2026 NewCosmos — Bem-estar Integrativo com IA. Todos os direitos reservados.",
+
+    // CHAT
+    chat_idioma: "pt",
+    chat_placeholder: "Compartilhe o que está no seu coração...",
+    chat_hint: "Enter para enviar · Shift+Enter para nova linha · 📎 para anexar",
+    chat_novo: "Novo encontro",
+    chat_inicio: "← Início",
+    chat_aviso_tempo: "⏳ Nosso encontro está chegando ao fim — vou começar a integrar as orientações para você.",
+    chat_disclaimer: "Espaço de bem-estar e autoconhecimento. Este encontro é de natureza complementar e não substitui atendimento médico ou psicológico profissional.",
+    chat_role: "Guia de Bem-Estar Integrativo",
+    chat_soul_lang: "Responda sempre em português brasileiro.",
+  },
+
+  en: {
+    nav_como_funciona: "How it works",
+    nav_abordagens: "Approaches",
+    nav_planos: "Plans",
+    nav_faq: "FAQ",
+    nav_cliente: "I'm a client",
+    nav_sessao_gratuita: "Free session",
+    modal_titulo: "Access my Session",
+    modal_texto: "Enter the access code sent to your email after payment confirmation.",
+    modal_placeholder: "Paste your code here",
+    modal_btn: "Enter my Space ✦",
+    modal_verificando: "Verifying...",
+    modal_sem_email: "Didn't receive the email?",
+    modal_contato: "Contact us",
+    modal_erro_vazio: "Please enter your access code.",
+    modal_erro_nao_encontrado: "Code not found. Check if you copied it correctly.",
+    modal_erro_expirado: "This code has expired. Contact us to renew.",
+    modal_erro_usado: "This session has already been used. Purchase a new access.",
+    modal_erro_conexao: "Connection error. Please try again.",
+    modal_erro_invalido: "Invalid code. Please try again.",
+    hero_eyebrow: "Integrative Wellness with Artificial Intelligence",
+    hero_title1: "Healing that unites",
+    hero_title2: "science",
+    hero_title3: "and",
+    hero_title4: "soul",
+    hero_subtitle: "A wellness guide available for you, anytime.",
+    hero_body: "NewCosmos integrates holistic practices, self-knowledge and personal development in personalized sessions — guided by artificial intelligence trained with holistic depth and human sensitivity.",
+    hero_btn_primary: "Try for free",
+    hero_btn_ghost: "How it works",
+    hero_btn_cliente: "✦ I'm already a client",
+    section_processo: "The process",
+    como_title: "Simple to start.",
+    como_title_em: "Deep to experience.",
+    como_1_title: "Schedule your session",
+    como_1_desc: "Choose the day and time that best fits your routine. First session always free, no commitment.",
+    como_2_title: "Connect to your guide",
+    como_2_desc: "At the scheduled time, access the chat directly from your browser — no installation needed, on mobile or desktop.",
+    como_3_title: "Personalized session",
+    como_3_desc: "Your wellness guide leads the session with active listening, integrative practices and protocols adapted to your moment.",
+    como_4_title: "Grow with continuity",
+    como_4_desc: "Each session builds on the previous one. Your journey and history are preserved for real ongoing support.",
+    section_metodologia: "Methodology",
+    abord_title: "Practices that",
+    abord_title_em: "transform",
+    abord_desc: "Trained with an integrative library of holistic knowledge — uniting the rigor of evidence-based practices with the depth of healing traditions.",
+    abord_1_name: "Integrative Practices (PICs)",
+    abord_1_desc: "Approaches recognized by health authorities for promoting well-being and mind-body balance.",
+    abord_2_name: "Holistic Care",
+    abord_2_desc: "Protocols encompassing body, mind and energy — including bioresonance and complementary practices.",
+    abord_3_name: "Applied Spirituality",
+    abord_3_desc: "Guided meditation, contemplative practices and transpersonal perspectives without religious dogmas.",
+    abord_4_name: "Personal Development",
+    abord_4_desc: "Evidence-based tools for emotional regulation, self-knowledge and stress management.",
+    abord_center: "Integration\nmind · body · soul",
+    section_planos: "Plans",
+    planos_title: "Invest in your",
+    planos_title_em: "well-being",
+    plano_avulso_nome: "Single session",
+    plano_avulso_periodo: "per single session",
+    plano_avulso_f1: "1 complete self-knowledge session",
+    plano_avulso_f2: "Up to 60 minutes of conversation",
+    plano_avulso_f3: "eBook \"7 Holistic Practices\" as bonus",
+    plano_avulso_btn: "Get started",
+    plano_essencial_nome: "Essential",
+    plano_essencial_badge: "Most popular",
+    plano_essencial_periodo: "per month · 4 sessions (1 per week)",
+    plano_essencial_f1: "4 sessions per month (1 per week)",
+    plano_essencial_f2: "Complete history preserved",
+    plano_essencial_f3: "Personalized wellness protocols",
+    plano_essencial_f4: "Monthly journey summary",
+    plano_essencial_f5: "Practices and exercises between sessions",
+    plano_essencial_btn: "Subscribe now",
+    plano_transf_nome: "Transformation",
+    plano_transf_periodo: "per month · 8 sessions (2 per week)",
+    plano_transf_f1: "8 sessions per month (2 per week)",
+    plano_transf_f2: "Everything in Essential plan",
+    plano_transf_f3: "QMR bioresonance protocols",
+    plano_transf_f4: "Detailed PDF journey reports",
+    plano_transf_f5: "Wellness metrics tracking",
+    plano_transf_f6: "Priority support and early access",
+    plano_transf_btn: "Subscribe now",
+    free_tag: "✦ Welcome offer",
+    free_title: "Your first session is",
+    free_title_em: "free",
+    free_desc: "Try without commitment. Schedule your 45-minute session now and discover how integrative AI practices can transform your wellness journey.",
+    free_btn: "Schedule free session",
+    section_experiencias: "Experiences",
+    dep_title: "What our",
+    dep_title_em: "clients say",
+    section_duvidas: "Questions",
+    faq_title: "Frequently asked",
+    faq_title_em: "questions",
+    faq_1_q: "Does NewCosmos replace a psychologist or doctor?",
+    faq_1_a: "No. NewCosmos is a wellness and personal development support service — it does not replace professional medical or psychological care. We do not diagnose, prescribe medications or offer clinical treatment. In crisis situations, we always recommend seeking qualified health professionals.",
+    faq_2_q: "Are my conversations private and secure?",
+    faq_2_a: "Yes. All sessions are encrypted and your data is treated with full confidentiality, in compliance with data protection laws. Your conversations are not shared with third parties.",
+    faq_3_q: "Can I cancel my subscription at any time?",
+    faq_3_a: "Yes, completely. Essential and Transformation plans can be cancelled at any time without penalty, effective from the next billing cycle.",
+    faq_4_q: "How does the free session work?",
+    faq_4_a: "You schedule through our system, receive a link by email and access the chat at the scheduled time. The session lasts up to 45 minutes and is identical to paid sessions — no content limitations. No credit card required.",
+    faq_5_q: "Do I need to install any app?",
+    faq_5_a: "No. Sessions take place directly in the browser — on mobile or desktop. Just click the link received by email at the scheduled time.",
+    faq_6_q: "Does the wellness guide remember previous sessions?",
+    faq_6_a: "Yes, in Essential and Transformation plans. Your complete session history is preserved, allowing real continuity in your journey support.",
+    disclaimer: "Important notice: NewCosmos is a wellness, self-knowledge and integrative practices service based on artificial intelligence. We do not diagnose, prescribe medications or replace qualified health professionals. In crisis or emergency, immediately seek CVV (188), SAMU (192) or mental health services in your region.",
+    footer_termos: "Terms of use",
+    footer_privacidade: "Privacy",
+    footer_contato: "Contact",
+    footer_copy: "© 2026 NewCosmos — Integrative Wellness with AI. All rights reserved.",
+    chat_idioma: "en",
+    chat_placeholder: "Share what's in your heart...",
+    chat_hint: "Enter to send · Shift+Enter for new line · 📎 to attach",
+    chat_novo: "New session",
+    chat_inicio: "← Home",
+    chat_aviso_tempo: "⏳ Our session is coming to an end — I'll start integrating the guidance for you.",
+    chat_disclaimer: "Wellness and self-knowledge space. This session is complementary and does not replace professional medical or psychological care.",
+    chat_role: "Integrative Wellness Guide",
+    chat_soul_lang: "Always respond in English.",
+  },
+
+  es: {
+    nav_como_funciona: "Cómo funciona",
+    nav_abordagens: "Enfoques",
+    nav_planos: "Planes",
+    nav_faq: "FAQ",
+    nav_cliente: "Ya soy cliente",
+    nav_sessao_gratuita: "Sesión gratuita",
+    modal_titulo: "Acceder a mi Sesión",
+    modal_texto: "Introduce el código de acceso enviado a tu correo electrónico tras la confirmación del pago.",
+    modal_placeholder: "Pega tu código aquí",
+    modal_btn: "Entrar en mi Espacio ✦",
+    modal_verificando: "Verificando...",
+    modal_sem_email: "¿No recibiste el correo?",
+    modal_contato: "Contáctanos",
+    modal_erro_vazio: "Por favor, introduce tu código de acceso.",
+    modal_erro_nao_encontrado: "Código no encontrado. Verifica si lo copiaste correctamente.",
+    modal_erro_expirado: "Este código ha expirado. Contáctanos para renovarlo.",
+    modal_erro_usado: "Esta sesión ya fue realizada. Adquiere un nuevo acceso.",
+    modal_erro_conexao: "Error de conexión. Inténtalo de nuevo.",
+    modal_erro_invalido: "Código inválido. Inténtalo de nuevo.",
+    hero_eyebrow: "Bienestar Integrativo con Inteligencia Artificial",
+    hero_title1: "Sanación que une",
+    hero_title2: "ciencia",
+    hero_title3: "y",
+    hero_title4: "alma",
+    hero_subtitle: "Una guía de bienestar disponible para ti, en cualquier momento.",
+    hero_body: "NewCosmos integra prácticas holísticas, autoconocimiento y desarrollo personal en sesiones personalizadas — guiadas por inteligencia artificial entrenada con profundidad holística y sensibilidad humana.",
+    hero_btn_primary: "Probar gratis",
+    hero_btn_ghost: "Cómo funciona",
+    hero_btn_cliente: "✦ Ya soy cliente",
+    section_processo: "El proceso",
+    como_title: "Simple de empezar.",
+    como_title_em: "Profundo de vivir.",
+    como_1_title: "Agenda tu sesión",
+    como_1_desc: "Elige el día y horario que mejor se adapte a tu rutina. Primera sesión siempre gratuita, sin compromiso.",
+    como_2_title: "Conéctate con tu guía",
+    como_2_desc: "A la hora programada, accede al chat directamente desde el navegador — sin instalar nada, en móvil o computadora.",
+    como_3_title: "Sesión personalizada",
+    como_3_desc: "Tu guía de bienestar conduce la sesión con escucha activa, prácticas integrativas y protocolos adaptados a tu momento.",
+    como_4_title: "Evoluciona con continuidad",
+    como_4_desc: "Cada sesión construye sobre la anterior. Tu viaje e historial se preservan para un acompañamiento real.",
+    section_metodologia: "Metodología",
+    abord_title: "Prácticas que",
+    abord_title_em: "transforman",
+    abord_desc: "Entrenado con una biblioteca integrativa de conocimiento holístico — uniendo el rigor de las prácticas basadas en evidencias con la profundidad de las tradiciones de sanación.",
+    abord_1_name: "Prácticas Integrativas",
+    abord_1_desc: "Enfoques reconocidos por las autoridades de salud para promover el bienestar y el equilibrio mente-cuerpo.",
+    abord_2_name: "Cuidado Holístico",
+    abord_2_desc: "Protocolos que contemplan cuerpo, mente y energía — incluyendo biorresonancia y prácticas complementarias.",
+    abord_3_name: "Espiritualidad Aplicada",
+    abord_3_desc: "Meditación guiada, prácticas contemplativas y perspectivas transpersonales sin dogmas religiosos.",
+    abord_4_name: "Desarrollo Personal",
+    abord_4_desc: "Herramientas basadas en evidencias para regulación emocional, autoconocimiento y gestión del estrés.",
+    abord_center: "Integración\nmente · cuerpo · alma",
+    section_planos: "Planes",
+    planos_title: "Invierte en tu",
+    planos_title_em: "bienestar",
+    plano_avulso_nome: "Sesión individual",
+    plano_avulso_periodo: "por sesión única",
+    plano_avulso_f1: "1 sesión completa de autoconocimiento",
+    plano_avulso_f2: "Hasta 60 minutos de conversación",
+    plano_avulso_f3: "eBook \"7 Prácticas Holísticas\" de regalo",
+    plano_avulso_btn: "Comenzar",
+    plano_essencial_nome: "Esencial",
+    plano_essencial_badge: "Más elegido",
+    plano_essencial_periodo: "por mes · 4 sesiones (1 por semana)",
+    plano_essencial_f1: "4 sesiones por mes (1 por semana)",
+    plano_essencial_f2: "Historial completo preservado",
+    plano_essencial_f3: "Protocolos de bienestar personalizados",
+    plano_essencial_f4: "Resumen mensual de tu viaje",
+    plano_essencial_f5: "Prácticas y ejercicios entre sesiones",
+    plano_essencial_btn: "Suscribirse ahora",
+    plano_transf_nome: "Transformación",
+    plano_transf_periodo: "por mes · 8 sesiones (2 por semana)",
+    plano_transf_f1: "8 sesiones por mes (2 por semana)",
+    plano_transf_f2: "Todo del plan Esencial",
+    plano_transf_f3: "Protocolos de biorresonancia QMR",
+    plano_transf_f4: "Informes PDF detallados del viaje",
+    plano_transf_f5: "Seguimiento de métricas de bienestar",
+    plano_transf_f6: "Soporte prioritario y acceso anticipado",
+    plano_transf_btn: "Suscribirse ahora",
+    free_tag: "✦ Oferta de bienvenida",
+    free_title: "Tu primera sesión es",
+    free_title_em: "gratuita",
+    free_desc: "Prueba sin compromiso. Agenda ahora tu sesión de 45 minutos y descubre cómo las prácticas integrativas con IA pueden transformar tu viaje de bienestar.",
+    free_btn: "Agendar sesión gratuita",
+    section_experiencias: "Experiencias",
+    dep_title: "Lo que dicen",
+    dep_title_em: "nuestros clientes",
+    section_duvidas: "Preguntas",
+    faq_title: "Preguntas",
+    faq_title_em: "frecuentes",
+    faq_1_q: "¿NewCosmos reemplaza a un psicólogo o médico?",
+    faq_1_a: "No. NewCosmos es un servicio de apoyo al bienestar y desarrollo personal — no reemplaza el acompañamiento médico o psicológico profesional. No realizamos diagnósticos, no prescribimos medicamentos y no ofrecemos tratamiento clínico.",
+    faq_2_q: "¿Mis conversaciones son privadas y seguras?",
+    faq_2_a: "Sí. Todas las sesiones están encriptadas y tus datos son tratados con total confidencialidad. Tus conversaciones no se comparten con terceros.",
+    faq_3_q: "¿Puedo cancelar mi suscripción en cualquier momento?",
+    faq_3_a: "Sí, completamente. Los planes Esencial y Transformación pueden cancelarse en cualquier momento sin penalización.",
+    faq_4_q: "¿Cómo funciona la sesión gratuita?",
+    faq_4_a: "Agendas a través de nuestro sistema, recibes un enlace por correo y accedes al chat a la hora marcada. La sesión dura hasta 45 minutos. No se requiere tarjeta de crédito.",
+    faq_5_q: "¿Necesito instalar alguna aplicación?",
+    faq_5_a: "No. Las sesiones se realizan directamente en el navegador — en móvil o computadora.",
+    faq_6_q: "¿El guía de bienestar recuerda las sesiones anteriores?",
+    faq_6_a: "Sí, en los planes Esencial y Transformación. Tu historial completo se preserva para una continuidad real en el acompañamiento.",
+    disclaimer: "Aviso importante: NewCosmos es un servicio de bienestar basado en inteligencia artificial. No realizamos diagnósticos ni prescribimos medicamentos. En crisis o emergencia, busca inmediatamente servicios de salud mental en tu región.",
+    footer_termos: "Términos de uso",
+    footer_privacidade: "Privacidad",
+    footer_contato: "Contacto",
+    footer_copy: "© 2026 NewCosmos — Bienestar Integrativo con IA. Todos los derechos reservados.",
+    chat_idioma: "es",
+    chat_placeholder: "Comparte lo que está en tu corazón...",
+    chat_hint: "Enter para enviar · Shift+Enter para nueva línea · 📎 para adjuntar",
+    chat_novo: "Nueva sesión",
+    chat_inicio: "← Inicio",
+    chat_aviso_tempo: "⏳ Nuestra sesión está llegando a su fin — comenzaré a integrar las orientaciones para ti.",
+    chat_disclaimer: "Espacio de bienestar y autoconocimiento. Esta sesión es complementaria y no reemplaza la atención médica o psicológica profesional.",
+    chat_role: "Guía de Bienestar Integrativo",
+    chat_soul_lang: "Responde siempre en español.",
+  },
+
+  it: {
+    nav_como_funciona: "Come funziona",
+    nav_abordagens: "Approcci",
+    nav_planos: "Piani",
+    nav_faq: "FAQ",
+    nav_cliente: "Sono già cliente",
+    nav_sessao_gratuita: "Sessione gratuita",
+    modal_titulo: "Accedi alla mia Sessione",
+    modal_texto: "Inserisci il codice di accesso inviato alla tua email dopo la conferma del pagamento.",
+    modal_placeholder: "Incolla il tuo codice qui",
+    modal_btn: "Entra nel mio Spazio ✦",
+    modal_verificando: "Verifica in corso...",
+    modal_sem_email: "Non hai ricevuto l'email?",
+    modal_contato: "Contattaci",
+    modal_erro_vazio: "Per favore, inserisci il tuo codice di accesso.",
+    modal_erro_nao_encontrado: "Codice non trovato. Verifica se l'hai copiato correttamente.",
+    modal_erro_expirado: "Questo codice è scaduto. Contattaci per rinnovarlo.",
+    modal_erro_usado: "Questa sessione è già stata effettuata. Acquista un nuovo accesso.",
+    modal_erro_conexao: "Errore di connessione. Riprova.",
+    modal_erro_invalido: "Codice non valido. Riprova.",
+    hero_eyebrow: "Benessere Integrativo con Intelligenza Artificiale",
+    hero_title1: "Guarigione che unisce",
+    hero_title2: "scienza",
+    hero_title3: "e",
+    hero_title4: "anima",
+    hero_subtitle: "Una guida al benessere disponibile per te, in qualsiasi momento.",
+    hero_body: "NewCosmos integra pratiche olistiche, autoconoscenza e sviluppo personale in sessioni personalizzate — guidate da intelligenza artificiale addestrata con profondità olistica e sensibilità umana.",
+    hero_btn_primary: "Prova gratuitamente",
+    hero_btn_ghost: "Come funziona",
+    hero_btn_cliente: "✦ Sono già cliente",
+    section_processo: "Il processo",
+    como_title: "Semplice da iniziare.",
+    como_title_em: "Profondo da vivere.",
+    como_1_title: "Prenota la tua sessione",
+    como_1_desc: "Scegli il giorno e l'orario più adatto alla tua routine. Prima sessione sempre gratuita, senza impegno.",
+    como_2_title: "Connettiti alla tua guida",
+    como_2_desc: "All'orario prenotato, accedi alla chat direttamente dal browser — senza installare nulla, su mobile o computer.",
+    como_3_title: "Sessione personalizzata",
+    como_3_desc: "La tua guida al benessere conduce la sessione con ascolto attivo, pratiche integrative e protocolli adattati al tuo momento.",
+    como_4_title: "Cresci con continuità",
+    como_4_desc: "Ogni sessione costruisce sulla precedente. Il tuo percorso e la tua storia vengono preservati per un supporto reale e continuo.",
+    section_metodologia: "Metodologia",
+    abord_title: "Pratiche che",
+    abord_title_em: "trasformano",
+    abord_desc: "Addestrato con una biblioteca integrativa di conoscenza olistica — unendo il rigore delle pratiche basate sull'evidenza con la profondità delle tradizioni di guarigione.",
+    abord_1_name: "Pratiche Integrative",
+    abord_1_desc: "Approcci riconosciuti dalle autorità sanitarie per promuovere il benessere e l'equilibrio mente-corpo.",
+    abord_2_name: "Cura Olistica",
+    abord_2_desc: "Protocolli che contemplano corpo, mente ed energia — inclusa la biorisonanza e le pratiche complementari.",
+    abord_3_name: "Spiritualità Applicata",
+    abord_3_desc: "Meditazione guidata, pratiche contemplative e prospettive transpersonali senza dogmi religiosi.",
+    abord_4_name: "Sviluppo Personale",
+    abord_4_desc: "Strumenti basati sull'evidenza per la regolazione emotiva, l'autoconoscenza e la gestione dello stress.",
+    abord_center: "Integrazione\nmente · corpo · anima",
+    section_planos: "Piani",
+    planos_title: "Investi nel tuo",
+    planos_title_em: "benessere",
+    plano_avulso_nome: "Sessione singola",
+    plano_avulso_periodo: "per sessione singola",
+    plano_avulso_f1: "1 sessione completa di autoconoscenza",
+    plano_avulso_f2: "Fino a 60 minuti di conversazione",
+    plano_avulso_f3: "eBook \"7 Pratiche Olistiche\" in omaggio",
+    plano_avulso_btn: "Inizia",
+    plano_essencial_nome: "Essenziale",
+    plano_essencial_badge: "Più scelto",
+    plano_essencial_periodo: "al mese · 4 sessioni (1 a settimana)",
+    plano_essencial_f1: "4 sessioni al mese (1 a settimana)",
+    plano_essencial_f2: "Storico completo preservato",
+    plano_essencial_f3: "Protocolli di benessere personalizzati",
+    plano_essencial_f4: "Riepilogo mensile del tuo percorso",
+    plano_essencial_f5: "Pratiche ed esercizi tra le sessioni",
+    plano_essencial_btn: "Abbonati ora",
+    plano_transf_nome: "Trasformazione",
+    plano_transf_periodo: "al mese · 8 sessioni (2 a settimana)",
+    plano_transf_f1: "8 sessioni al mese (2 a settimana)",
+    plano_transf_f2: "Tutto del piano Essenziale",
+    plano_transf_f3: "Protocolli di biorisonanza QMR",
+    plano_transf_f4: "Rapporti PDF dettagliati del percorso",
+    plano_transf_f5: "Monitoraggio delle metriche di benessere",
+    plano_transf_f6: "Supporto prioritario e accesso anticipato",
+    plano_transf_btn: "Abbonati ora",
+    free_tag: "✦ Offerta di benvenuto",
+    free_title: "La tua prima sessione è",
+    free_title_em: "gratuita",
+    free_desc: "Prova senza impegno. Prenota ora la tua sessione di 45 minuti e scopri come le pratiche integrative con IA possono trasformare il tuo percorso di benessere.",
+    free_btn: "Prenota sessione gratuita",
+    section_experiencias: "Esperienze",
+    dep_title: "Cosa dicono i nostri",
+    dep_title_em: "clienti",
+    section_duvidas: "Domande",
+    faq_title: "Domande",
+    faq_title_em: "frequenti",
+    faq_1_q: "NewCosmos sostituisce uno psicologo o un medico?",
+    faq_1_a: "No. NewCosmos è un servizio di supporto al benessere e sviluppo personale — non sostituisce l'assistenza medica o psicologica professionale. Non effettuiamo diagnosi, non prescriviamo farmaci e non offriamo trattamento clinico.",
+    faq_2_q: "Le mie conversazioni sono private e sicure?",
+    faq_2_a: "Sì. Tutte le sessioni sono criptate e i tuoi dati vengono trattati con totale riservatezza. Le tue conversazioni non vengono condivise con terzi.",
+    faq_3_q: "Posso cancellare il mio abbonamento in qualsiasi momento?",
+    faq_3_a: "Sì, completamente. I piani Essenziale e Trasformazione possono essere cancellati in qualsiasi momento senza penalità.",
+    faq_4_q: "Come funziona la sessione gratuita?",
+    faq_4_a: "Prenoti tramite il nostro sistema, ricevi un link via email e accedi alla chat all'orario stabilito. La sessione dura fino a 45 minuti. Non è necessaria la carta di credito.",
+    faq_5_q: "Devo installare qualche applicazione?",
+    faq_5_a: "No. Le sessioni si svolgono direttamente nel browser — su mobile o computer.",
+    faq_6_q: "La guida al benessere ricorda le sessioni precedenti?",
+    faq_6_a: "Sì, nei piani Essenziale e Trasformazione. La tua storia completa viene preservata per una continuità reale nel supporto del tuo percorso.",
+    disclaimer: "Avviso importante: NewCosmos è un servizio di benessere basato sull'intelligenza artificiale. Non effettuiamo diagnosi né prescriviamo farmaci. In situazioni di crisi o emergenza, rivolgiti immediatamente ai servizi di salute mentale della tua regione.",
+    footer_termos: "Termini di utilizzo",
+    footer_privacidade: "Privacy",
+    footer_contato: "Contatto",
+    footer_copy: "© 2026 NewCosmos — Benessere Integrativo con IA. Tutti i diritti riservati.",
+    chat_idioma: "it",
+    chat_placeholder: "Condividi ciò che hai nel cuore...",
+    chat_hint: "Invio per inviare · Shift+Invio per nuova riga · 📎 per allegare",
+    chat_novo: "Nuova sessione",
+    chat_inicio: "← Home",
+    chat_aviso_tempo: "⏳ La nostra sessione sta per concludersi — inizierò a integrare le indicazioni per te.",
+    chat_disclaimer: "Spazio di benessere e autoconoscenza. Questa sessione è complementare e non sostituisce l'assistenza medica o psicologica professionale.",
+    chat_role: "Guida al Benessere Integrativo",
+    chat_soul_lang: "Rispondi sempre in italiano.",
+  }
+};
+
+
+let currentLang = localStorage.getItem('nc_lang') || 'pt';
+
+const langFlags = { pt: '🇧🇷 PT', en: '🇬🇧 EN', es: '🇪🇸 ES', it: '🇮🇹 IT' };
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('nc_lang', lang);
+  applyTranslations();
+  // Salvar no sessionStorage para o chat usar
+  sessionStorage.setItem('nc_lang', lang);
+}
+
+function applyTranslations() {
+  const t = i18n[currentLang];
+  if (!t) return;
+
+  // Atualizar botão de idioma
+  document.getElementById('lang-current').textContent = langFlags[currentLang];
+  document.querySelectorAll('.lang-option').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('onclick').includes(`'${currentLang}'`));
+  });
+
+  // Nav
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === '#como-funciona') link.textContent = t.nav_como_funciona;
+    else if (href === '#abordagens') link.textContent = t.nav_abordagens;
+    else if (href === '#planos') link.textContent = t.nav_planos;
+    else if (href === '#faq') link.textContent = t.nav_faq;
+    else if (link.classList.contains('nav-cta')) link.textContent = t.nav_sessao_gratuita;
+    else if (link.getAttribute('onclick') && link.getAttribute('onclick').includes('abrirModal')) link.textContent = t.nav_cliente;
+  });
+
+  // Modal
+  setText('modal-acesso', '[data-id="modal-titulo"]', t.modal_titulo);
+  setText('modal-acesso', '[data-id="modal-texto"]', t.modal_texto);
+  setAttr('modal-token-input', 'placeholder', t.modal_placeholder);
+  setModalBtn(t);
+
+  // Hero
+  setDataI18n('hero_eyebrow', t.hero_eyebrow);
+  setDataI18n('hero_subtitle', t.hero_subtitle);
+  const heroBody = document.querySelector('.hero-body');
+  if (heroBody) heroBody.textContent = t.hero_body;
+  const heroPrimary = document.querySelector('.hero-actions .btn-primary');
+  if (heroPrimary) heroPrimary.innerHTML = t.hero_btn_primary + ' <span>→</span>';
+  const heroGhost = document.querySelector('.hero-actions .btn-ghost');
+  if (heroGhost) heroGhost.textContent = t.hero_btn_ghost;
+  const heroCliente = document.querySelector('.hero-actions [onclick*="abrirModal"]');
+  if (heroCliente) heroCliente.textContent = t.hero_btn_cliente;
+
+  // Como funciona
+  const sectionLabels = document.querySelectorAll('.section-label');
+  const sectionTitles = document.querySelectorAll('.section-title');
+  const howCards = document.querySelectorAll('.how-card');
+  if (howCards.length >= 4) {
+    howCards[0].querySelector('.how-title').textContent = t.como_1_title;
+    howCards[0].querySelector('.how-desc').textContent = t.como_1_desc;
+    howCards[1].querySelector('.how-title').textContent = t.como_2_title;
+    howCards[1].querySelector('.how-desc').textContent = t.como_2_desc;
+    howCards[2].querySelector('.how-title').textContent = t.como_3_title;
+    howCards[2].querySelector('.how-desc').textContent = t.como_3_desc;
+    howCards[3].querySelector('.how-title').textContent = t.como_4_title;
+    howCards[3].querySelector('.how-desc').textContent = t.como_4_desc;
+  }
+
+  // Abordagens
+  const approachItems = document.querySelectorAll('.approach-item');
+  if (approachItems.length >= 4) {
+    approachItems[0].querySelector('.approach-name').textContent = t.abord_1_name;
+    approachItems[0].querySelector('.approach-desc').textContent = t.abord_1_desc;
+    approachItems[1].querySelector('.approach-name').textContent = t.abord_2_name;
+    approachItems[1].querySelector('.approach-desc').textContent = t.abord_2_desc;
+    approachItems[2].querySelector('.approach-name').textContent = t.abord_3_name;
+    approachItems[2].querySelector('.approach-desc').textContent = t.abord_3_desc;
+    approachItems[3].querySelector('.approach-name').textContent = t.abord_4_name;
+    approachItems[3].querySelector('.approach-desc').textContent = t.abord_4_desc;
+  }
+  const approachCenterText = document.querySelector('.approach-center-text');
+  if (approachCenterText) approachCenterText.innerHTML = t.abord_center.replace('\n', '<br>');
+
+  // Planos
+  const planNames = document.querySelectorAll('.plan-name');
+  const planPeriods = document.querySelectorAll('.plan-period');
+  const planBtns = document.querySelectorAll('.btn-plan');
+  const planBadge = document.querySelector('.plan-badge');
+  if (planNames.length >= 3) {
+    planNames[0].textContent = t.plano_avulso_nome;
+    planNames[1].textContent = t.plano_essencial_nome;
+    planNames[2].textContent = t.plano_transf_nome;
+  }
+  if (planPeriods.length >= 3) {
+    planPeriods[0].textContent = t.plano_avulso_periodo;
+    planPeriods[1].textContent = t.plano_essencial_periodo;
+    planPeriods[2].textContent = t.plano_transf_periodo;
+  }
+  if (planBtns.length >= 3) {
+    planBtns[0].textContent = t.plano_avulso_btn;
+    planBtns[1].textContent = t.plano_essencial_btn;
+    planBtns[2].textContent = t.plano_transf_btn;
+  }
+  if (planBadge) planBadge.textContent = t.plano_essencial_badge;
+
+  // Free session
+  const freeTag = document.querySelector('.free-tag');
+  const freeTitle = document.querySelector('.free-title');
+  const freeDesc = document.querySelector('.free-desc');
+  const freeBtn = document.querySelector('.free-session .btn-primary');
+  if (freeTag) freeTag.textContent = t.free_tag;
+  if (freeTitle) freeTitle.innerHTML = t.free_title + ' <em>' + t.free_title_em + '</em>';
+  if (freeDesc) freeDesc.textContent = t.free_desc;
+  if (freeBtn) freeBtn.innerHTML = t.free_btn + ' <span>→</span>';
+
+  // FAQ
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  const faqAnswers = document.querySelectorAll('.faq-answer');
+  const faqKeys = ['faq_1', 'faq_2', 'faq_3', 'faq_4', 'faq_5', 'faq_6'];
+  faqQuestions.forEach((q, i) => {
+    if (t[faqKeys[i] + '_q']) {
+      const icon = q.querySelector('.faq-icon');
+      q.childNodes[0].textContent = t[faqKeys[i] + '_q'] + ' ';
+      if (icon) q.appendChild(icon);
+    }
+  });
+  faqAnswers.forEach((a, i) => {
+    if (t[faqKeys[i] + '_a']) a.textContent = t[faqKeys[i] + '_a'];
+  });
+
+  // Disclaimer
+  const disclaimer = document.querySelector('.disclaimer');
+  if (disclaimer) disclaimer.innerHTML = '<strong>' + (currentLang === 'pt' ? 'Aviso importante:' : currentLang === 'en' ? 'Important notice:' : currentLang === 'es' ? 'Aviso importante:' : 'Avviso importante:') + '</strong> ' + t.disclaimer.replace(/^[^:]+: /, '');
+
+  // Footer
+  const footerLinks = document.querySelectorAll('.footer-links a');
+  if (footerLinks.length >= 3) {
+    footerLinks[0].textContent = t.footer_termos;
+    footerLinks[1].textContent = t.footer_privacidade;
+    footerLinks[2].textContent = t.footer_contato;
+  }
+  const footerCopy = document.querySelector('.footer-copy');
+  if (footerCopy) footerCopy.textContent = t.footer_copy;
+
+  // Atualiza lang do html
+  document.documentElement.lang = currentLang;
+}
+
+function setDataI18n(key, value) {
+  const el = document.querySelector('[data-i18n="' + key + '"]');
+  if (el) el.textContent = value;
+}
+
+function setText(parentId, selector, value) {
+  const parent = document.getElementById(parentId);
+  if (parent) {
+    const el = parent.querySelector(selector);
+    if (el) el.textContent = value;
+  }
+}
+
+function setAttr(id, attr, value) {
+  const el = document.getElementById(id);
+  if (el) el.setAttribute(attr, value);
+}
+
+function setModalBtn(t) {
+  const modalBtns = document.querySelectorAll('#modal-acesso button');
+  modalBtns.forEach(btn => {
+    if (btn.textContent.includes('Entrar') || btn.textContent.includes('Enter') || btn.textContent.includes('Entrar') || btn.textContent.includes('Entra')) {
+      btn.textContent = t.modal_btn;
+    }
+  });
+}
+
+// Aplicar idioma salvo ao carregar
+document.addEventListener('DOMContentLoaded', () => {
+  applyTranslations();
+});
+</script>
+
 </body>
 </html>
