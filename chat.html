@@ -100,7 +100,7 @@
   @keyframes spin { to { transform: rotate(360deg); } }
 
   /* ── APP LAYOUT ── */
-  .app { display: grid; grid-template-columns: 260px 1fr; height: 100vh; }
+  .app { display: grid; grid-template-columns: 280px 1fr; height: 100vh; }
 
   /* ── SIDEBAR ── */
   .sidebar {
@@ -110,73 +110,112 @@
     overflow: hidden;
   }
 
+  /* Topo da sidebar */
   .sidebar-top {
-    padding: 1.4rem 1.4rem 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .logo { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 300; letter-spacing: 0.1em; color: var(--cream); text-decoration: none; display: block; }
-  .logo span { color: var(--teal); }
-  .session-tag { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fog-dim); margin-top: 0.2rem; }
-
-  .status-bar {
-    padding: 0.9rem 1.4rem;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: blink 2s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-  .status-text { font-size: 0.72rem; color: var(--fog); }
-
-  /* Timer na sidebar */
-  .timer-bar {
-    padding: 0.7rem 1.4rem;
+    padding: 1.2rem 1.4rem 1rem;
     border-bottom: 1px solid var(--border);
     display: flex; align-items: center; justify-content: space-between;
   }
-  .timer-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fog-dim); }
+  .logo { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.1em; color: var(--cream); text-decoration: none; display: block; }
+  .logo span { color: var(--teal); }
+  .session-tag { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fog-dim); margin-top: 0.15rem; }
+
+  /* Status + timer combinados */
+  .sidebar-status {
+    padding: 0.8rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(78,205,196,0.03);
+  }
+  .status-left { display: flex; align-items: center; gap: 0.5rem; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: blink 2s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .status-text { font-size: 0.68rem; color: var(--fog); }
+
+  .timer-pill {
+    display: flex; align-items: center; gap: 5px;
+    background: rgba(78,205,196,0.08);
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 20px; padding: 3px 10px;
+  }
+  .timer-icon { font-size: 10px; }
   .timer-display {
-    font-size: 0.85rem; color: var(--teal);
-    font-variant-numeric: tabular-nums; font-weight: 400;
+    font-size: 0.82rem; color: var(--teal);
+    font-variant-numeric: tabular-nums; font-weight: 500;
+    letter-spacing: 0.05em;
   }
   .timer-display.warning { color: #FFC107; }
-  .timer-display.danger { color: #FF5252; }
+  .timer-display.danger { color: #FF5252; animation: pulse-danger 1s ease-in-out infinite; }
+  @keyframes pulse-danger { 0%,100%{opacity:1} 50%{opacity:0.6} }
 
-  .sidebar-section { padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); overflow-y: auto; }
-  .sidebar-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog-dim); margin-bottom: 0.7rem; }
+  /* Scrollable body da sidebar */
+  .sidebar-body { flex: 1; overflow-y: auto; }
+  .sidebar-body::-webkit-scrollbar { width: 3px; }
+  .sidebar-body::-webkit-scrollbar-thumb { background: rgba(78,205,196,0.15); border-radius: 2px; }
 
-  .intention-chips { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .sidebar-section { padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); }
+  .sidebar-label {
+    font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--fog-dim); margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .sidebar-label::before { content: ''; display: block; width: 14px; height: 1px; background: currentColor; }
+
+  /* Chips de intenção — redesenhados */
+  .intention-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
   .chip {
-    background: rgba(78,205,196,0.07);
-    border: 1px solid rgba(78,205,196,0.18);
-    color: var(--teal); font-size: 0.68rem;
-    padding: 0.25rem 0.65rem; border-radius: 20px;
+    background: rgba(78,205,196,0.06);
+    border: 1px solid rgba(78,205,196,0.15);
+    color: var(--fog); font-size: 0.7rem;
+    padding: 0.3rem 0.7rem; border-radius: 20px;
     cursor: pointer; transition: all 0.2s;
     font-family: var(--font-sans);
   }
-  .chip:hover { background: rgba(78,205,196,0.15); border-color: var(--teal); }
+  .chip:hover { background: rgba(78,205,196,0.14); border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
 
-  .practice-btn {
-    display: flex; align-items: center; gap: 0.55rem;
-    width: 100%; background: none; border: none;
-    color: var(--fog); font-family: var(--font-sans);
-    font-size: 0.75rem; padding: 0.45rem 0;
-    cursor: pointer; text-align: left; transition: color 0.2s;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
+  /* Práticas — cards visuais */
+  .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .practice-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.65rem 0.7rem;
+    cursor: pointer; transition: all 0.2s;
+    text-align: left; font-family: var(--font-sans);
+    display: flex; flex-direction: column; gap: 4px;
   }
-  .practice-btn:last-child { border-bottom: none; }
-  .practice-btn:hover { color: var(--teal); }
-  .practice-icon {
-    width: 22px; height: 22px; border: 1px solid rgba(78,205,196,0.2);
-    border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; font-size: 0.65rem; color: var(--teal); flex-shrink: 0;
-  }
+  .practice-card:hover { background: rgba(78,205,196,0.06); border-color: rgba(78,205,196,0.25); transform: translateY(-1px); }
+  .practice-card-icon { font-size: 16px; line-height: 1; }
+  .practice-card-name { font-size: 0.68rem; color: var(--fog); line-height: 1.3; }
 
+  /* Números de emergência — destaque */
+  .emergency-box {
+    margin: 1rem 1.4rem;
+    background: rgba(255,82,82,0.06);
+    border: 1px solid rgba(255,82,82,0.2);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+  }
+  .emergency-label {
+    font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,130,130,0.7); margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .emergency-numbers { display: flex; gap: 0.5rem; }
+  .emergency-btn {
+    flex: 1; background: rgba(255,82,82,0.1); border: 1px solid rgba(255,82,82,0.25);
+    border-radius: 6px; padding: 0.5rem; text-align: center;
+    cursor: pointer; transition: all 0.2s; text-decoration: none; display: block;
+  }
+  .emergency-btn:hover { background: rgba(255,82,82,0.18); }
+  .emergency-btn-name { font-size: 0.62rem; color: rgba(255,150,150,0.7); display: block; margin-bottom: 2px; }
+  .emergency-btn-num { font-size: 1rem; color: #ff8080; font-weight: 500; display: block; font-family: var(--font-sans); }
+
+  /* Footer da sidebar */
   .sidebar-footer {
-    margin-top: auto;
-    padding: 0.9rem 1.4rem;
+    padding: 0.8rem 1.4rem;
     border-top: 1px solid var(--border);
-    font-size: 0.62rem; color: var(--fog-dim); line-height: 1.5;
+    font-size: 0.6rem; color: var(--fog-dim); line-height: 1.6;
+    text-align: center;
   }
 
   /* ── MAIN CHAT ── */
@@ -387,7 +426,6 @@
     border-radius: 6px; text-decoration: none; font-size: 0.85rem;
   }
 
-  /* Mobile */
   @media (max-width: 700px) {
     .app { grid-template-columns: 1fr; }
     .sidebar { display: none; }
@@ -496,63 +534,114 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
+
+    <!-- Topo -->
     <div class="sidebar-top">
-      <a href="index.html" class="logo">New<span>Cosmos</span></a>
-      <div class="session-tag">✦ Encontro em andamento</div>
-    </div>
-
-    <div class="status-bar">
-      <div class="dot"></div>
-      <span class="status-text">Guia presente e disponível</span>
-    </div>
-
-    <div class="timer-bar">
-      <span class="timer-label">Tempo restante</span>
-      <span class="timer-display" id="timer-display">60:00</span>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">Intenções rápidas</div>
-      <div class="intention-chips">
-        <span class="chip" onclick="sendQuick('Quero trabalhar minha ansiedade hoje')">Ansiedade</span>
-        <span class="chip" onclick="sendQuick('Preciso de clareza e direção')">Clareza</span>
-        <span class="chip" onclick="sendQuick('Quero uma meditação guiada')">Meditação</span>
-        <span class="chip" onclick="sendQuick('Estou passando por um momento de luto ou perda')">Luto</span>
-        <span class="chip" onclick="sendQuick('Quero trabalhar minha autoestima')">Autoestima</span>
-        <span class="chip" onclick="sendQuick('Quero entender meu mapa numerológico')">Numerologia</span>
-        <span class="chip" onclick="sendQuick('Quero conhecer meu mapa astrológico')">Astrologia</span>
-        <span class="chip" onclick="sendQuick('Quero uma limpeza energética com Chama Violeta')">Chama Violeta</span>
-        <span class="chip" onclick="sendQuick('Quero saber quais florais de Bach são para mim')">Florais</span>
-        <span class="chip" onclick="sendQuick('Quero trabalhar com os números de Grabovoi')">Grabovoi</span>
+      <div>
+        <a href="index.html" class="logo">New<span>Cosmos</span></a>
+        <div class="session-tag" id="sidebar-session-tag">✦ Encontro em andamento</div>
       </div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-label">Práticas disponíveis</div>
-      <button class="practice-btn" onclick="sendQuick('Me guia em uma respiração coerente para me centrar agora')">
-        <span class="practice-icon">○</span> Respiração coerente
-      </button>
-      <button class="practice-btn" onclick="sendQuick('Me guia em uma meditação de ativação de chacras')">
-        <span class="practice-icon">◈</span> Ativação de chacras
-      </button>
-      <button class="practice-btn" onclick="sendQuick('Quero fazer uma visualização com a Chama Violeta agora')">
-        <span class="practice-icon">✦</span> Chama Violeta
-      </button>
-      <button class="practice-btn" onclick="sendQuick('Me indica uma frequência Solfeggio para o meu momento')">
-        <span class="practice-icon">◉</span> Frequências Solfeggio
-      </button>
-      <button class="practice-btn" onclick="sendQuick('Me guia em um exercício de defumação e limpeza do ambiente')">
-        <span class="practice-icon">◎</span> Defumação
-      </button>
-      <button class="practice-btn" onclick="sendQuick('Quero trabalhar com os números de Grabovoi para cura')">
-        <span class="practice-icon">◇</span> Números Grabovoi
-      </button>
+    <!-- Status + Timer -->
+    <div class="sidebar-status">
+      <div class="status-left">
+        <div class="dot"></div>
+        <span class="status-text" id="sidebar-status-text">Guia presente</span>
+      </div>
+      <div class="timer-pill">
+        <span class="timer-icon">⏱</span>
+        <span class="timer-display" id="timer-display">60:00</span>
+      </div>
     </div>
 
-    <div class="sidebar-footer">
-      Este espaço é de apoio ao bem-estar e autoconhecimento. Não substitui profissionais de saúde habilitados.<br><br>
-      Crise? <strong style="color:rgba(78,205,196,0.5)">CVV: 188</strong> · <strong style="color:rgba(78,205,196,0.5)">SAMU: 192</strong>
+    <!-- Corpo scrollável -->
+    <div class="sidebar-body">
+
+      <!-- Intenções rápidas -->
+      <div class="sidebar-section">
+        <div class="sidebar-label" id="label-intencoes">Intenções rápidas</div>
+        <div class="intention-chips">
+          <span class="chip" onclick="sendQuick('Quero trabalhar minha ansiedade hoje')">😰 Ansiedade</span>
+          <span class="chip" onclick="sendQuick('Preciso de clareza e direção na minha vida')">🔆 Clareza</span>
+          <span class="chip" onclick="sendQuick('Quero uma meditação guiada agora')">🧘 Meditação</span>
+          <span class="chip" onclick="sendQuick('Estou passando por um momento de luto ou perda')">🌧 Luto</span>
+          <span class="chip" onclick="sendQuick('Quero trabalhar minha autoestima e autoconfiança')">💛 Autoestima</span>
+          <span class="chip" onclick="sendQuick('Estou me sentindo muito sobrecarregado e esgotado')">🔋 Esgotamento</span>
+          <span class="chip" onclick="sendQuick('Quero entender meu mapa numerológico')">🔢 Numerologia</span>
+          <span class="chip" onclick="sendQuick('Quero conhecer meu mapa astrológico')">♈ Astrologia</span>
+          <span class="chip" onclick="sendQuick('Quero uma limpeza energética com Chama Violeta')">💜 Chama Violeta</span>
+          <span class="chip" onclick="sendQuick('Quero saber quais florais de Bach são para mim agora')">🌸 Florais</span>
+          <span class="chip" onclick="sendQuick('Quero trabalhar com os números de Grabovoi para cura')">✨ Grabovoi</span>
+          <span class="chip" onclick="sendQuick('Quero entender o que meu corpo está tentando me dizer')">🫀 Corpo</span>
+        </div>
+      </div>
+
+      <!-- Práticas em cards -->
+      <div class="sidebar-section">
+        <div class="sidebar-label" id="label-praticas">Práticas agora</div>
+        <div class="practice-grid">
+          <button class="practice-card" onclick="sendQuick('Me guia em uma respiração coerente de 5 minutos para me centrar agora')">
+            <span class="practice-card-icon">🌬️</span>
+            <span class="practice-card-name">Respiração coerente</span>
+          </button>
+          <button class="practice-card" onclick="sendQuick('Me guia em uma meditação de ativação de chacras agora')">
+            <span class="practice-card-icon">🌀</span>
+            <span class="practice-card-name">Chacras</span>
+          </button>
+          <button class="practice-card" onclick="sendQuick('Quero fazer uma visualização com a Chama Violeta agora')">
+            <span class="practice-card-icon">🔮</span>
+            <span class="practice-card-name">Chama Violeta</span>
+          </button>
+          <button class="practice-card" onclick="sendQuick('Me indica e explica a frequência Solfeggio para o meu momento agora')">
+            <span class="practice-card-icon">🎵</span>
+            <span class="practice-card-name">Solfeggio</span>
+          </button>
+          <button class="practice-card" onclick="sendQuick('Me guia em um exercício de defumação e limpeza do ambiente')">
+            <span class="practice-card-icon">🌿</span>
+            <span class="practice-card-name">Defumação</span>
+          </button>
+          <button class="practice-card" onclick="sendQuick('Quero trabalhar com os números de Grabovoi para cura agora')">
+            <span class="practice-card-icon">✦</span>
+            <span class="practice-card-name">Grabovoi</span>
+          </button>
+          <button class="practice-card" onclick="sendQuick('Me ensina a técnica de ancoragem 5-4-3-2-1 para me acalmar agora')">
+            <span class="practice-card-icon">⚓</span>
+            <span class="practice-card-name">Ancoragem</span>
+          </button>
+          <button class="practice-card" onclick="sendQuick('Me guia em um decreto da Chama Violeta de Saint Germain')">
+            <span class="practice-card-icon">📿</span>
+            <span class="practice-card-name">Decretos</span>
+          </button>
+        </div>
+      </div>
+
     </div>
+
+    <!-- Emergência — sempre visível -->
+    <div class="emergency-box">
+      <div class="emergency-label">🆘 Em crise? Busque ajuda</div>
+      <div class="emergency-numbers">
+        <a href="tel:188" class="emergency-btn">
+          <span class="emergency-btn-name">CVV</span>
+          <span class="emergency-btn-num">188</span>
+        </a>
+        <a href="tel:192" class="emergency-btn">
+          <span class="emergency-btn-name">SAMU</span>
+          <span class="emergency-btn-num">192</span>
+        </a>
+        <a href="tel:190" class="emergency-btn">
+          <span class="emergency-btn-name">Polícia</span>
+          <span class="emergency-btn-num">190</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="sidebar-footer">
+      Apoio ao bem-estar · Não substitui profissionais de saúde
+    </div>
+
   </aside>
 
   <!-- MAIN -->
