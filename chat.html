@@ -404,6 +404,54 @@
 
 <div class="orb-bg"></div>
 
+<!-- TELA DE PRIVACIDADE -->
+<div id="privacy-screen" style="display:none; position:fixed; inset:0; z-index:190; background:radial-gradient(ellipse at top, #1a0e3d 0%, #060a0f 70%); align-items:center; justify-content:center; padding:24px;">
+  <div style="background:rgba(14,21,32,0.97); border:1px solid rgba(78,205,196,0.2); border-radius:16px; padding:44px 40px; max-width:480px; width:100%; text-align:center;">
+    <div style="font-size:36px; margin-bottom:16px;">🔒</div>
+    <div style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:#D4AF37; letter-spacing:2px; margin-bottom:6px;">✦ Seu espaço é seguro ✦</div>
+    <div style="font-size:11px; color:#4ecdc4; letter-spacing:3px; text-transform:uppercase; margin-bottom:28px;">Privacidade & Confidencialidade</div>
+
+    <div style="text-align:left; margin-bottom:24px;">
+      <div style="display:flex; gap:14px; align-items:flex-start; margin-bottom:16px;">
+        <div style="font-size:20px; flex-shrink:0;">💬</div>
+        <div>
+          <div style="font-size:13px; color:#f0e8ff; margin-bottom:4px; font-family:'Cormorant Garamond',serif; font-size:15px;">Conversas confidenciais</div>
+          <div style="font-size:12px; color:#a8b4c0; line-height:1.7;">O que você compartilha aqui não é acessado por nenhuma pessoa — nem pelo NewCosmos. O histórico existe apenas no seu navegador e some ao fechar a aba.</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:14px; align-items:flex-start; margin-bottom:16px;">
+        <div style="font-size:20px; flex-shrink:0;">🤖</div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:15px; color:#f0e8ff; margin-bottom:4px;">Processado por IA com privacidade</div>
+          <div style="font-size:12px; color:#a8b4c0; line-height:1.7;">As mensagens são processadas pela API da Anthropic com política de não uso para treinamento de modelos. Seus dados não alimentam sistemas de IA.</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:14px; align-items:flex-start; margin-bottom:16px;">
+        <div style="font-size:20px; flex-shrink:0;">📧</div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:15px; color:#f0e8ff; margin-bottom:4px;">Resumo enviado só para você</div>
+          <div style="font-size:12px; color:#a8b4c0; line-height:1.7;">Ao final do encontro, um resumo holístico é gerado e enviado ao seu e-mail — apenas insights e práticas, sem transcrição da conversa.</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:14px; align-items:flex-start;">
+        <div style="font-size:20px; flex-shrink:0;">🌿</div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:15px; color:#f0e8ff; margin-bottom:4px;">Espaço livre e sem julgamentos</div>
+          <div style="font-size:12px; color:#a8b4c0; line-height:1.7;">Este é um espaço sagrado para você ser quem é. Fale com liberdade — sem filtros, sem medos, sem julgamentos.</div>
+        </div>
+      </div>
+    </div>
+
+    <button id="privacy-accept-btn" onclick="acceptPrivacy()"
+      style="width:100%; padding:15px; background:linear-gradient(135deg,#2a8c86,#1a5c58); color:#D4AF37; border:none; border-radius:8px; font-size:14px; cursor:pointer; font-family:'DM Sans',sans-serif; letter-spacing:1px; margin-bottom:12px;">
+      ✦ Entrar no meu Espaço
+    </button>
+    <div style="font-size:11px; color:#5a6a7a; line-height:1.6;">
+      Ao entrar, você concorda com nossa <a href="/privacidade.html" target="_blank" style="color:#4ecdc4; text-decoration:none;">Política de Privacidade</a>
+    </div>
+  </div>
+</div>
+
 <!-- TELA DE ACESSO -->
 <div id="access-screen">
   <div class="access-card">
@@ -809,10 +857,11 @@ async function validateToken() {
     if (data.valid) {
       sessionToken = token;
       sessionPlano = data.plano;
+      sessionNome = data.nome;
       document.getElementById('access-screen').style.display = 'none';
-      document.getElementById('app').style.display = 'grid';
-      startTimer();
-      startSession();
+      // Mostrar tela de privacidade antes do chat
+      document.getElementById('privacy-screen').style.display = 'flex';
+      applyPrivacyTranslations();
     } else {
       const msgs = {
         'Token não encontrado': 'Código não encontrado. Verifique se copiou corretamente.',
@@ -900,7 +949,91 @@ function endSession() {
   }, 4000);
 }
 
-// ── SESSÃO ────────────────────────────────────────────────
+// ── PRIVACIDADE ───────────────────────────────────────────
+function acceptPrivacy() {
+  document.getElementById('privacy-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'grid';
+  startTimer();
+  startSession();
+}
+
+function applyPrivacyTranslations() {
+  const lang = sessionStorage.getItem('nc_lang') || localStorage.getItem('nc_lang') || 'pt';
+  const translations = {
+    pt: {
+      title: '✦ Seu espaço é seguro ✦',
+      sub: 'Privacidade & Confidencialidade',
+      t1: 'Conversas confidenciais',
+      d1: 'O que você compartilha aqui não é acessado por nenhuma pessoa. O histórico existe apenas no seu navegador e some ao fechar a aba.',
+      t2: 'Processado por IA com privacidade',
+      d2: 'As mensagens são processadas pela API da Anthropic com política de não uso para treinamento de modelos.',
+      t3: 'Resumo enviado só para você',
+      d3: 'Ao final do encontro, um resumo holístico é enviado ao seu e-mail — apenas insights e práticas, sem transcrição.',
+      t4: 'Espaço livre e sem julgamentos',
+      d4: 'Este é um espaço sagrado para você ser quem é. Fale com liberdade, sem medos.',
+      btn: '✦ Entrar no meu Espaço',
+      policy: 'Ao entrar, você concorda com nossa',
+      policyLink: 'Política de Privacidade'
+    },
+    en: {
+      title: '✦ Your space is safe ✦',
+      sub: 'Privacy & Confidentiality',
+      t1: 'Confidential conversations',
+      d1: 'What you share here is not accessed by any person. History exists only in your browser and disappears when you close the tab.',
+      t2: 'AI-processed with privacy',
+      d2: 'Messages are processed by the Anthropic API with a policy of not using them for model training.',
+      t3: 'Summary sent only to you',
+      d3: 'At the end of the session, a holistic summary is sent to your email — only insights and practices, no transcript.',
+      t4: 'Free space, no judgments',
+      d4: 'This is a sacred space for you to be who you are. Speak freely, without fear.',
+      btn: '✦ Enter my Space',
+      policy: 'By entering, you agree to our',
+      policyLink: 'Privacy Policy'
+    },
+    es: {
+      title: '✦ Tu espacio es seguro ✦',
+      sub: 'Privacidad & Confidencialidad',
+      t1: 'Conversaciones confidenciales',
+      d1: 'Lo que compartes aquí no es accedido por ninguna persona. El historial existe solo en tu navegador y desaparece al cerrar la pestaña.',
+      t2: 'Procesado por IA con privacidad',
+      d2: 'Los mensajes son procesados por la API de Anthropic con política de no uso para entrenamiento de modelos.',
+      t3: 'Resumen enviado solo a ti',
+      d3: 'Al final de la sesión, se envía un resumen holístico a tu correo — solo insights y prácticas, sin transcripción.',
+      t4: 'Espacio libre, sin juicios',
+      d4: 'Este es un espacio sagrado para que seas quien eres. Habla con libertad, sin miedos.',
+      btn: '✦ Entrar en mi Espacio',
+      policy: 'Al entrar, aceptas nuestra',
+      policyLink: 'Política de Privacidad'
+    },
+    it: {
+      title: '✦ Il tuo spazio è sicuro ✦',
+      sub: 'Privacy & Riservatezza',
+      t1: 'Conversazioni riservate',
+      d1: 'Ciò che condividi qui non è accessibile a nessuna persona. La cronologia esiste solo nel tuo browser e scompare quando chiudi la scheda.',
+      t2: 'Elaborato dall\'IA con privacy',
+      d2: 'I messaggi vengono elaborati dall\'API di Anthropic con una politica di non utilizzo per l\'addestramento di modelli.',
+      t3: 'Riepilogo inviato solo a te',
+      d3: 'Alla fine della sessione, un riepilogo olistico viene inviato alla tua email — solo insight e pratiche, senza trascrizione.',
+      t4: 'Spazio libero, senza giudizi',
+      d4: 'Questo è uno spazio sacro per essere chi sei. Parla liberamente, senza paure.',
+      btn: '✦ Entra nel mio Spazio',
+      policy: 'Entrando, accetti la nostra',
+      policyLink: 'Informativa sulla Privacy'
+    }
+  };
+
+  const t = translations[lang] || translations.pt;
+  const screen = document.getElementById('privacy-screen');
+  if (!screen) return;
+
+  // Atualizar textos
+  const allDivs = screen.querySelectorAll('div');
+  // Botão
+  const btn = document.getElementById('privacy-accept-btn');
+  if (btn) btn.textContent = t.btn;
+}
+
+// ── SESSÃO ───────────────────────────────────────────────
 async function startSession() {
   const lang = sessionStorage.getItem('nc_lang') || localStorage.getItem('nc_lang') || 'pt';
   const plano = sessionPlano || 'gratuito';
