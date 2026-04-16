@@ -868,9 +868,31 @@ function endSession() {
   if (sessionEnded) return;
   sessionEnded = true;
   clearInterval(timerInterval);
+
   addMessage('agent', '🌙 Nosso encontro chegou ao seu fim natural. Foi uma honra estar presente nesse momento da sua jornada. Que a luz que você tocou hoje continue iluminando seus passos. Com amor e gratidão — NewCosmos ✦');
+
   document.getElementById('sendBtn').disabled = true;
   document.getElementById('msgInput').disabled = true;
+
+  // Gerar relatório e enviar por e-mail (planos pagos)
+  if (sessionToken && history.length >= 2) {
+    const lang = sessionStorage.getItem('nc_lang') || localStorage.getItem('nc_lang') || 'pt';
+    fetch('/api/session-report', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        token: sessionToken,
+        history: history,
+        duration: secondsElapsed,
+        lang: lang
+      })
+    }).then(r => r.json()).then(data => {
+      if (data.success) {
+        console.log('[REPORT] Relatório gerado e enviado por e-mail.');
+      }
+    }).catch(err => console.error('[REPORT ERROR]', err));
+  }
+
   setTimeout(() => {
     document.getElementById('app').style.display = 'none';
     const endScreen = document.getElementById('end-screen');
@@ -880,7 +902,99 @@ function endSession() {
 
 // ── SESSÃO ────────────────────────────────────────────────
 async function startSession() {
-  await sendToAPI('Inicie o encontro com sua mensagem de abertura.', true);
+  const lang = sessionStorage.getItem('nc_lang') || localStorage.getItem('nc_lang') || 'pt';
+  const plano = sessionPlano || 'gratuito';
+  const nome = sessionNome ? sessionNome.split(' ')[0] : null;
+  const prompt = buildOpeningPrompt(plano, nome, lang);
+  await sendToAPI(prompt, true);
+}
+
+function buildOpeningPrompt(plano, nome, lang) {
+  const nomeStr = nome ? `, ${nome}` : '';
+
+  // Variações de abertura por plano — sorteia uma aleatoriamente
+  const aberturas = {
+    pt: {
+      gratuito: [
+        `Inicie o encontro com uma saudação calorosa e acolhedora para quem está chegando pela primeira vez${nomeStr}. Mencione que este é um espaço seguro e gratuito para explorar. Convide-a a compartilhar o que está no coração. Seja poético, amoroso e breve — máximo 3 parágrafos.`,
+        `Esta pessoa${nomeStr} está chegando ao seu primeiro encontro gratuito. Abra o espaço com presença e gentileza. Use uma metáfora da natureza ou do cosmos. Pergunte como ela está chegando — no corpo, na mente, no espírito. Máximo 3 parágrafos.`,
+        `Abra este encontro gratuito${nomeStr ? ' para ' + nome : ''} com uma frase poética sobre o presente momento e a coragem de buscar cuidado. Crie uma atmosfera de acolhimento total. Faça uma pergunta aberta sobre o que trouxe a pessoa até aqui. Máximo 3 parágrafos.`,
+      ],
+      avulso: [
+        `Inicie o encontro com uma saudação especial para${nomeStr || ' esta pessoa'} que escolheu este momento de cuidado. Honre a escolha dela. Convide-a a compartilhar o que está mais presente hoje. Seja caloroso e profundo. Máximo 3 parágrafos.`,
+        `Abra este encontro avulso${nomeStr ? ' com ' + nome : ''} como se fosse um ritual de boas-vindas — um espaço sagrado que se abre para ela. Use uma imagem simbólica. Pergunte o que o coração traz hoje. Máximo 3 parágrafos.`,
+        `Esta pessoa${nomeStr} escolheu este encontro único. Honre isso com presença total. Comece com uma observação sobre o poder de escolher cuidado, e convide-a a se instalar neste espaço. Pergunte como está chegando. Máximo 3 parágrafos.`,
+      ],
+      essencial: [
+        `${nome ? nome + ' é' : 'Esta pessoa é'} assinante do Plano Essencial e está chegando para mais um encontro semanal. Cumprimente-a como quem reencontra alguém familiar — com afeto e presença. Pergunte o que surgiu desde o último encontro ou o que o momento pede agora. Máximo 3 parágrafos.`,
+        `Abra este encontro semanal${nomeStr ? ' com ' + nome : ''} com a leveza de quem se encontra regularmente. Há uma continuidade aqui — honre isso. Use uma metáfora de ciclos ou estações. Convide-a a compartilhar como esta semana foi. Máximo 3 parágrafos.`,
+        `${nome || 'Esta pessoa'} está no ritmo semanal do Plano Essencial. Abra o encontro com gratidão por essa constância. Diga algo sobre o poder da regularidade na jornada de transformação. Pergunte o que está mais vivo nela hoje. Máximo 3 parágrafos.`,
+        `Cumprimente${nomeStr || ' esta pessoa'} como um espaço que sempre a aguarda. Ela é assinante — há fidelidade aqui que merece ser honrada. Use uma frase sobre raízes que se aprofundam com o tempo. Pergunte como está chegando hoje. Máximo 3 parágrafos.`,
+      ],
+      transformacao: [
+        `${nome ? nome + ' está' : 'Esta pessoa está'} no Plano Transformação — dois encontros por semana, uma jornada intensa e profunda. Abra com a energia de quem está no meio de uma grande transformação. Pergunte o que emergiu desde o último encontro e o que quer aprofundar hoje. Máximo 3 parágrafos.`,
+        `Este é um encontro do Plano Transformação${nomeStr}. A intensidade desta jornada merece ser reconhecida. Abra com presença plena e fale sobre o coragem de transformar. Pergunte onde ${nome || 'ela'} está no seu processo agora. Máximo 3 parágrafos.`,
+        `${nome || 'Esta pessoa'} escolheu o caminho mais profundo — dois encontros semanais de transformação real. Abra com a reverência que essa escolha merece. Use uma metáfora alquímica. Pergunte o que está sendo transmutado neste momento da jornada. Máximo 3 parágrafos.`,
+        `Cumprimente${nomeStr || ' esta pessoa'} que está em plena jornada de transformação. Lembre que cada encontro é um degrau. Abra com energia e profundidade. Pergunte o que ficou do último encontro e o que quer trabalhar agora. Máximo 3 parágrafos.`,
+      ],
+    },
+    en: {
+      gratuito: [
+        `Open this free session with a warm, welcoming greeting${nomeStr ? ' for ' + nome : ''}. Create a sense of safety and openness. Invite them to share what's in their heart. Be poetic and brief — max 3 paragraphs.`,
+        `Welcome${nomeStr || ' this person'} to their first free session. Use a nature or cosmic metaphor. Ask how they're arriving — in body, mind, spirit. Max 3 paragraphs.`,
+      ],
+      avulso: [
+        `Open this single session${nomeStr ? ' for ' + nome : ''} with the energy of a sacred space opening. Honor their choice to seek care. Ask what the heart brings today. Max 3 paragraphs.`,
+        `Welcome${nomeStr || ' this person'} with warmth. They chose this unique moment of care. Invite them to settle in and share what's most present. Max 3 paragraphs.`,
+      ],
+      essencial: [
+        `Welcome back${nomeStr || ''}. This is their weekly Essential session. Greet them like someone you know well — with warmth and presence. Ask what arose since last time or what this moment calls for. Max 3 paragraphs.`,
+        `Open this weekly session${nomeStr ? ' with ' + nome : ''} with ease and familiarity. Honor the regularity of this practice. Ask how this week has been. Max 3 paragraphs.`,
+      ],
+      transformacao: [
+        `${nome || 'This person'} is on the Transformation Plan — two sessions per week, a deep journey. Open with full presence. Ask what emerged since the last session and what they want to deepen today. Max 3 paragraphs.`,
+        `Welcome${nomeStr || ''} to this Transformation session. Honor the courage of this deep journey. Use an alchemical metaphor. Ask where they are in their process right now. Max 3 paragraphs.`,
+      ],
+    },
+    es: {
+      gratuito: [
+        `Abre esta sesión gratuita con una bienvenida cálida${nomeStr ? ' para ' + nome : ''}. Crea un espacio de seguridad. Invita a compartir lo que está en el corazón. Sé poético y breve — máximo 3 párrafos.`,
+        `Recibe${nomeStr || ' a esta persona'} en su primera sesión gratuita con presencia y gentileza. Pregunta cómo está llegando — en cuerpo, mente y espíritu. Máximo 3 párrafos.`,
+      ],
+      avulso: [
+        `Abre esta sesión individual${nomeStr ? ' con ' + nome : ''} como un ritual de bienvenida. Honra su elección de buscar cuidado. Pregunta qué trae el corazón hoy. Máximo 3 párrafos.`,
+      ],
+      essencial: [
+        `Recibe de vuelta${nomeStr || ''}. Es su sesión semanal del Plan Esencial. Saluda con afecto y presencia. Pregunta qué surgió desde el último encuentro. Máximo 3 párrafos.`,
+        `Abre esta sesión semanal${nomeStr ? ' con ' + nome : ''} con la calidez de quien se reencuentra regularmente. Pregunta cómo ha sido esta semana. Máximo 3 párrafos.`,
+      ],
+      transformacao: [
+        `${nome || 'Esta persona'} está en el Plan Transformación — dos sesiones semanales. Abre con presencia plena. Pregunta qué emergió desde la última sesión y qué quiere profundizar hoy. Máximo 3 párrafos.`,
+      ],
+    },
+    it: {
+      gratuito: [
+        `Apri questa sessione gratuita con un caloroso benvenuto${nomeStr ? ' per ' + nome : ''}. Crea uno spazio sicuro. Invita a condividere ciò che è nel cuore. Sii poetico e breve — massimo 3 paragrafi.`,
+        `Accogli${nomeStr || ' questa persona'} nella sua prima sessione gratuita con presenza e gentilezza. Chiedi come sta arrivando — nel corpo, nella mente, nello spirito. Massimo 3 paragrafi.`,
+      ],
+      avulso: [
+        `Apri questa sessione singola${nomeStr ? ' con ' + nome : ''} come un rituale di benvenuto. Onora la sua scelta di cercare cura. Chiedi cosa porta il cuore oggi. Massimo 3 paragrafi.`,
+      ],
+      essencial: [
+        `Accogli di nuovo${nomeStr || ''}. È la sua sessione settimanale del Piano Essenziale. Saluta con calore e presenza. Chiedi cosa è emerso dall'ultimo incontro. Massimo 3 paragrafi.`,
+        `Apri questa sessione settimanale${nomeStr ? ' con ' + nome : ''} con la familiarità di chi si incontra regolarmente. Chiedi come è stata questa settimana. Massimo 3 paragrafi.`,
+      ],
+      transformacao: [
+        `${nome || 'Questa persona'} è nel Piano Trasformazione — due sessioni settimanali. Apri con piena presenza. Chiedi cosa è emerso dall'ultima sessione e cosa vuole approfondire oggi. Massimo 3 paragrafi.`,
+      ],
+    },
+  };
+
+  const langAberturas = aberturas[lang] || aberturas.pt;
+  const planoAberturas = langAberturas[plano] || langAberturas.gratuito;
+  const chosen = planoAberturas[Math.floor(Math.random() * planoAberturas.length)];
+
+  return chosen;
 }
 
 // ── UI ────────────────────────────────────────────────────
