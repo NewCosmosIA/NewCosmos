@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade — NewCosmos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #4ecdc4;
+    --gold: #c9a96e;
+    --cream: #f0ebe2;
+    --fog: #a8b4c0;
+    --void: #060a0f;
+    --slate: #141c26;
+    --border: rgba(255,255,255,0.06);
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'DM Sans', sans-serif;
+  }
+  body { background: var(--void); color: var(--cream); font-family: var(--font-sans); font-weight: 300; line-height: 1.8; }
+
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(6,10,15,0.95); border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+  }
+  .nav-logo { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 300; letter-spacing: 0.15em; color: var(--cream); text-decoration: none; }
+  .nav-logo span { color: var(--teal); }
+  .nav-back { color: var(--fog); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.1em; transition: color 0.2s; }
+  .nav-back:hover { color: var(--teal); }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 8rem 2rem 4rem; }
+
+  .page-label { font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--teal); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
+  .page-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--teal); }
+
+  h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.2; margin-bottom: 0.5rem; }
+  h1 em { font-style: italic; color: var(--gold); }
+
+  .updated { font-size: 0.78rem; color: var(--fog); margin-bottom: 3rem; }
+
+  .privacy-highlight {
+    background: rgba(78,205,196,0.06);
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 3rem;
+  }
+  .privacy-highlight p { font-size: 0.95rem; color: var(--cream); line-height: 1.8; }
+  .privacy-highlight strong { color: var(--teal); font-weight: 400; }
+
+  h2 { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 400; color: var(--cream); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+
+  p { font-size: 0.9rem; color: var(--fog); margin-bottom: 1rem; line-height: 1.8; }
+  p strong { color: var(--cream); font-weight: 400; }
+
+  ul { margin: 0.5rem 0 1rem 1rem; }
+  ul li { font-size: 0.9rem; color: var(--fog); margin-bottom: 0.5rem; line-height: 1.7; }
+  ul li::marker { color: var(--teal); }
+
+  .callout {
+    background: rgba(201,169,110,0.06);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+    color: var(--fog);
+    line-height: 1.7;
+  }
+  .callout strong { color: var(--gold); font-weight: 400; }
+
+  .contact-box {
+    background: var(--slate);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 2rem;
+  }
+  .contact-box p { margin: 0; }
+  .contact-box a { color: var(--teal); text-decoration: none; }
+
+  .divider { height: 1px; background: linear-gradient(to right, transparent, rgba(78,205,196,0.3), transparent); margin: 3rem 0; }
+
+  footer { text-align: center; padding: 2rem; font-size: 0.72rem; color: rgba(168,180,192,0.4); border-top: 1px solid var(--border); }
+
+  @media (max-width: 600px) { nav { padding: 1rem 1.5rem; } .container { padding: 7rem 1.5rem 3rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">New<span>Cosmos</span></a>
+  <a href="/" class="nav-back">← Voltar ao início</a>
+</nav>
+
+<div class="container">
+
+  <div class="page-label">Transparência</div>
+  <h1>Política de <em>Privacidade</em></h1>
+  <p class="updated">Última atualização: Abril de 2026</p>
+
+  <div class="privacy-highlight">
+    <p>
+      O NewCosmos foi construído sobre um princípio fundamental: <strong>o que você compartilha em um encontro é sagrado e confidencial.</strong>
+      Nenhuma pessoa — nem mesmo a equipe NewCosmos — tem acesso ao conteúdo das suas conversas.
+      Esta política explica, de forma clara e honesta, como tratamos seus dados.
+    </p>
+  </div>
+
+  <h2>1. Quem somos</h2>
+  <p>O NewCosmos é uma plataforma de bem-estar integrativo com inteligência artificial, operada por João Prata, com sede em Vila Velha, Espírito Santo, Brasil. Site: <strong>newcosmos.com.br</strong> · E-mail: contato@newcosmos.com.br</p>
+
+  <h2>2. O que acontece com suas conversas</h2>
+  <p><strong>Suas conversas não são armazenadas por nós.</strong> O histórico de cada encontro existe apenas na memória do seu navegador durante a sessão e é apagado automaticamente quando você fecha a aba ou encerra o encontro.</p>
+  <p>As mensagens são processadas em tempo real pela API da Anthropic (criadora do Claude), que possui uma política clara de <strong>não usar conversas de clientes via API para treinar seus modelos de inteligência artificial</strong>. Isso significa que o que você diz não alimenta sistemas de IA.</p>
+
+  <div class="callout">
+    <strong>Em resumo:</strong> Nenhum humano lê suas conversas. Nenhum sistema armazena suas conversas. O que acontece no encontro, fica no encontro.
+  </div>
+
+  <h2>3. O resumo pós-sessão</h2>
+  <p>Ao final de cada encontro, nosso sistema gera automaticamente um <strong>resumo holístico</strong> da sessão — contendo insights, práticas recomendadas e orientações para os próximos dias. Este resumo é:</p>
+  <ul>
+    <li>Gerado por IA a partir dos temas abordados, sem transcrição literal da conversa</li>
+    <li>Enviado exclusivamente para o e-mail cadastrado no momento da compra</li>
+    <li>Não acessado por nenhuma pessoa da equipe NewCosmos</li>
+    <li>Armazenado de forma segura no banco de dados apenas como metadado da sessão</li>
+  </ul>
+
+  <h2>4. Dados que coletamos</h2>
+  <p>Coletamos apenas o mínimo necessário para o funcionamento do serviço:</p>
+  <ul>
+    <li><strong>Nome e e-mail</strong> — fornecidos no momento da compra via Hotmart, para envio do link de acesso e resumos pós-sessão</li>
+    <li><strong>Plano e token de acesso</strong> — para controlar o número de sessões disponíveis</li>
+    <li><strong>Metadados da sessão</strong> — data, duração em minutos e plano utilizado (sem conteúdo)</li>
+    <li><strong>Idioma preferido</strong> — salvo no seu navegador via localStorage para personalizar a experiência</li>
+  </ul>
+  <p>Não coletamos dados de localização, dados de navegação ou qualquer informação além do necessário para a prestação do serviço.</p>
+
+  <h2>5. Compartilhamento de dados</h2>
+  <p>Seus dados são compartilhados apenas com os seguintes serviços, necessários para o funcionamento da plataforma:</p>
+  <ul>
+    <li><strong>Anthropic</strong> — processamento das mensagens via API (sem armazenamento para treino)</li>
+    <li><strong>Hotmart</strong> — plataforma de pagamento e gestão de assinaturas</li>
+    <li><strong>Resend</strong> — envio de e-mails transacionais (acesso e resumos)</li>
+    <li><strong>Supabase</strong> — banco de dados seguro para tokens e metadados de sessão</li>
+  </ul>
+  <p>Não vendemos, alugamos ou compartilhamos seus dados com terceiros para fins de marketing ou publicidade.</p>
+
+  <h2>6. Segurança</h2>
+  <p>Todas as comunicações entre seu navegador e nossos servidores são criptografadas via HTTPS. Os tokens de acesso são únicos, gerados aleatoriamente e têm prazo de validade. O banco de dados é protegido por Row Level Security (RLS) do Supabase.</p>
+
+  <h2>7. Seus direitos (LGPD)</h2>
+  <p>Em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você tem direito a:</p>
+  <ul>
+    <li>Confirmar a existência de tratamento dos seus dados</li>
+    <li>Acessar os dados que temos sobre você</li>
+    <li>Solicitar a correção de dados incompletos ou desatualizados</li>
+    <li>Solicitar a exclusão dos seus dados da nossa base</li>
+    <li>Revogar o consentimento a qualquer momento</li>
+  </ul>
+  <p>Para exercer qualquer desses direitos, entre em contato pelo e-mail <strong>contato@newcosmos.com.br</strong>.</p>
+
+  <h2>8. Retenção de dados</h2>
+  <p>Os metadados de sessão (nome, e-mail, plano, duração) são mantidos pelo período necessário para a gestão das assinaturas e cumprimento de obrigações legais. Após o cancelamento de um plano, os dados são excluídos em até 90 dias.</p>
+
+  <h2>9. Cookies e armazenamento local</h2>
+  <p>Utilizamos apenas <strong>localStorage</strong> do navegador para salvar sua preferência de idioma. Não utilizamos cookies de rastreamento, pixels de publicidade ou ferramentas de analytics que identifiquem você individualmente.</p>
+
+  <h2>10. Menores de idade</h2>
+  <p>O NewCosmos é destinado a pessoas com 18 anos ou mais. Não coletamos intencionalmente dados de menores de idade. Se identificarmos que um menor utilizou o serviço, os dados serão excluídos imediatamente.</p>
+
+  <h2>11. Alterações nesta política</h2>
+  <p>Esta política pode ser atualizada periodicamente. Alterações significativas serão comunicadas por e-mail aos usuários ativos. A data da última atualização está sempre indicada no topo deste documento.</p>
+
+  <div class="divider"></div>
+
+  <div class="contact-box">
+    <p><strong style="color: var(--teal);">Dúvidas sobre privacidade?</strong><br>
+    Fale conosco em <a href="mailto:contato@newcosmos.com.br">contato@newcosmos.com.br</a><br>
+    Respondemos em até 5 dias úteis.</p>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 NewCosmos — Bem-estar Integrativo com IA. Todos os direitos reservados.
+</footer>
+
+</body>
+</html>
