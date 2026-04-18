@@ -1,12 +1,15 @@
 // api/session-report.js
 // Gera relatório da sessão via Claude e envia por e-mail
-// Para planos Essencial e Transformação: inclui PDF resumo
 // REGRA: NUNCA usar "terapia", "terapêutico" ou "terapeuta"
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SECRET = process.env.SUPABASE_SECRET_KEY;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+
+// Preços claude-sonnet-4-20250514
+const PRICE_INPUT_PER_M  = 3.00;
+const PRICE_OUTPUT_PER_M = 15.00;
 
 // Gera resumo da sessão via Claude
 async function generateSessionSummary(history, nome, plano, lang) {
@@ -66,7 +69,10 @@ Retorne APENAS o JSON, sem markdown ou texto adicional.`;
 }
 
 // Salva resumo no Supabase
-async function saveSessionReport(sessionId, report, duration) {
+async function saveSessionReport(sessionId, report, duration, reportTokensInput, reportTokensOutput) {
+  const reportCost = ((reportTokensInput || 0) / 1_000_000 * PRICE_INPUT_PER_M) +
+                     ((reportTokensOutput || 0) / 1_000_000 * PRICE_OUTPUT_PER_M);
+
   await fetch(`${SUPABASE_URL}/rest/v1/sessions?id=eq.${sessionId}`, {
     method: 'PATCH',
     headers: {
@@ -78,7 +84,8 @@ async function saveSessionReport(sessionId, report, duration) {
     body: JSON.stringify({
       session_ended_at: new Date().toISOString(),
       session_report: JSON.stringify(report),
-      session_duration_minutes: Math.round(duration / 60)
+      session_duration_minutes: Math.round(duration / 60),
+      report_cost_usd: reportCost
     })
   });
 }
@@ -213,11 +220,35 @@ export default async function handler(req, res) {
     const { email, nome, plano, id } = session;
 
     // Gerar resumo via Claude
-    const report = await generateSessionSummary(history, nome, plano, lang || 'pt');
+    const reportResponse = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const reportData = await reportResponse.json();
+    const reportTokensInput  = reportData.usage?.input_tokens  || 0;
+    const reportTokensOutput = reportData.usage?.output_tokens || 0;
+    const text = reportData.content?.[0]?.text || '{}';
+
+    let report;
+    try {
+      report = JSON.parse(text.replace(/```json|```/g, '').trim());
+    } catch {
+      report = null;
+    }
     if (!report) return res.status(500).json({ error: 'Erro ao gerar resumo' });
 
-    // Salvar no Supabase
-    await saveSessionReport(id, report, duration || 0);
+    // Salvar no Supabase com tokens
+    await saveSessionReport(id, report, duration || 0, reportTokensInput, reportTokensOutput);
 
     // Enviar e-mail (todos os planos recebem resumo)
     if (RESEND_API_KEY && email) {
