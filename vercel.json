@@ -3,12 +3,25 @@
   "functions": {
     "api/chat.js": {
       "maxDuration": 30
+    },
+    "api/validate-token.js": {
+      "maxDuration": 10
+    },
+    "api/webhook-hotmart.js": {
+      "maxDuration": 15
+    },
+    "api/webhook-calcom.js": {
+      "maxDuration": 15
+    },
+    "api/session-report.js": {
+      "maxDuration": 30
     }
   },
   "rewrites": [
-    {
-      "source": "/api/chat",
-      "destination": "/api/chat.js"
-    }
+    { "source": "/api/chat", "destination": "/api/chat.js" },
+    { "source": "/api/validate-token", "destination": "/api/validate-token.js" },
+    { "source": "/api/webhook-hotmart", "destination": "/api/webhook-hotmart.js" },
+    { "source": "/api/webhook-calcom", "destination": "/api/webhook-calcom.js" },
+    { "source": "/api/session-report", "destination": "/api/session-report.js" }
   ]
 }
