@@ -1,5 +1,11 @@
 {
   "version": 2,
+  "crons": [
+    {
+      "path": "/api/keepalive",
+      "schedule": "0 8 */3 * *"
+    }
+  ],
   "functions": {
     "api/chat.js": {
       "maxDuration": 30
@@ -15,6 +21,9 @@
     },
     "api/session-report.js": {
       "maxDuration": 30
+    },
+    "api/keepalive.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
