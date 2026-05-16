@@ -14,13 +14,16 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SECRET = process.env.SUPABASE_SECRET_KEY;
 
 // Preços claude-sonnet-4-20250514 (por milhão de tokens)
-const PRICE_INPUT_PER_M  = 3.00;
-const PRICE_OUTPUT_PER_M = 15.00;
+const PRICE_INPUT_PER_M        = 3.00;
+const PRICE_INPUT_CACHED_PER_M = 0.30;
+const PRICE_OUTPUT_PER_M       = 15.00;
 
-async function updateTokenCost(token, inputTokens, outputTokens) {
+async function updateTokenCost(token, inputTokens, cachedTokens, outputTokens) {
   if (!token || !SUPABASE_URL || !SUPABASE_SECRET) return;
 
-  const costUsd = (inputTokens / 1_000_000 * PRICE_INPUT_PER_M) +
+  const uncachedInput = inputTokens - cachedTokens;
+  const costUsd = (uncachedInput / 1_000_000 * PRICE_INPUT_PER_M) +
+                  (cachedTokens / 1_000_000 * PRICE_INPUT_CACHED_PER_M) +
                   (outputTokens / 1_000_000 * PRICE_OUTPUT_PER_M);
 
   try {
@@ -83,12 +86,19 @@ export default async function handler(req, res) {
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
+        'anthropic-version': '2023-06-01',
+        'anthropic-beta': 'prompt-caching-2024-07-31'
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1024,
-        system: system || '',
+        system: [
+          {
+            type: 'text',
+            text: system || '',
+            cache_control: { type: 'ephemeral' }
+          }
+        ],
         messages: messages
       })
     });
@@ -106,8 +116,8 @@ export default async function handler(req, res) {
 
     // Rastrear tokens e custo no Supabase (não bloqueia a resposta)
     if (session_token && data.usage) {
-      const { input_tokens, output_tokens } = data.usage;
-      updateTokenCost(session_token, input_tokens || 0, output_tokens || 0);
+      const { input_tokens, output_tokens, cache_read_input_tokens } = data.usage;
+      updateTokenCost(session_token, input_tokens || 0, cache_read_input_tokens || 0, output_tokens || 0);
     }
 
     return res.status(200).json(data);
