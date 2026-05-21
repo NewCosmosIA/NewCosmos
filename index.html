@@ -678,62 +678,65 @@
     line-height: 1.7;
   }
 
-  /* DEPOIMENTOS */
-  .testimonials-section { background: var(--void); }
+  /* PRINCÍPIOS */
+  .principles-section {
+    padding: 6rem 0;
+    background: var(--void);
+    color: var(--cream);
+  }
 
-  .testimonials-grid {
+  .principles-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 4rem;
+    gap: 1.5rem;
+    margin-top: 3rem;
   }
 
-  .testimonial-card {
-    background: var(--slate);
-    padding: 2rem;
-    position: relative;
+  .principle-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(94, 191, 168, 0.15);
+    border-radius: 4px;
+    padding: 2rem 1.75rem;
+    transition: border-color 0.3s ease;
   }
 
-  .testimonial-card::before {
-    content: '"';
+  .principle-card:hover {
+    border-color: rgba(201, 168, 106, 0.35);
+  }
+
+  .principle-number {
+    display: block;
     font-family: var(--font-serif);
-    font-size: 5rem;
-    color: rgba(78,205,196,0.1);
-    position: absolute;
-    top: 0.5rem;
-    left: 1.5rem;
+    font-style: italic;
+    font-size: 2.5rem;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 1rem;
     line-height: 1;
   }
 
-  .testimonial-text {
+  .principle-title {
     font-family: var(--font-serif);
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--cream);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .testimonial-author {
-    font-size: 0.78rem;
-    color: var(--fog);
-    letter-spacing: 0.05em;
-  }
-
-  .testimonial-author strong {
-    display: block;
-    color: var(--cream);
+    font-size: 1.4rem;
     font-weight: 400;
-    margin-bottom: 0.2rem;
+    color: var(--cream);
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.01em;
   }
 
-  .stars {
-    color: var(--gold);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.8rem;
+  .principle-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--fog);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .principles-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .principles-grid { grid-template-columns: 1fr; }
   }
 
   /* FAQ */
@@ -1203,39 +1206,58 @@
 
 <div class="section-divider"></div>
 
-<!-- DEPOIMENTOS -->
-<section class="testimonials-section">
+<!-- 7 PRINCÍPIOS -->
+<section class="principles-section">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">Experiências</p>
-      <h2 class="section-title">O que dizem<br><em>nossos clientes</em></h2>
+      <p class="section-label">Princípios</p>
+      <h2 class="section-title">Sete promessas<br><em>que escolhemos manter</em></h2>
     </div>
 
-    <div class="testimonials-grid reveal">
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Fiquei surpresa com a profundidade dos encontros. Não parece conversar com uma máquina — parece conversar com alguém que realmente me entende e me acolhe."</p>
-        <div class="testimonial-author">
-          <strong>Ana C.</strong>
-          Lisboa, Portugal
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Moro no exterior e não encontrava apoio em português com esse nível de qualidade. O NewCosmos preencheu essa lacuna de um jeito que não esperava."</p>
-        <div class="testimonial-author">
-          <strong>Rafael M.</strong>
-          Dublin, Irlanda
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Os protocolos personalizados me ajudaram muito com ansiedade e autoconhecimento. Consigo acessar a qualquer hora — isso faz toda a diferença."</p>
-        <div class="testimonial-author">
-          <strong>Marina L.</strong>
-          São Paulo, Brasil
-        </div>
-      </div>
+    <div class="principles-grid reveal">
+
+      <article class="principle-card">
+        <span class="principle-number">01</span>
+        <h3 class="principle-title">Escuta antes de resposta</h3>
+        <p class="principle-text">A IA do NewCosmos foi treinada pra escutar — não pra responder rápido. Pausas, perguntas que abrem espaço, contexto antes de oferecer caminhos.</p>
+      </article>
+
+      <article class="principle-card">
+        <span class="principle-number">02</span>
+        <h3 class="principle-title">Ciência e alma — os dois</h3>
+        <p class="principle-text">Práticas Integrativas reconhecidas pelo Ministério da Saúde + tradições de cura ancestrais. Sem opor evidência a sensibilidade.</p>
+      </article>
+
+      <article class="principle-card">
+        <span class="principle-number">03</span>
+        <h3 class="principle-title">Adultez antes de promessa</h3>
+        <p class="principle-text">Sem "eleve sua vibração". Sem cura milagrosa. Sem misticismo barato. Linguagem adulta para adultos que buscam profundidade real.</p>
+      </article>
+
+      <article class="principle-card">
+        <span class="principle-number">04</span>
+        <h3 class="principle-title">Continuidade que importa</h3>
+        <p class="principle-text">Nos planos Essencial e Transformação, sua história é preservada de uma sessão para outra. Histórico vira contexto. Você não recomeça do zero a cada encontro.</p>
+      </article>
+
+      <article class="principle-card">
+        <span class="principle-number">05</span>
+        <h3 class="principle-title">Privacidade como pilar</h3>
+        <p class="principle-text">Conversas criptografadas, em conformidade com a LGPD, nunca compartilhadas com terceiros. Seu silêncio nos pertence em segurança.</p>
+      </article>
+
+      <article class="principle-card">
+        <span class="principle-number">06</span>
+        <h3 class="principle-title">Acesso sem fricção</h3>
+        <p class="principle-text">Em português. 24 horas por dia. Direto do navegador. Sem instalar app, sem entrar em fila, sem letra miúda. Cuidado disponível como deveria ser.</p>
+      </article>
+
+      <article class="principle-card">
+        <span class="principle-number">07</span>
+        <h3 class="principle-title">Complemento, nunca substituto</h3>
+        <p class="principle-text">Não substituímos psicólogo nem médico. Somos um espaço a mais de cuidado integrativo. Em situações de crise, sempre profissional de saúde habilitado.</p>
+      </article>
+
     </div>
   </div>
 </section>
