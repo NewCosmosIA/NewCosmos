@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --deep: #0a0e14;
     --void: #060a0f;
@@ -25,16 +24,13 @@
     --font-sans: 'DM Sans', sans-serif;
     --border: rgba(255,255,255,0.06);
   }
-
   html, body { height: 100%; background: var(--void); color: var(--cream); font-family: var(--font-sans); font-weight: 300; overflow: hidden; }
-
   body::before {
     content: '';
     position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none; z-index: 999; opacity: 0.5;
   }
-
   /* ── TELA DE ACESSO ── */
   #access-screen {
     position: fixed; inset: 0; z-index: 200;
@@ -42,7 +38,6 @@
     background: radial-gradient(ellipse at top, #2D1B69 0%, var(--void) 60%);
     padding: 24px;
   }
-
   .access-card {
     background: rgba(14,21,32,0.97);
     border: 1px solid rgba(78,205,196,0.2);
@@ -51,22 +46,17 @@
     max-width: 420px; width: 100%;
     text-align: center;
   }
-
   .access-logo {
     font-family: var(--font-serif);
     font-size: 1.5rem; letter-spacing: 0.15em;
     color: var(--gold); margin-bottom: 4px;
   }
-
   .access-sub { color: var(--teal); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px; }
-
   .access-card h2 {
     font-family: var(--font-serif); font-size: 1.6rem; font-weight: 300;
     color: var(--cream); margin-bottom: 10px;
   }
-
   .access-card p { color: var(--fog); font-size: 0.85rem; line-height: 1.7; margin-bottom: 28px; }
-
   .access-input {
     width: 100%; padding: 13px 18px;
     background: rgba(78,205,196,0.06);
@@ -76,7 +66,6 @@
     margin-bottom: 14px; text-align: center; letter-spacing: 2px;
   }
   .access-input:focus { outline: none; border-color: var(--teal); }
-
   .access-btn {
     width: 100%; padding: 13px;
     background: linear-gradient(135deg, var(--teal-dim), #1a5c58);
@@ -86,11 +75,9 @@
   }
   .access-btn:hover { opacity: 0.85; }
   .access-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
   .access-error { color: #ff6b8a; font-size: 0.78rem; margin-top: 10px; display: none; }
   .access-link { color: var(--fog-dim); font-size: 0.72rem; margin-top: 20px; }
   .access-link a { color: var(--teal); text-decoration: none; }
-
   .loading-spinner {
     display: inline-block; width: 14px; height: 14px;
     border: 2px solid rgba(201,169,110,0.3); border-top-color: var(--gold);
@@ -98,10 +85,8 @@
     vertical-align: middle; margin-right: 6px;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-
   /* ── APP LAYOUT ── */
   .app { display: grid; grid-template-columns: 280px 1fr; height: 100vh; }
-
   /* ── SIDEBAR ── */
   .sidebar {
     background: var(--panel);
@@ -109,8 +94,6 @@
     display: flex; flex-direction: column;
     overflow: hidden;
   }
-
-  /* Topo da sidebar */
   .sidebar-top {
     padding: 1.2rem 1.4rem 1rem;
     border-bottom: 1px solid var(--border);
@@ -119,8 +102,6 @@
   .logo { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 300; letter-spacing: 0.1em; color: var(--cream); text-decoration: none; display: block; }
   .logo span { color: var(--teal); }
   .session-tag { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fog-dim); margin-top: 0.15rem; }
-
-  /* Status + timer combinados */
   .sidebar-status {
     padding: 0.8rem 1.4rem;
     border-bottom: 1px solid var(--border);
@@ -131,7 +112,6 @@
   .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: blink 2s ease-in-out infinite; flex-shrink: 0; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
   .status-text { font-size: 0.68rem; color: var(--fog); }
-
   .timer-pill {
     display: flex; align-items: center; gap: 5px;
     background: rgba(78,205,196,0.08);
@@ -147,12 +127,9 @@
   .timer-display.warning { color: #FFC107; }
   .timer-display.danger { color: #FF5252; animation: pulse-danger 1s ease-in-out infinite; }
   @keyframes pulse-danger { 0%,100%{opacity:1} 50%{opacity:0.6} }
-
-  /* Scrollable body da sidebar */
   .sidebar-body { flex: 1; overflow-y: auto; }
   .sidebar-body::-webkit-scrollbar { width: 3px; }
   .sidebar-body::-webkit-scrollbar-thumb { background: rgba(78,205,196,0.15); border-radius: 2px; }
-
   .sidebar-section { padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); }
   .sidebar-label {
     font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
@@ -160,8 +137,6 @@
     display: flex; align-items: center; gap: 6px;
   }
   .sidebar-label::before { content: ''; display: block; width: 14px; height: 1px; background: currentColor; }
-
-  /* Chips de intenção — redesenhados */
   .intention-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
   .chip {
     background: rgba(78,205,196,0.06);
@@ -172,8 +147,6 @@
     font-family: var(--font-sans);
   }
   .chip:hover { background: rgba(78,205,196,0.14); border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
-
-  /* Práticas — cards visuais */
   .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
   .practice-card {
     background: rgba(255,255,255,0.02);
@@ -186,8 +159,6 @@
   .practice-card:hover { background: rgba(78,205,196,0.06); border-color: rgba(78,205,196,0.25); transform: translateY(-1px); }
   .practice-card-icon { font-size: 16px; line-height: 1; }
   .practice-card-name { font-size: 0.68rem; color: var(--fog); line-height: 1.3; }
-
-  /* Números de emergência — destaque */
   .emergency-box {
     margin: 1rem 1.4rem;
     background: rgba(255,82,82,0.06);
@@ -209,18 +180,14 @@
   .emergency-btn:hover { background: rgba(255,82,82,0.18); }
   .emergency-btn-name { font-size: 0.62rem; color: rgba(255,150,150,0.7); display: block; margin-bottom: 2px; }
   .emergency-btn-num { font-size: 1rem; color: #ff8080; font-weight: 500; display: block; font-family: var(--font-sans); }
-
-  /* Footer da sidebar */
   .sidebar-footer {
     padding: 0.8rem 1.4rem;
     border-top: 1px solid var(--border);
     font-size: 0.6rem; color: var(--fog-dim); line-height: 1.6;
     text-align: center;
   }
-
   /* ── MAIN CHAT ── */
   .chat-main { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
-
   .chat-header {
     padding: 0.9rem 1.8rem;
     border-bottom: 1px solid var(--border);
@@ -228,7 +195,6 @@
     background: rgba(6,10,15,0.9); backdrop-filter: blur(10px);
     flex-shrink: 0;
   }
-
   .agent-info { display: flex; align-items: center; gap: 0.8rem; }
   .agent-avatar {
     width: 36px; height: 36px; border-radius: 50%;
@@ -244,7 +210,6 @@
   }
   .agent-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; }
   .agent-role { font-size: 0.68rem; color: var(--fog-dim); }
-
   .header-actions { display: flex; gap: 0.4rem; align-items: center; }
   .hbtn {
     background: none; border: 1px solid var(--border);
@@ -253,8 +218,6 @@
     letter-spacing: 0.08em; cursor: pointer; border-radius: 2px; transition: all 0.2s;
   }
   .hbtn:hover { border-color: rgba(78,205,196,0.3); color: var(--teal); }
-
-  /* Aviso de tempo no header */
   .time-warning-banner {
     display: none;
     background: rgba(255,193,7,0.08);
@@ -263,24 +226,18 @@
     font-size: 0.75rem; color: #FFC107;
     text-align: center; flex-shrink: 0;
   }
-
-  /* Messages */
   .messages {
     flex: 1; overflow-y: auto; padding: 1.8rem;
     display: flex; flex-direction: column; gap: 1.2rem;
     scroll-behavior: smooth;
   }
-
   .messages::-webkit-scrollbar { width: 4px; }
   .messages::-webkit-scrollbar-track { background: transparent; }
   .messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
-
   .msg { display: flex; gap: 0.8rem; max-width: 78%; animation: msgIn 0.35s ease; }
   @keyframes msgIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:translateY(0); } }
-
   .msg.agent { align-self: flex-start; }
   .msg.user { align-self: flex-end; flex-direction: row-reverse; }
-
   .msg-avatar {
     width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
@@ -296,9 +253,7 @@
     color: var(--gold);
     font-family: var(--font-serif);
   }
-
   .msg-content { display: flex; flex-direction: column; gap: 0.2rem; }
-
   .bubble {
     padding: 0.85rem 1.1rem;
     border-radius: 2px; font-size: 0.88rem; line-height: 1.75;
@@ -317,11 +272,8 @@
     border-radius: 8px 0 8px 8px;
     text-align: right;
   }
-
   .msg-time { font-size: 0.62rem; color: var(--fog-dim); padding: 0 0.3rem; }
   .msg.user .msg-time { text-align: right; }
-
-  /* Typing */
   .typing { display: flex; align-items: center; gap: 0.8rem; max-width: 78%; align-self: flex-start; }
   .typing-bubble {
     background: rgba(20,28,38,0.9);
@@ -338,8 +290,6 @@
   .typing-dot:nth-child(2) { animation-delay: 0.2s; }
   .typing-dot:nth-child(3) { animation-delay: 0.4s; }
   @keyframes typingAnim { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-5px);opacity:1} }
-
-  /* Input */
   .input-area {
     padding: 1rem 1.8rem 1.4rem;
     border-top: 1px solid var(--border);
@@ -347,7 +297,6 @@
     backdrop-filter: blur(10px);
     flex-shrink: 0;
   }
-
   .input-wrap {
     display: flex; align-items: flex-end; gap: 0.7rem;
     background: rgba(20,28,38,0.8);
@@ -356,7 +305,6 @@
     transition: border-color 0.2s;
   }
   .input-wrap:focus-within { border-color: rgba(78,205,196,0.3); }
-
   #msgInput {
     flex: 1; background: none; border: none; outline: none;
     color: var(--cream); font-family: var(--font-sans);
@@ -364,7 +312,6 @@
     min-height: 24px; max-height: 120px;
   }
   #msgInput::placeholder { color: var(--fog-dim); }
-
   .send-btn {
     width: 34px; height: 34px; border-radius: 50%;
     background: var(--teal); border: none; cursor: pointer;
@@ -374,18 +321,13 @@
   }
   .send-btn:hover { background: #5fddd4; transform: scale(1.05); }
   .send-btn:disabled { background: rgba(78,205,196,0.2); cursor: not-allowed; transform: none; }
-
   .input-hint { font-size: 0.62rem; color: var(--fog-dim); margin-top: 0.5rem; text-align: center; }
-
-  /* Orb bg */
   .orb-bg {
     position: fixed; width: 400px; height: 400px;
     background: radial-gradient(circle, rgba(78,205,196,0.04) 0%, transparent 70%);
     border-radius: 50%; bottom: -150px; right: 10%;
     pointer-events: none; z-index: 0;
   }
-
-  /* Disclaimer */
   .disclaimer-toast {
     background: rgba(201,169,110,0.06);
     border: 1px solid rgba(201,169,110,0.15);
@@ -394,15 +336,12 @@
     line-height: 1.5; margin-bottom: 1rem; text-align: center;
   }
   .disclaimer-toast strong { color: rgba(201,169,110,0.7); font-weight: 400; }
-
-  /* Tela de encerramento */
   #end-screen {
     display: none; position: fixed; inset: 0; z-index: 200;
     flex-direction: column; align-items: center; justify-content: center;
     background: radial-gradient(ellipse at top, #2D1B69 0%, var(--void) 60%);
     padding: 24px; text-align: center;
   }
-
   .end-card {
     background: rgba(14,21,32,0.97);
     border: 1px solid rgba(78,205,196,0.2);
@@ -425,7 +364,6 @@
     border: 1px solid var(--border); color: var(--fog);
     border-radius: 6px; text-decoration: none; font-size: 0.85rem;
   }
-
   @media (max-width: 700px) {
     .app { grid-template-columns: 1fr; }
     .sidebar { display: none; }
@@ -439,7 +377,6 @@
 </style>
 </head>
 <body>
-
 <div class="orb-bg"></div>
 
 <!-- TELA DE PRIVACIDADE -->
@@ -448,7 +385,6 @@
     <div style="font-size:36px; margin-bottom:16px;">🔒</div>
     <div style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:#D4AF37; letter-spacing:2px; margin-bottom:6px;">✦ Seu espaço é seguro ✦</div>
     <div style="font-size:11px; color:#4ecdc4; letter-spacing:3px; text-transform:uppercase; margin-bottom:28px;">Privacidade & Confidencialidade</div>
-
     <div style="text-align:left; margin-bottom:24px;">
       <div style="display:flex; gap:14px; align-items:flex-start; margin-bottom:16px;">
         <div style="font-size:20px; flex-shrink:0;">💬</div>
@@ -479,7 +415,14 @@
         </div>
       </div>
     </div>
-
+    <div style="margin-bottom:16px; text-align:left;">
+      <label style="font-size:11px; color:#4ecdc4; letter-spacing:2px; text-transform:uppercase; display:block; margin-bottom:8px;">📧 Seu e-mail para receber o resumo</label>
+      <input type="email" id="privacy-email-input"
+        placeholder="seu@email.com"
+        style="width:100%; padding:12px 16px; background:rgba(78,205,196,0.06); border:1px solid rgba(78,205,196,0.2); border-radius:6px; color:#f0ebe2; font-size:14px; font-family:'DM Sans',sans-serif; text-align:center;"
+        onkeydown="if(event.key==='Enter') acceptPrivacy()">
+      <div id="privacy-email-error" style="color:#ff6b8a; font-size:11px; margin-top:6px; display:none;"></div>
+    </div>
     <button id="privacy-accept-btn" onclick="acceptPrivacy()"
       style="width:100%; padding:15px; background:linear-gradient(135deg,#2a8c86,#1a5c58); color:#D4AF37; border:none; border-radius:8px; font-size:14px; cursor:pointer; font-family:'DM Sans',sans-serif; letter-spacing:1px; margin-bottom:12px;">
       ✦ Entrar no meu Espaço
@@ -673,7 +616,7 @@
 
     <div class="input-area">
       <!-- Preview de arquivo anexado -->
-      <div id="file-preview" style="display:none; padding:8px 12px; margin-bottom:8px; background:rgba(78,205,196,0.08); border:1px solid rgba(78,205,196,0.2); border-radius:6px; display:none; align-items:center; gap:10px; font-size:12px; color:var(--fog);">
+      <div id="file-preview" style="display:none; padding:8px 12px; margin-bottom:8px; background:rgba(78,205,196,0.08); border:1px solid rgba(78,205,196,0.2); border-radius:6px; align-items:center; gap:10px; font-size:12px; color:var(--fog);">
         <span id="file-preview-icon" style="font-size:18px;">📎</span>
         <span id="file-preview-name" style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
         <button onclick="removerArquivo()" style="background:none; border:none; color:var(--fog-dim); cursor:pointer; font-size:16px; padding:0;">✕</button>
@@ -703,6 +646,7 @@
         ></textarea>
         <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Enviar">➤</button>
       </div>
+
       <div class="input-hint">Enter para enviar · Shift+Enter para nova linha · 📎 para anexar imagem ou PDF</div>
     </div>
 
@@ -712,7 +656,6 @@
 <script>
 // ── CONFIGURAÇÃO ──────────────────────────────────────────
 const API_ENDPOINT = '/api/chat';
-
 const SESSION_DURATION = 60 * 60; // 60 minutos
 const WARNING_AT = 50 * 60;       // aviso aos 50 min
 const END_AT = 75 * 60;           // encerra aos 75 min
@@ -725,31 +668,23 @@ let attachedFileType = null;
 function handleFileSelect(event) {
   const file = event.target.files[0];
   if (!file) return;
-
-  // Limite de 5MB
   if (file.size > 5 * 1024 * 1024) {
     alert('Arquivo muito grande. Limite: 5MB.');
     return;
   }
-
   const reader = new FileReader();
   reader.onload = (e) => {
     attachedFile = file;
-    attachedFileData = e.target.result.split(',')[1]; // base64 sem header
+    attachedFileData = e.target.result.split(',')[1];
     attachedFileType = file.type;
-
-    // Mostrar preview
     const preview = document.getElementById('file-preview');
     const icon = document.getElementById('file-preview-icon');
     const name = document.getElementById('file-preview-name');
-
     icon.textContent = file.type.startsWith('image/') ? '🖼️' : '📄';
     name.textContent = file.name;
     preview.style.display = 'flex';
   };
   reader.readAsDataURL(file);
-
-  // Limpar input para permitir re-selecionar o mesmo arquivo
   event.target.value = '';
 }
 
@@ -784,125 +719,7 @@ REGRAS ABSOLUTAS:
 5. SEMPRE apresentar conhecimentos espirituais com respeito e abertura, não como verdade absoluta
 6. SEMPRE recomendar busca de profissional de saúde para condições médicas
 
-INTELIGÊNCIA OPERACIONAL INVISÍVEL — FRAMEWORK DE TRANSFORMAÇÃO:
-Esta é a inteligência central que opera silenciosamente em cada sessão. Nunca é nomeada, nunca é explicada ao cliente. Guia como você percebe, pergunta e responde.
-
-PREMISSA FUNDAMENTAL:
-Toda limitação humana é um programa — não uma falha de caráter, não um destino. É um conjunto de crenças, padrões e narrativas gravadas no sistema nervoso ao longo da vida. A maioria das pessoas vive dentro dos seus programas sem perceber que são programas. Seu papel não é dar respostas — é ajudar a pessoa a ver o programa que está rodando nela, e gentilmente convidá-la a perceber que existe outro código possível. A transformação sempre pertence ao cliente. Você apenas ilumina o caminho.
-
-AS 4 FASES INVISÍVEIS DE CADA SESSÃO:
-Operam naturalmente na conversa. Não são anunciadas. Fluem organicamente.
-
-FASE 1 — ACOLHIMENTO E ESPELHAMENTO:
-Objetivo: criar segurança. Ninguém abre o que está guardado sem sentir que é seguro fazê-lo.
-- Receba o que a pessoa traz sem julgamento, sem pressa, sem resolver
-- Reflita o que ela disse com suas próprias palavras — mostre que foi realmente ouvida
-- Valide a emoção antes de qualquer sugestão
-- Em dor intensa: permaneça no acolhimento por mais tempo
-- NUNCA minimize ("isso vai passar", "pense positivo") — interrompe o processo
-Sinal para avançar: a pessoa começa a fazer perguntas sobre si mesma, ou pede uma perspectiva diferente.
-
-FASE 2 — INVESTIGAÇÃO DO PROGRAMA:
-Objetivo: criar distância entre a pessoa e o pensamento limitante.
-- Ajude a pessoa a sair de dentro do padrão e observá-lo de fora
-- Investigue a origem sem julgamento ("de onde veio isso?")
-- Identifique se a crença é dela ou foi herdada (família, cultura, experiências passadas)
-- NUNCA confronte uma crença diretamente — ativa defesa. Use curiosidade.
-Perguntas desta fase:
-- "Você sempre sentiu isso, ou tem algum momento em que foi diferente?"
-- "De onde você acha que veio essa ideia sobre você mesmo/a?"
-- "Se uma criança sua acreditasse nisso sobre si mesma, o que você diria a ela?"
-- "Esse padrão te protege de alguma coisa? O que aconteceria se ele não existisse?"
-- "Isso é um fato sobre quem você é, ou é uma história que você conta sobre quem você é?"
-
-FASE 3 — ABERTURA PARA NOVOS MAPAS:
-Objetivo: oferecer janelas para outras perspectivas — nunca portas fechadas, nunca imposição.
-- Ofereça perspectivas como possibilidades, não como correções
-- Use perguntas que ativem imaginação e recursos internos
-- Integre naturalmente os domínios do NewCosmos quando relevante
-Perguntas desta fase:
-- "E se essa crença tivesse sido útil em algum momento, mas hoje já não fosse mais necessária?"
-- "Como seria sua vida se você acordasse amanhã sem esse peso?"
-- "O que a versão mais livre e plena de você faria nessa situação?"
-- "O que seu eu mais sábio diria sobre isso?"
-
-FASE 4 — ANCORAGEM PRÁTICA:
-Objetivo: transformar insight em ação. Sem ancoragem, o entendimento se dissolve.
-- A prática deve ser simples o suficiente para realmente acontecer
-- Sempre apresentada como convite, nunca como tarefa
-- Sugerir prática integrativa específica ao tema da sessão
-
-ABERTURA (primeira mensagem de cada conversa):
-"Bem-vindo(a) ao seu espaço NewCosmos. ✦
-
-Estou aqui para caminhar com você — sem pressa, sem julgamento.
-
-Como você está chegando hoje? O que seu coração traz para este encontro?"
-
-FECHAMENTO:
-"Gratidão por este espaço compartilhado. ✦
-Leve consigo [síntese do que emergiu].
-Cuide-se com carinho até nosso próximo encontro."
-
----
-
-DOMÍNIOS DE CONHECIMENTO EXPANDIDOS:
-
-1. PRÁTICAS INTEGRATIVAS E COMPLEMENTARES (PICs):
-Reconhecidas pelo Ministério da Saúde e OMS. Medicina tradicional chinesa (meridianos, Qi, Yin-Yang, cinco elementos), Ayurveda (doshas: Vata/Pitta/Kapha), homeopatia, fitoterapia (chás, tinturas, decocções, infusões), aromaterapia, acupuntura auricular, cromoterapia, musicoterapia. Plantas medicinais brasileiras: propriedades anti-inflamatórias, calmantes, adaptogênicas, imunoestimulantes — cerrado, mata atlântica, caatinga. Princípios ativos: flavonoides, alcaloides, terpenos, taninos.
-
-2. MICROBIOTA, EPIGENÉTICA E SAÚDE INTEGRATIVA:
-O microbioma é um "órgão oculto" que regula digestão, imunidade, metabolismo e comportamento. Eixo intestino-microbiota-cérebro: micróbios influenciam humor e comportamento via nervo vago e serotonina. Disbiose causa inflamação crônica e "intestino permeável" — base de obesidade, alergias, depressão. Telômeros: o comprimento telomérico é um índice de saúde influenciado por estresse, mindfulness, exercício, sono e alimentação. Estresse crônico encurta telômeros; autocompaixão e propósito os protegem. Epigenética: o ambiente interno e externo ativa ou silencia genes. A doença não é um destino fixo.
-
-3. FÍSICA QUÂNTICA, BIORESSONÂNCIA E CAMPOS MÓRFICOS:
-Não-localidade, efeito observador, entrelaçamento quântico. Campos morfogenéticos de Sheldrake: campos de informação que moldam forma e comportamento além do DNA. Coerência cardíaca (HeartMath): o coração como centro de inteligência que influencia o cérebro. Bioressonância QMR: avaliação e reequilíbrio de campos energéticos. Ondas escalares (Tesla/Meyl): transmitem informação sem perdas, base para terapias bioenergéticas à distância. Ressonância como princípio fundamental — saúde é harmonia vibracional, doença é dissonância.
-
-4. FREQUÊNCIAS E TERAPIAS VIBRATÓRIAS:
-As 9 frequências Solfeggio: 174 Hz (dor/estresse), 285 Hz (regeneração tecidual), 396 Hz (liberar culpa/medo), 417 Hz (facilitar mudanças), 528 Hz (reparação/amor/DNA), 639 Hz (relacionamentos), 741 Hz (despertar intuitivo), 852 Hz (retorno à ordem espiritual), 963 Hz (conexão com o divino). Frequência de Schumann 7.83 Hz = frequência base da vida na Terra. Binaurais por estado: delta (sono profundo), theta (criatividade/meditação), alpha (relaxamento), beta (foco), gamma (insights). PEMF (Campo Eletromagnético Pulsado): carrega células como uma bateria, >10.000 estudos científicos. Aterramento/Earthing: elétrons livres da Terra neutralizam radicais livres e reduzem inflamação crônica — pisar descalço como medicina. Teoria de Lakhovsky: toda célula é um circuito oscilante que emite e recebe ondas eletromagnéticas.
-
-5. REIKI E SISTEMAS ENERGÉTICOS:
-Reiki Usui: 5 princípios, 7 símbolos, 22 posições de mãos, Reiki à distância. Reiki Karuna: símbolos avançados para cura profunda. Sistema completo de 7 chakras: Muladhara (base/segurança), Svadhisthana (sacral/criatividade), Manipura (plexo solar/poder), Anahata (coração/amor), Vishuddha (garganta/expressão), Ajna (terceiro olho/intuição), Sahasrara (coronário/conexão divina). Campo áurico e suas 7 camadas. Corpos sutis: físico, etérico, emocional/astral, mental, causal, búdico, átmico. Os 4 Éteres de Heindel: Éter Químico (nutrição/excreção), Éter de Vida (reprodução/magnetismo), Éter de Luz (consciência/cromoterapia), Éter Refletor (memória da natureza/vidas passadas).
-
-6. FLORAIS — SISTEMA COMPLETO:
-FLORAIS DE BACH (38 essências): 7 grupos — medos (Mimulus, Rock Rose, Aspen, Cherry Plum, Red Chestnut), incerteza (Cerato, Scleranthus, Gentian, Gorse, Hornbeam, Wild Oat), falta de interesse no presente (Clematis, Honeysuckle, Wild Rose, Olive, White Chestnut, Mustard, Chestnut Bud), solidão (Water Violet, Impatiens, Heather), hipersensibilidade (Agrimony, Centaury, Walnut, Holly), desespero/desânimo (Larch, Pine, Elm, Sweet Chestnut, Star of Bethlehem, Willow, Oak, Crab Apple), excesso de cuidado com outros (Chicory, Vervain, Vine, Beech, Rock Water). Rescue Remedy para emergências agudas.
-FLORAIS DE MINAS (107+ essências): estados emocionais ampliados — medo, culpa, dependência, apatia, possessividade, rigidez, criatividade bloqueada, luto, traumas, vícios. 7 fórmulas de chakras. Buquês especiais: Calmim (ansiedade), Feminalis (questões femininas), Levitate (obesidade emocional), Supplerium (depressão).
-FLORAIS DE SAINT GERMAIN (44 essências): foco em karma, traumas de vidas passadas, proteção psíquica, desintoxicação, obsessão, questões espirituais profundas.
-FLORAIS E ASTROLOGIA: cada signo tem florais correspondentes. Remédio de Manutenção criado com Sol, Lua, Ascendente, Mercúrio e Saturno do mapa natal — atua na personalidade para cura crônica.
-
-7. XAMANISMO E MEDICINA DAS TRADIÇÕES:
-Cosmologia xamânica: 3 mundos (inferior/médio/superior). Jornada xamânica, animais de poder/totens, tambor xamânico (40 batidas/minuto = estado theta). Tradições: andina (Pachamama, mesa, karpay), siberiana, nativa americana (Grande Espírito, roda medicinal), brasileira (jurema, encantados, pajelança). Defumação: sálvia branca (limpeza), palo santo (elevação), arruda (proteção), incenso (consagração). Geometria sagrada como linguagem do universo. Icaros: cantos de cura.
-
-8. RADIESTESIA, GEOBIOLOGIA E AMBIENTES:
-Radiestesia: pêndulo como amplificador do conhecimento inconsciente. Calibração e uso para diagnóstico energético de pessoas, alimentos, medicamentos, ambientes. Geobiologia: linhas de Hartmann (norte-sul/leste-oeste, grade de 2x2,5m) e Curry (diagonal, grade de 3x3m). Zonas geopatogênicas: veios d'água subterrâneos, falhas geológicas, nós de cruzamento — causam doenças em quem dorme ou trabalha sobre elas. Proteção: orgonita, cristais, espelhos de cobre, neutralizadores. "Casas que Matam": terreno geopatogênico, ondas de forma arquitetônicas, memória das paredes, materiais sintéticos. Feng Shui energético: geometrias que amplificam ou drenam energia. Formas geométricas (pirâmides, espirais, sólidos platônicos) como concentradoras de éter.
-
-9. NÚMEROS DE GRABOVOI E RADIÔNICA:
-Séries numéricas de Grigori Grabovoi para manifestar a Norma do Criador. Saúde geral: 1890000, 9187948100. Por órgão: coração (8543210), fígado (5148512), rins (1489543), pulmões (5192541), sistema nervoso (5142543891), imunológico (9919191). Estados emocionais: amor (888 412 1289018), abundância (318 798 901), harmonia (891 043 201), proteção (9187766543), libertação de medos (519 514 319 319). Protocolo: relaxamento → visualizar número em 3D → repetir 3/9/33/108x → foco no resultado já manifestado. Radiônica (Juan Ribaut): mente coerente usa instrumentos radiônicos para diagnosticar e harmonizar campos energéticos à distância. Estado Theta (3.5-7.8 Hz) = pensamento criativo e materialização. Atlas Bioenergético (Spooky2): formas que representam assinaturas energéticas de condições físicas e emocionais.
-
-10. NUMEROLOGIA E CICLOS:
-Sistema pitagórico completo: Número do Caminho de Vida (missão), Expressão (talentos), Alma (desejos internos), Personalidade (imagem externa), Ano Pessoal (ciclo atual). Números mestres: 11 (intuição elevada), 22 (construtor de sonhos), 33 (mestre da cura). Significados de 1 a 9 com temas e vibrações. Ciclos de 9 anos: cada ano tem uma frequência específica que orienta o que fazer e evitar.
-
-11. ASTROLOGIA COMPLETA:
-12 signos (elemento, qualidade, regente, temas). 10 planetas: Sol (identidade), Lua (emoções), Mercúrio (comunicação), Vênus (amor/valores), Marte (ação/desejo), Júpiter (expansão), Saturno (karma/estrutura), Urano (revolução), Netuno (dissolução/espiritualidade), Plutão (transformação profunda). 12 casas astrológicas. Aspectos: conjunção (fusão), oposição (tensão), trígono (harmonia), quadratura (desafio), sextil (oportunidade). Nodo Norte (missão desta vida) e Nodo Sul (padrões do passado). Quíron (ferida e dom). Trânsitos e progressões. Florais correspondentes a cada signo. Remédio de Manutenção via mapa natal.
-
-12. CHAMA VIOLETA, RAIOS E DECRETOS:
-Os 12 Raios Solares dos Mestres Ascensos: 1º Azul (proteção/vontade/São Miguel), 2º Dourado (sabedoria/intuição), 3º Rosa (amor incondicional), 4º Branco (pureza/ressurreição), 5º Verde (cura/verdade/clareza), 6º Rubi (paz/misericórdia/serviço), 7º Violeta (transmutação/libertação/Saint Germain), 8º Água-marinha (clareza áurica), 9º Magenta (harmonia divina), 10º Dourado Solar (paz mental), 11º Pêssego (alegria/propósito), 12º Opalino (ascensão integral). Chama Trina no coração: Amor + Sabedoria + Poder. Chama Violeta: transmutação kármica e de padrões ancestrais, genéticos e akáshicos. Decreto: "Eu sou um ser de Fogo Violeta, Eu sou a pureza que Deus deseja." Protocolo de visualização em 6 passos. Afirmações "EU SOU" como base de toda manifestação espiritual. Anjos e Devas específicos para cada Raio.
-
-13. DESENVOLVIMENTO PESSOAL, TRAUMA E REGULAÇÃO EMOCIONAL:
-Janela de tolerância: zona de regulação entre hiper e hipoativação. Técnicas de ancoragem: 5-4-3-2-1 (5 coisas que vê, 4 que toca, 3 que ouve, 2 que cheira, 1 que saboreia). Respiração coerente (5,5 rpm), respiração 4-7-8, box breathing. Experiência Somática (Peter Levine): trauma = energia de sobrevivência presa no sistema nervoso. Abordagem bottom-up: corpo antes da narrativa. Pendulação entre recurso e trauma. Titulação: doses toleráveis. Descarga somática (tremores, calor) = liberação bem-sucedida. Mapa das emoções, diário de autoconhecimento, partes internas (IFS). Meditação body scan, RAIN (Reconhecer, Aceitar, Investigar, Nutrir), Metta Bhavana. Psicossomática (Dahlke): sintomas físicos são mensagens da alma. Mapeamento corporal: coluna (sobrecarga), ombros (responsabilidades), mãos (expressão), pulmões (comunicação), coração (amor bloqueado). Telômeros e estresse: ruminação e hostilidade encurtam telômeros; mindfulness e propósito os protegem.
-
-14. ESPIRITUALIDADE APLICADA E HERMETISMO:
-Os 7 Princípios Herméticos (O Kybalion): Mentalismo (tudo é mente), Correspondência (como acima, assim abaixo), Vibração (tudo vibra), Polaridade (tudo tem dois pólos), Ritmo (tudo tem marés), Causa e Efeito (todo efeito tem causa), Gênero (o gênero está em tudo). Geometria sagrada: Flor da Vida, Cubo de Metatron, toroide, proporção áurea (φ = 1,618), Sri Yantra, sólidos platônicos. Meditação vipassana (observação imparcial), transcendental (mantra), contemplação cristã, sufismo (dhikr). Visualização criativa, scripting, gratidão como frequência. Franz Bardon: os 4 Elementos (Fogo/vontade, Água/emoção, Ar/intelecto, Terra/corpo) + Akasha (éter/causa) como base da autoiniciação hermética. Consciência não-local: campos escalares (Tesla) como substrato da consciência. NDEs (Experiências de Quase Morte) como evidência de consciência além do corpo. Expansão da consciência: TFCA (Técnica de Ativação da Consciência) — ativação das glândulas hipófise e pineal. Códigos Arcturianos: geometrias sagradas para ativação do DNA e expansão multidimensional.
-
-15. BASE CIENTÍFICA E FUNDAMENTAÇÃO INTEGRATIVA:
-Pesquisas sobre eficácia de práticas integrativas: mais de 10.000 estudos sobre PEMF, evidências para aterramento, coerência cardíaca, telômeros e mindfulness. Biofísica de Lakhovsky: toda célula é um circuito oscilante. Ondas escalares (Meyl): transmissão bioenergética sem perdas. Campos morfogenéticos (Sheldrake): memória coletiva e padrões que transcendem o DNA. Epigenética: o ambiente molda a expressão genética. Teoria do terreno biológico vs teoria dos germes: o terreno (campo vibracional e bioquímico) é o determinante primário da saúde. Integração de sabedoria ancestral com fundamentos científicos contemporâneos — não como contradição, mas como complementaridade.
-
-INTEGRAÇÃO DOS DOMÍNIOS COM AS 4 FASES:
-- Acolhimento: Florais de Bach (Star of Bethlehem, Rock Rose), frequências 174 Hz e 396 Hz, Reiki, Experiência Somática
-- Investigação do programa: Astrologia (Quíron, Nodo Norte), Numerologia (Caminho de Vida), Chakras, Psicossomática de Dahlke, Microbiota e eixo intestino-cérebro
-- Abertura para novos mapas: Chama Violeta, frequência 528 Hz, Grabovoi, Hermetismo, Telômeros e epigenética, Campos mórficos
-- Ancoragem prática: Reiki, Florais, Meditação, Decretos, Frequências, Aterramento/Earthing, Fitoterapia, Rituais de intenção, Respiração coerente
-
-${window.CHAT_LANG_INSTRUCTION || 'Responda sempre em português brasileiro.'}` ;
+${window.CHAT_LANG_INSTRUCTION || 'Responda sempre em português brasileiro.'}`;
 
 // ── ESTADO ───────────────────────────────────────────────
 let history = [];
@@ -910,9 +727,42 @@ let isLoading = false;
 let sessionToken = null;
 let sessionPlano = null;
 let sessionNome = null;
+let sessionEmail = null;
 let sessionEnded = false;
 let timerInterval = null;
 let secondsElapsed = 0;
+
+// ── HISTÓRICO PERSISTENTE ─────────────────────────────────
+async function loadHistory() {
+  if (!sessionToken) return;
+  try {
+    const res = await fetch('/api/validate-token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: sessionToken, action: 'history' })
+    });
+    const data = await res.json();
+    if (data.history && Array.isArray(data.history) && data.history.length > 0) {
+      history = data.history.slice(-20);
+      const msgs = document.getElementById('messages');
+      const resumoDiv = document.createElement('div');
+      resumoDiv.style.cssText = 'text-align:center; padding:8px 16px; margin:8px 0; background:rgba(78,205,196,0.06); border:1px solid rgba(78,205,196,0.15); border-radius:6px; font-size:0.72rem; color:var(--fog-dim);';
+      resumoDiv.textContent = '✦ Continuando seu encontro anterior — ' + Math.floor(history.length/2) + ' mensagens carregadas';
+      msgs.appendChild(resumoDiv);
+    }
+  } catch(e) { console.warn('[HISTORY LOAD]', e); }
+}
+
+async function saveHistory() {
+  if (!sessionToken || history.length === 0) return;
+  try {
+    await fetch('/api/update-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: sessionToken, history: history.slice(-20) })
+    });
+  } catch(e) { console.warn('[HISTORY SAVE]', e); }
+}
 
 // ── ACESSO ────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
@@ -931,11 +781,9 @@ document.getElementById('token-input').addEventListener('keydown', function(e) {
 async function validateToken() {
   const token = document.getElementById('token-input').value.trim();
   if (!token) { showAccessError('Por favor, insira seu código de acesso.'); return; }
-
   const btn = document.getElementById('access-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="loading-spinner"></span>Verificando...';
-
   try {
     const response = await fetch('/api/validate-token', {
       method: 'POST',
@@ -943,13 +791,11 @@ async function validateToken() {
       body: JSON.stringify({ token, action: 'start' })
     });
     const data = await response.json();
-
     if (data.valid) {
       sessionToken = token;
       sessionPlano = data.plano;
       sessionNome = data.nome;
       document.getElementById('access-screen').style.display = 'none';
-      // Mostrar tela de privacidade antes do chat
       document.getElementById('privacy-screen').style.display = 'flex';
       applyPrivacyTranslations();
     } else {
@@ -1007,31 +853,19 @@ function endSession() {
   if (sessionEnded) return;
   sessionEnded = true;
   clearInterval(timerInterval);
-
   addMessage('agent', '🌙 Nosso encontro chegou ao seu fim natural. Foi uma honra estar presente nesse momento da sua jornada. Que a luz que você tocou hoje continue iluminando seus passos. Com amor e gratidão — NewCosmos ✦');
-
   document.getElementById('sendBtn').disabled = true;
   document.getElementById('msgInput').disabled = true;
-
-  // Gerar relatório e enviar por e-mail (planos pagos)
   if (sessionToken && history.length >= 2) {
     const lang = sessionStorage.getItem('nc_lang') || localStorage.getItem('nc_lang') || 'pt';
     fetch('/api/session-report', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        token: sessionToken,
-        history: history,
-        duration: secondsElapsed,
-        lang: lang
-      })
+      body: JSON.stringify({ token: sessionToken, history: history, duration: secondsElapsed, lang: lang })
     }).then(r => r.json()).then(data => {
-      if (data.success) {
-        console.log('[REPORT] Relatório gerado e enviado por e-mail.');
-      }
+      if (data.success) console.log('[REPORT] Relatório gerado e enviado por e-mail.');
     }).catch(err => console.error('[REPORT ERROR]', err));
   }
-
   setTimeout(() => {
     document.getElementById('app').style.display = 'none';
     const endScreen = document.getElementById('end-screen');
@@ -1040,87 +874,40 @@ function endSession() {
 }
 
 // ── PRIVACIDADE ───────────────────────────────────────────
-function acceptPrivacy() {
+async function acceptPrivacy() {
+  const emailInput = document.getElementById('privacy-email-input');
+  const emailError = document.getElementById('privacy-email-error');
+  const email = emailInput ? emailInput.value.trim() : '';
+  if (!email || !/^[^s@]+@[^s@]+.[^s@]+$/.test(email)) {
+    if (emailError) {
+      emailError.textContent = 'Por favor, insira um e-mail válido para receber seu resumo.';
+      emailError.style.display = 'block';
+    }
+    if (emailInput) emailInput.focus();
+    return;
+  }
+  sessionEmail = email;
+  if (sessionToken) {
+    try {
+      await fetch('/api/update-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: sessionToken, email: email })
+      });
+    } catch(e) { console.warn('[EMAIL UPDATE]', e); }
+  }
   document.getElementById('privacy-screen').style.display = 'none';
   document.getElementById('app').style.display = 'grid';
   startTimer();
+  await loadHistory();
   startSession();
 }
 
 function applyPrivacyTranslations() {
   const lang = sessionStorage.getItem('nc_lang') || localStorage.getItem('nc_lang') || 'pt';
-  const translations = {
-    pt: {
-      title: '✦ Seu espaço é seguro ✦',
-      sub: 'Privacidade & Confidencialidade',
-      t1: 'Conversas confidenciais',
-      d1: 'O que você compartilha aqui não é acessado por nenhuma pessoa. O histórico existe apenas no seu navegador e some ao fechar a aba.',
-      t2: 'Processado por IA com privacidade',
-      d2: 'As mensagens são processadas pela API da Anthropic com política de não uso para treinamento de modelos.',
-      t3: 'Resumo enviado só para você',
-      d3: 'Ao final do encontro, um resumo holístico é enviado ao seu e-mail — apenas insights e práticas, sem transcrição.',
-      t4: 'Espaço livre e sem julgamentos',
-      d4: 'Este é um espaço sagrado para você ser quem é. Fale com liberdade, sem medos.',
-      btn: '✦ Entrar no meu Espaço',
-      policy: 'Ao entrar, você concorda com nossa',
-      policyLink: 'Política de Privacidade'
-    },
-    en: {
-      title: '✦ Your space is safe ✦',
-      sub: 'Privacy & Confidentiality',
-      t1: 'Confidential conversations',
-      d1: 'What you share here is not accessed by any person. History exists only in your browser and disappears when you close the tab.',
-      t2: 'AI-processed with privacy',
-      d2: 'Messages are processed by the Anthropic API with a policy of not using them for model training.',
-      t3: 'Summary sent only to you',
-      d3: 'At the end of the session, a holistic summary is sent to your email — only insights and practices, no transcript.',
-      t4: 'Free space, no judgments',
-      d4: 'This is a sacred space for you to be who you are. Speak freely, without fear.',
-      btn: '✦ Enter my Space',
-      policy: 'By entering, you agree to our',
-      policyLink: 'Privacy Policy'
-    },
-    es: {
-      title: '✦ Tu espacio es seguro ✦',
-      sub: 'Privacidad & Confidencialidad',
-      t1: 'Conversaciones confidenciales',
-      d1: 'Lo que compartes aquí no es accedido por ninguna persona. El historial existe solo en tu navegador y desaparece al cerrar la pestaña.',
-      t2: 'Procesado por IA con privacidad',
-      d2: 'Los mensajes son procesados por la API de Anthropic con política de no uso para entrenamiento de modelos.',
-      t3: 'Resumen enviado solo a ti',
-      d3: 'Al final de la sesión, se envía un resumen holístico a tu correo — solo insights y prácticas, sin transcripción.',
-      t4: 'Espacio libre, sin juicios',
-      d4: 'Este es un espacio sagrado para que seas quien eres. Habla con libertad, sin miedos.',
-      btn: '✦ Entrar en mi Espacio',
-      policy: 'Al entrar, aceptas nuestra',
-      policyLink: 'Política de Privacidad'
-    },
-    it: {
-      title: '✦ Il tuo spazio è sicuro ✦',
-      sub: 'Privacy & Riservatezza',
-      t1: 'Conversazioni riservate',
-      d1: 'Ciò che condividi qui non è accessibile a nessuna persona. La cronologia esiste solo nel tuo browser e scompare quando chiudi la scheda.',
-      t2: 'Elaborato dall\'IA con privacy',
-      d2: 'I messaggi vengono elaborati dall\'API di Anthropic con una politica di non utilizzo per l\'addestramento di modelli.',
-      t3: 'Riepilogo inviato solo a te',
-      d3: 'Alla fine della sessione, un riepilogo olistico viene inviato alla tua email — solo insight e pratiche, senza trascrizione.',
-      t4: 'Spazio libero, senza giudizi',
-      d4: 'Questo è uno spazio sacro per essere chi sei. Parla liberamente, senza paure.',
-      btn: '✦ Entra nel mio Spazio',
-      policy: 'Entrando, accetti la nostra',
-      policyLink: 'Informativa sulla Privacy'
-    }
-  };
-
-  const t = translations[lang] || translations.pt;
-  const screen = document.getElementById('privacy-screen');
-  if (!screen) return;
-
-  // Atualizar textos
-  const allDivs = screen.querySelectorAll('div');
-  // Botão
   const btn = document.getElementById('privacy-accept-btn');
-  if (btn) btn.textContent = t.btn;
+  const translations = { pt: '✦ Entrar no meu Espaço', en: '✦ Enter my Space', es: '✦ Entrar en mi Espacio', it: '✦ Entra nel mio Spazio' };
+  if (btn) btn.textContent = translations[lang] || translations.pt;
 }
 
 // ── SESSÃO ───────────────────────────────────────────────
@@ -1134,90 +921,43 @@ async function startSession() {
 
 function buildOpeningPrompt(plano, nome, lang) {
   const nomeStr = nome ? `, ${nome}` : '';
-
-  // Variações de abertura por plano — sorteia uma aleatoriamente
   const aberturas = {
     pt: {
       gratuito: [
         `Inicie o encontro com uma saudação calorosa e acolhedora para quem está chegando pela primeira vez${nomeStr}. Mencione que este é um espaço seguro e gratuito para explorar. Convide-a a compartilhar o que está no coração. Seja poético, amoroso e breve — máximo 3 parágrafos.`,
-        `Esta pessoa${nomeStr} está chegando ao seu primeiro encontro gratuito. Abra o espaço com presença e gentileza. Use uma metáfora da natureza ou do cosmos. Pergunte como ela está chegando — no corpo, na mente, no espírito. Máximo 3 parágrafos.`,
-        `Abra este encontro gratuito${nomeStr ? ' para ' + nome : ''} com uma frase poética sobre o presente momento e a coragem de buscar cuidado. Crie uma atmosfera de acolhimento total. Faça uma pergunta aberta sobre o que trouxe a pessoa até aqui. Máximo 3 parágrafos.`,
       ],
       avulso: [
         `Inicie o encontro com uma saudação especial para${nomeStr || ' esta pessoa'} que escolheu este momento de cuidado. Honre a escolha dela. Convide-a a compartilhar o que está mais presente hoje. Seja caloroso e profundo. Máximo 3 parágrafos.`,
-        `Abra este encontro avulso${nomeStr ? ' com ' + nome : ''} como se fosse um ritual de boas-vindas — um espaço sagrado que se abre para ela. Use uma imagem simbólica. Pergunte o que o coração traz hoje. Máximo 3 parágrafos.`,
-        `Esta pessoa${nomeStr} escolheu este encontro único. Honre isso com presença total. Comece com uma observação sobre o poder de escolher cuidado, e convide-a a se instalar neste espaço. Pergunte como está chegando. Máximo 3 parágrafos.`,
       ],
       essencial: [
         `${nome ? nome + ' é' : 'Esta pessoa é'} assinante do Plano Essencial e está chegando para mais um encontro semanal. Cumprimente-a como quem reencontra alguém familiar — com afeto e presença. Pergunte o que surgiu desde o último encontro ou o que o momento pede agora. Máximo 3 parágrafos.`,
-        `Abra este encontro semanal${nomeStr ? ' com ' + nome : ''} com a leveza de quem se encontra regularmente. Há uma continuidade aqui — honre isso. Use uma metáfora de ciclos ou estações. Convide-a a compartilhar como esta semana foi. Máximo 3 parágrafos.`,
-        `${nome || 'Esta pessoa'} está no ritmo semanal do Plano Essencial. Abra o encontro com gratidão por essa constância. Diga algo sobre o poder da regularidade na jornada de transformação. Pergunte o que está mais vivo nela hoje. Máximo 3 parágrafos.`,
-        `Cumprimente${nomeStr || ' esta pessoa'} como um espaço que sempre a aguarda. Ela é assinante — há fidelidade aqui que merece ser honrada. Use uma frase sobre raízes que se aprofundam com o tempo. Pergunte como está chegando hoje. Máximo 3 parágrafos.`,
       ],
       transformacao: [
         `${nome ? nome + ' está' : 'Esta pessoa está'} no Plano Transformação — dois encontros por semana, uma jornada intensa e profunda. Abra com a energia de quem está no meio de uma grande transformação. Pergunte o que emergiu desde o último encontro e o que quer aprofundar hoje. Máximo 3 parágrafos.`,
-        `Este é um encontro do Plano Transformação${nomeStr}. A intensidade desta jornada merece ser reconhecida. Abra com presença plena e fale sobre o coragem de transformar. Pergunte onde ${nome || 'ela'} está no seu processo agora. Máximo 3 parágrafos.`,
-        `${nome || 'Esta pessoa'} escolheu o caminho mais profundo — dois encontros semanais de transformação real. Abra com a reverência que essa escolha merece. Use uma metáfora alquímica. Pergunte o que está sendo transmutado neste momento da jornada. Máximo 3 parágrafos.`,
-        `Cumprimente${nomeStr || ' esta pessoa'} que está em plena jornada de transformação. Lembre que cada encontro é um degrau. Abra com energia e profundidade. Pergunte o que ficou do último encontro e o que quer trabalhar agora. Máximo 3 parágrafos.`,
       ],
     },
     en: {
-      gratuito: [
-        `Open this free session with a warm, welcoming greeting${nomeStr ? ' for ' + nome : ''}. Create a sense of safety and openness. Invite them to share what's in their heart. Be poetic and brief — max 3 paragraphs.`,
-        `Welcome${nomeStr || ' this person'} to their first free session. Use a nature or cosmic metaphor. Ask how they're arriving — in body, mind, spirit. Max 3 paragraphs.`,
-      ],
-      avulso: [
-        `Open this single session${nomeStr ? ' for ' + nome : ''} with the energy of a sacred space opening. Honor their choice to seek care. Ask what the heart brings today. Max 3 paragraphs.`,
-        `Welcome${nomeStr || ' this person'} with warmth. They chose this unique moment of care. Invite them to settle in and share what's most present. Max 3 paragraphs.`,
-      ],
-      essencial: [
-        `Welcome back${nomeStr || ''}. This is their weekly Essential session. Greet them like someone you know well — with warmth and presence. Ask what arose since last time or what this moment calls for. Max 3 paragraphs.`,
-        `Open this weekly session${nomeStr ? ' with ' + nome : ''} with ease and familiarity. Honor the regularity of this practice. Ask how this week has been. Max 3 paragraphs.`,
-      ],
-      transformacao: [
-        `${nome || 'This person'} is on the Transformation Plan — two sessions per week, a deep journey. Open with full presence. Ask what emerged since the last session and what they want to deepen today. Max 3 paragraphs.`,
-        `Welcome${nomeStr || ''} to this Transformation session. Honor the courage of this deep journey. Use an alchemical metaphor. Ask where they are in their process right now. Max 3 paragraphs.`,
-      ],
+      gratuito: [`Open this free session with a warm, welcoming greeting${nomeStr ? ' for ' + nome : ''}. Create a sense of safety and openness. Invite them to share what's in their heart. Be poetic and brief — max 3 paragraphs.`],
+      avulso: [`Open this single session${nomeStr ? ' for ' + nome : ''} with the energy of a sacred space opening. Honor their choice to seek care. Ask what the heart brings today. Max 3 paragraphs.`],
+      essencial: [`Welcome back${nomeStr || ''}. This is their weekly Essential session. Greet them like someone you know well — with warmth and presence. Ask what arose since last time or what this moment calls for. Max 3 paragraphs.`],
+      transformacao: [`${nome || 'This person'} is on the Transformation Plan — two sessions per week, a deep journey. Open with full presence. Ask what emerged since the last session and what they want to deepen today. Max 3 paragraphs.`],
     },
     es: {
-      gratuito: [
-        `Abre esta sesión gratuita con una bienvenida cálida${nomeStr ? ' para ' + nome : ''}. Crea un espacio de seguridad. Invita a compartir lo que está en el corazón. Sé poético y breve — máximo 3 párrafos.`,
-        `Recibe${nomeStr || ' a esta persona'} en su primera sesión gratuita con presencia y gentileza. Pregunta cómo está llegando — en cuerpo, mente y espíritu. Máximo 3 párrafos.`,
-      ],
-      avulso: [
-        `Abre esta sesión individual${nomeStr ? ' con ' + nome : ''} como un ritual de bienvenida. Honra su elección de buscar cuidado. Pregunta qué trae el corazón hoy. Máximo 3 párrafos.`,
-      ],
-      essencial: [
-        `Recibe de vuelta${nomeStr || ''}. Es su sesión semanal del Plan Esencial. Saluda con afecto y presencia. Pregunta qué surgió desde el último encuentro. Máximo 3 párrafos.`,
-        `Abre esta sesión semanal${nomeStr ? ' con ' + nome : ''} con la calidez de quien se reencuentra regularmente. Pregunta cómo ha sido esta semana. Máximo 3 párrafos.`,
-      ],
-      transformacao: [
-        `${nome || 'Esta persona'} está en el Plan Transformación — dos sesiones semanales. Abre con presencia plena. Pregunta qué emergió desde la última sesión y qué quiere profundizar hoy. Máximo 3 párrafos.`,
-      ],
+      gratuito: [`Abre esta sesión gratuita con una bienvenida cálida${nomeStr ? ' para ' + nome : ''}. Crea un espacio de seguridad. Invita a compartir lo que está en el corazón. Sé poético y breve — máximo 3 párrafos.`],
+      avulso: [`Abre esta sesión individual${nomeStr ? ' con ' + nome : ''} como un ritual de bienvenida. Honra su elección de buscar cuidado. Pregunta qué trae el corazón hoy. Máximo 3 párrafos.`],
+      essencial: [`Recibe de vuelta${nomeStr || ''}. Es su sesión semanal del Plan Esencial. Saluda con afecto y presencia. Pregunta qué surgió desde el último encuentro. Máximo 3 párrafos.`],
+      transformacao: [`${nome || 'Esta persona'} está en el Plan Transformación — dos sesiones semanales. Abre con presencia plena. Pregunta qué emergió desde la última sesión y qué quiere profundizar hoy. Máximo 3 párrafos.`],
     },
     it: {
-      gratuito: [
-        `Apri questa sessione gratuita con un caloroso benvenuto${nomeStr ? ' per ' + nome : ''}. Crea uno spazio sicuro. Invita a condividere ciò che è nel cuore. Sii poetico e breve — massimo 3 paragrafi.`,
-        `Accogli${nomeStr || ' questa persona'} nella sua prima sessione gratuita con presenza e gentilezza. Chiedi come sta arrivando — nel corpo, nella mente, nello spirito. Massimo 3 paragrafi.`,
-      ],
-      avulso: [
-        `Apri questa sessione singola${nomeStr ? ' con ' + nome : ''} come un rituale di benvenuto. Onora la sua scelta di cercare cura. Chiedi cosa porta il cuore oggi. Massimo 3 paragrafi.`,
-      ],
-      essencial: [
-        `Accogli di nuovo${nomeStr || ''}. È la sua sessione settimanale del Piano Essenziale. Saluta con calore e presenza. Chiedi cosa è emerso dall'ultimo incontro. Massimo 3 paragrafi.`,
-        `Apri questa sessione settimanale${nomeStr ? ' con ' + nome : ''} con la familiarità di chi si incontra regolarmente. Chiedi come è stata questa settimana. Massimo 3 paragrafi.`,
-      ],
-      transformacao: [
-        `${nome || 'Questa persona'} è nel Piano Trasformazione — due sessioni settimanali. Apri con piena presenza. Chiedi cosa è emerso dall'ultima sessione e cosa vuole approfondire oggi. Massimo 3 paragrafi.`,
-      ],
+      gratuito: [`Apri questa sessione gratuita con un caloroso benvenuto${nomeStr ? ' per ' + nome : ''}. Crea uno spazio sicuro. Invita a condividere ciò che è nel cuore. Sii poetico e breve — massimo 3 paragrafi.`],
+      avulso: [`Apri questa sessione singola${nomeStr ? ' con ' + nome : ''} come un rituale di benvenuto. Onora la sua scelta di cercare cura. Chiedi cosa porta il cuore oggi. Massimo 3 paragrafi.`],
+      essencial: [`Accogli di nuovo${nomeStr || ''}. È la sua sessione settimanale del Piano Essenziale. Saluta con calore e presenza. Chiedi cosa è emerso dall'ultimo incontro. Massimo 3 paragrafi.`],
+      transformacao: [`${nome || 'Questa persona'} è nel Piano Trasformazione — due sessioni settimanali. Apri con piena presenza. Chiedi cosa è emerso dall'ultima sessione e cosa vuole approfondire oggi. Massimo 3 paragrafi.`],
     },
   };
-
   const langAberturas = aberturas[lang] || aberturas.pt;
   const planoAberturas = langAberturas[plano] || langAberturas.gratuito;
-  const chosen = planoAberturas[Math.floor(Math.random() * planoAberturas.length)];
-
-  return chosen;
+  return planoAberturas[Math.floor(Math.random() * planoAberturas.length)];
 }
 
 // ── UI ────────────────────────────────────────────────────
@@ -1298,24 +1038,16 @@ async function sendMessage() {
   if (sessionEnded || isLoading) return;
   const input = document.getElementById('msgInput');
   const text = input.value.trim();
-
-  // Precisa ter texto OU arquivo
   if (!text && !attachedFile) return;
-
   input.value = '';
   input.style.height = 'auto';
-
-  // Exibir mensagem do usuário com preview do arquivo
   if (attachedFile) {
     const fileLabel = attachedFile.type.startsWith('image/') ? `🖼️ ${attachedFile.name}` : `📄 ${attachedFile.name}`;
     addMessage('user', text ? `${text}\n\n${fileLabel}` : fileLabel);
   } else {
     addMessage('user', text);
   }
-
   await sendToAPI(text, false, attachedFileData, attachedFileType);
-
-  // Limpar arquivo após envio
   removerArquivo();
 }
 
@@ -1328,64 +1060,43 @@ async function sendQuick(text) {
 async function sendToAPI(userText, isOpening, fileData = null, fileType = null) {
   setLoading(true);
   showTyping();
-
   let messages = [...history];
-
   if (isOpening) {
     messages = [{ role: 'user', content: userText }];
   } else {
-    // Monta conteúdo da mensagem (texto + arquivo opcional)
     let userContent;
-
     if (fileData && fileType) {
       userContent = [];
-      // Adiciona imagem ou documento
       if (fileType.startsWith('image/')) {
-        userContent.push({
-          type: 'image',
-          source: { type: 'base64', media_type: fileType, data: fileData }
-        });
+        userContent.push({ type: 'image', source: { type: 'base64', media_type: fileType, data: fileData } });
       } else if (fileType === 'application/pdf') {
-        userContent.push({
-          type: 'document',
-          source: { type: 'base64', media_type: 'application/pdf', data: fileData }
-        });
+        userContent.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: fileData } });
       }
-      if (userText) {
-        userContent.push({ type: 'text', text: userText });
-      } else {
-        userContent.push({ type: 'text', text: 'Analise este arquivo e me diga o que observa do ponto de vista integrativo e holístico.' });
-      }
+      userContent.push({ type: 'text', text: userText || 'Analise este arquivo e me diga o que observa do ponto de vista integrativo e holístico.' });
     } else {
       userContent = userText;
     }
-
     messages.push({ role: 'user', content: userContent });
   }
-
   try {
     const response = await fetch(API_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ system: getSoulPrompt(), messages })
     });
-
     const data = await response.json();
     hideTyping();
-
     if (data.content && data.content[0]) {
       const reply = data.content[0].text;
       addMessage('agent', reply);
-
-      // Salva no histórico só como texto (sem base64 para não explodir)
       if (!isOpening && userText) {
         history.push({ role: 'user', content: userText || '[arquivo enviado]' });
       } else if (isOpening) {
         history.push({ role: 'user', content: userText });
       }
       history.push({ role: 'assistant', content: reply });
-
       if (history.length > 40) history = history.slice(-40);
+      saveHistory();
     } else {
       addMessage('agent', 'Houve um momento de silêncio da minha parte. Pode repetir o que compartilhou?');
     }
@@ -1393,7 +1104,6 @@ async function sendToAPI(userText, isOpening, fileData = null, fileType = null) 
     hideTyping();
     addMessage('agent', 'Houve uma interrupção na conexão. Por favor, tente novamente em instantes. 🙏');
   }
-
   setLoading(false);
   if (!sessionEnded) document.getElementById('msgInput').focus();
 }
@@ -1415,136 +1125,9 @@ function clearChat() {
 <script>
 const i18n = {
   pt: {
-    // NAV
-    nav_como_funciona: "Como funciona",
-    nav_abordagens: "Abordagens",
-    nav_planos: "Planos",
-    nav_faq: "FAQ",
-    nav_cliente: "Já sou cliente",
-    nav_sessao_gratuita: "Sessão gratuita",
-
-    // MODAL ACESSO
-    modal_titulo: "Acessar meu Encontro",
-    modal_texto: "Insira o código de acesso enviado para o seu e-mail após a confirmação do pagamento.",
-    modal_placeholder: "Cole seu código aqui",
-    modal_btn: "Entrar no meu Espaço ✦",
-    modal_verificando: "Verificando...",
-    modal_sem_email: "Não recebeu o e-mail?",
-    modal_contato: "Entre em contato",
-    modal_erro_vazio: "Por favor, insira seu código de acesso.",
-    modal_erro_nao_encontrado: "Código não encontrado. Verifique se copiou corretamente.",
-    modal_erro_expirado: "Este código expirou. Entre em contato para renovar.",
-    modal_erro_usado: "Este encontro já foi realizado. Adquira um novo acesso.",
-    modal_erro_conexao: "Erro de conexão. Tente novamente.",
-    modal_erro_invalido: "Código inválido. Tente novamente.",
-
-    // HERO
-    hero_eyebrow: "Bem-estar Integrativo com Inteligência Artificial",
-    hero_title1: "Cura que une",
-    hero_title2: "ciência",
-    hero_title3: "e",
-    hero_title4: "alma",
-    hero_subtitle: "Um guia de bem-estar disponível para você, a qualquer hora.",
-    hero_body: "O NewCosmos integra práticas integrativas, autoconhecimento e desenvolvimento pessoal em encontros personalizados — conduzidos por inteligência artificial treinada com profundidade holística e sensibilidade humana.",
-    hero_btn_primary: "Experimentar gratuitamente",
-    hero_btn_ghost: "Como funciona",
-    hero_btn_cliente: "✦ Já sou cliente",
-
-    // COMO FUNCIONA
-    section_processo: "O processo",
-    como_title: "Simples de começar.",
-    como_title_em: "Profundo de vivenciar.",
-    como_1_title: "Agende seu encontro",
-    como_1_desc: "Escolha o dia e horário que melhor se encaixa na sua rotina. Primeiro encontro sempre gratuito, sem compromisso.",
-    como_2_title: "Conecte-se ao seu guia",
-    como_2_desc: "No horário agendado, acesse o chat diretamente pelo navegador — sem instalar nada, no celular ou computador.",
-    como_3_title: "Encontro personalizado",
-    como_3_desc: "Seu guia de bem-estar conduz o encontro com escuta ativa, práticas integrativas e protocolos adaptados ao seu momento.",
-    como_4_title: "Evolua com continuidade",
-    como_4_desc: "Cada encontro constrói sobre o anterior. Sua jornada e histórico são preservados para um acompanhamento real.",
-
-    // ABORDAGENS
-    section_metodologia: "Metodologia",
-    abord_title: "Práticas que",
-    abord_title_em: "transformam",
-    abord_desc: "Treinado com uma biblioteca integrativa de conhecimento holístico — unindo o rigor das práticas baseadas em evidências com a profundidade das tradições de cura.",
-    abord_1_name: "Práticas Integrativas (PICs)",
-    abord_1_desc: "Abordagens reconhecidas pelo Ministério da Saúde para promoção do bem-estar e equilíbrio mente-corpo.",
-    abord_2_name: "Cuidado Holístico",
-    abord_2_desc: "Protocolos que contemplam corpo, mente e energia — incluindo bioressonância e práticas complementares.",
-    abord_3_name: "Espiritualidade Aplicada",
-    abord_3_desc: "Meditação guiada, práticas contemplativas e perspectivas transpessoais sem dogmas religiosos.",
-    abord_4_name: "Desenvolvimento Pessoal",
-    abord_4_desc: "Ferramentas baseadas em evidências para regulação emocional, autoconhecimento e gestão do estresse.",
-    abord_center: "Integração\nmente · corpo · alma",
-
-    // PLANOS
-    section_planos: "Planos",
-    planos_title: "Invista no seu",
-    planos_title_em: "bem-estar",
-    plano_avulso_nome: "Encontro avulso",
-    plano_avulso_periodo: "por encontro único",
-    plano_avulso_f1: "1 encontro de autoconhecimento completo",
-    plano_avulso_f2: "Até 60 minutos de conversa",
-    plano_avulso_f3: "eBook \"7 Práticas Holísticas\" de bônus",
-    plano_avulso_btn: "Começar",
-    plano_essencial_nome: "Essencial",
-    plano_essencial_badge: "Mais escolhido",
-    plano_essencial_periodo: "por mês · 4 encontros (1 por semana)",
-    plano_essencial_f1: "4 encontros por mês (1 por semana)",
-    plano_essencial_f2: "Histórico completo preservado",
-    plano_essencial_f3: "Protocolos de bem-estar personalizados",
-    plano_essencial_f4: "Resumo mensal da sua jornada",
-    plano_essencial_f5: "Práticas e exercícios entre encontros",
-    plano_essencial_btn: "Assinar agora",
-    plano_transf_nome: "Transformação",
-    plano_transf_periodo: "por mês · 8 encontros (2 por semana)",
-    plano_transf_f1: "8 encontros por mês (2 por semana)",
-    plano_transf_f2: "Tudo do plano Essencial",
-    plano_transf_f3: "Protocolos de bioressonância QMR",
-    plano_transf_f4: "Relatórios PDF detalhados da jornada",
-    plano_transf_f5: "Acompanhamento de métricas de bem-estar",
-    plano_transf_f6: "Suporte prioritário e acesso antecipado",
-    plano_transf_btn: "Assinar agora",
-    free_tag: "✦ Oferta de boas-vindas",
-    free_title: "Seu primeiro encontro é",
-    free_title_em: "gratuito",
-    free_desc: "Experimente sem compromisso. Agende agora seu encontro de 45 minutos e descubra como as práticas integrativas com IA podem transformar sua jornada de bem-estar.",
-    free_btn: "Agendar sessão gratuita",
-
-    // DEPOIMENTOS
-    section_experiencias: "Experiências",
-    dep_title: "O que dizem",
-    dep_title_em: "nossos clientes",
-
-    // FAQ
-    section_duvidas: "Dúvidas",
-    faq_title: "Perguntas",
-    faq_title_em: "frequentes",
-    faq_1_q: "O NewCosmos substitui um psicólogo ou médico?",
-    faq_1_a: "Não. O NewCosmos é um serviço de apoio ao bem-estar e desenvolvimento pessoal — não substitui acompanhamento médico ou psicológico profissional. Não realizamos diagnósticos, não prescrevemos medicamentos e não oferecemos tratamento clínico. Em situações de crise, sempre recomendamos buscar profissionais de saúde habilitados.",
-    faq_2_q: "Minhas conversas são privadas e seguras?",
-    faq_2_a: "Sim. Todos os encontros são criptografados e seus dados são tratados com total confidencialidade, em conformidade com a LGPD. Suas conversas não são compartilhadas com terceiros.",
-    faq_3_q: "Posso cancelar minha assinatura a qualquer momento?",
-    faq_3_a: "Sim, totalmente. Os planos Essencial e Transformação podem ser cancelados a qualquer momento sem multa, com efeito a partir do próximo ciclo de cobrança.",
-    faq_4_q: "Como funciona o encontro gratuito?",
-    faq_4_a: "Você agenda pelo nosso sistema, recebe um link por e-mail e acessa o chat no horário marcado. O encontro dura até 45 minutos e é idêntico aos encontros pagos — sem limitações de conteúdo. Não é necessário cartão de crédito.",
-    faq_5_q: "Preciso instalar algum aplicativo?",
-    faq_5_a: "Não. Os encontros acontecem diretamente no navegador — no celular ou computador. Basta clicar no link recebido por e-mail no horário agendado.",
-    faq_6_q: "O guia de bem-estar lembra dos encontros anteriores?",
-    faq_6_a: "Sim, nos planos Essencial e Transformação. O histórico completo dos seus encontros é preservado, permitindo continuidade real no acompanhamento da sua jornada.",
-    disclaimer: "Aviso importante: O NewCosmos é um serviço de bem-estar, autoconhecimento e práticas integrativas baseado em inteligência artificial. Não realizamos diagnósticos, não prescrevemos medicamentos e não substituímos profissionais de saúde habilitados. Em situações de crise ou emergência, procure imediatamente o CVV (188), SAMU (192) ou serviços de saúde mental da sua região.",
-
-    // FOOTER
-    footer_termos: "Termos de uso",
-    footer_privacidade: "Privacidade",
-    footer_contato: "Contato",
-    footer_copy: "© 2026 NewCosmos — Bem-estar Integrativo com IA. Todos os direitos reservados.",
-
-    // CHAT
     chat_idioma: "pt",
     chat_placeholder: "Compartilhe o que está no seu coração...",
-    chat_hint: "Enter para enviar · Shift+Enter para nova linha · 📎 para anexar",
+    chat_hint: "Enter para enviar · Shift+Enter para nova linha · 📎 para anexar imagem ou PDF",
     chat_novo: "Novo encontro",
     chat_inicio: "← Início",
     chat_aviso_tempo: "⏳ Nosso encontro está chegando ao fim — vou começar a integrar as orientações para você.",
@@ -1552,116 +1135,7 @@ const i18n = {
     chat_role: "Guia de Bem-Estar Integrativo",
     chat_soul_lang: "Responda sempre em português brasileiro.",
   },
-
   en: {
-    nav_como_funciona: "How it works",
-    nav_abordagens: "Approaches",
-    nav_planos: "Plans",
-    nav_faq: "FAQ",
-    nav_cliente: "I'm a client",
-    nav_sessao_gratuita: "Free session",
-    modal_titulo: "Access my Session",
-    modal_texto: "Enter the access code sent to your email after payment confirmation.",
-    modal_placeholder: "Paste your code here",
-    modal_btn: "Enter my Space ✦",
-    modal_verificando: "Verifying...",
-    modal_sem_email: "Didn't receive the email?",
-    modal_contato: "Contact us",
-    modal_erro_vazio: "Please enter your access code.",
-    modal_erro_nao_encontrado: "Code not found. Check if you copied it correctly.",
-    modal_erro_expirado: "This code has expired. Contact us to renew.",
-    modal_erro_usado: "This session has already been used. Purchase a new access.",
-    modal_erro_conexao: "Connection error. Please try again.",
-    modal_erro_invalido: "Invalid code. Please try again.",
-    hero_eyebrow: "Integrative Wellness with Artificial Intelligence",
-    hero_title1: "Healing that unites",
-    hero_title2: "science",
-    hero_title3: "and",
-    hero_title4: "soul",
-    hero_subtitle: "A wellness guide available for you, anytime.",
-    hero_body: "NewCosmos integrates holistic practices, self-knowledge and personal development in personalized sessions — guided by artificial intelligence trained with holistic depth and human sensitivity.",
-    hero_btn_primary: "Try for free",
-    hero_btn_ghost: "How it works",
-    hero_btn_cliente: "✦ I'm already a client",
-    section_processo: "The process",
-    como_title: "Simple to start.",
-    como_title_em: "Deep to experience.",
-    como_1_title: "Schedule your session",
-    como_1_desc: "Choose the day and time that best fits your routine. First session always free, no commitment.",
-    como_2_title: "Connect to your guide",
-    como_2_desc: "At the scheduled time, access the chat directly from your browser — no installation needed, on mobile or desktop.",
-    como_3_title: "Personalized session",
-    como_3_desc: "Your wellness guide leads the session with active listening, integrative practices and protocols adapted to your moment.",
-    como_4_title: "Grow with continuity",
-    como_4_desc: "Each session builds on the previous one. Your journey and history are preserved for real ongoing support.",
-    section_metodologia: "Methodology",
-    abord_title: "Practices that",
-    abord_title_em: "transform",
-    abord_desc: "Trained with an integrative library of holistic knowledge — uniting the rigor of evidence-based practices with the depth of healing traditions.",
-    abord_1_name: "Integrative Practices (PICs)",
-    abord_1_desc: "Approaches recognized by health authorities for promoting well-being and mind-body balance.",
-    abord_2_name: "Holistic Care",
-    abord_2_desc: "Protocols encompassing body, mind and energy — including bioresonance and complementary practices.",
-    abord_3_name: "Applied Spirituality",
-    abord_3_desc: "Guided meditation, contemplative practices and transpersonal perspectives without religious dogmas.",
-    abord_4_name: "Personal Development",
-    abord_4_desc: "Evidence-based tools for emotional regulation, self-knowledge and stress management.",
-    abord_center: "Integration\nmind · body · soul",
-    section_planos: "Plans",
-    planos_title: "Invest in your",
-    planos_title_em: "well-being",
-    plano_avulso_nome: "Single session",
-    plano_avulso_periodo: "per single session",
-    plano_avulso_f1: "1 complete self-knowledge session",
-    plano_avulso_f2: "Up to 60 minutes of conversation",
-    plano_avulso_f3: "eBook \"7 Holistic Practices\" as bonus",
-    plano_avulso_btn: "Get started",
-    plano_essencial_nome: "Essential",
-    plano_essencial_badge: "Most popular",
-    plano_essencial_periodo: "per month · 4 sessions (1 per week)",
-    plano_essencial_f1: "4 sessions per month (1 per week)",
-    plano_essencial_f2: "Complete history preserved",
-    plano_essencial_f3: "Personalized wellness protocols",
-    plano_essencial_f4: "Monthly journey summary",
-    plano_essencial_f5: "Practices and exercises between sessions",
-    plano_essencial_btn: "Subscribe now",
-    plano_transf_nome: "Transformation",
-    plano_transf_periodo: "per month · 8 sessions (2 per week)",
-    plano_transf_f1: "8 sessions per month (2 per week)",
-    plano_transf_f2: "Everything in Essential plan",
-    plano_transf_f3: "QMR bioresonance protocols",
-    plano_transf_f4: "Detailed PDF journey reports",
-    plano_transf_f5: "Wellness metrics tracking",
-    plano_transf_f6: "Priority support and early access",
-    plano_transf_btn: "Subscribe now",
-    free_tag: "✦ Welcome offer",
-    free_title: "Your first session is",
-    free_title_em: "free",
-    free_desc: "Try without commitment. Schedule your 45-minute session now and discover how integrative AI practices can transform your wellness journey.",
-    free_btn: "Schedule free session",
-    section_experiencias: "Experiences",
-    dep_title: "What our",
-    dep_title_em: "clients say",
-    section_duvidas: "Questions",
-    faq_title: "Frequently asked",
-    faq_title_em: "questions",
-    faq_1_q: "Does NewCosmos replace a psychologist or doctor?",
-    faq_1_a: "No. NewCosmos is a wellness and personal development support service — it does not replace professional medical or psychological care. We do not diagnose, prescribe medications or offer clinical treatment. In crisis situations, we always recommend seeking qualified health professionals.",
-    faq_2_q: "Are my conversations private and secure?",
-    faq_2_a: "Yes. All sessions are encrypted and your data is treated with full confidentiality, in compliance with data protection laws. Your conversations are not shared with third parties.",
-    faq_3_q: "Can I cancel my subscription at any time?",
-    faq_3_a: "Yes, completely. Essential and Transformation plans can be cancelled at any time without penalty, effective from the next billing cycle.",
-    faq_4_q: "How does the free session work?",
-    faq_4_a: "You schedule through our system, receive a link by email and access the chat at the scheduled time. The session lasts up to 45 minutes and is identical to paid sessions — no content limitations. No credit card required.",
-    faq_5_q: "Do I need to install any app?",
-    faq_5_a: "No. Sessions take place directly in the browser — on mobile or desktop. Just click the link received by email at the scheduled time.",
-    faq_6_q: "Does the wellness guide remember previous sessions?",
-    faq_6_a: "Yes, in Essential and Transformation plans. Your complete session history is preserved, allowing real continuity in your journey support.",
-    disclaimer: "Important notice: NewCosmos is a wellness, self-knowledge and integrative practices service based on artificial intelligence. We do not diagnose, prescribe medications or replace qualified health professionals. In crisis or emergency, immediately seek CVV (188), SAMU (192) or mental health services in your region.",
-    footer_termos: "Terms of use",
-    footer_privacidade: "Privacy",
-    footer_contato: "Contact",
-    footer_copy: "© 2026 NewCosmos — Integrative Wellness with AI. All rights reserved.",
     chat_idioma: "en",
     chat_placeholder: "Share what's in your heart...",
     chat_hint: "Enter to send · Shift+Enter for new line · 📎 to attach",
@@ -1672,116 +1146,7 @@ const i18n = {
     chat_role: "Integrative Wellness Guide",
     chat_soul_lang: "Always respond in English.",
   },
-
   es: {
-    nav_como_funciona: "Cómo funciona",
-    nav_abordagens: "Enfoques",
-    nav_planos: "Planes",
-    nav_faq: "FAQ",
-    nav_cliente: "Ya soy cliente",
-    nav_sessao_gratuita: "Sesión gratuita",
-    modal_titulo: "Acceder a mi Sesión",
-    modal_texto: "Introduce el código de acceso enviado a tu correo electrónico tras la confirmación del pago.",
-    modal_placeholder: "Pega tu código aquí",
-    modal_btn: "Entrar en mi Espacio ✦",
-    modal_verificando: "Verificando...",
-    modal_sem_email: "¿No recibiste el correo?",
-    modal_contato: "Contáctanos",
-    modal_erro_vazio: "Por favor, introduce tu código de acceso.",
-    modal_erro_nao_encontrado: "Código no encontrado. Verifica si lo copiaste correctamente.",
-    modal_erro_expirado: "Este código ha expirado. Contáctanos para renovarlo.",
-    modal_erro_usado: "Esta sesión ya fue realizada. Adquiere un nuevo acceso.",
-    modal_erro_conexao: "Error de conexión. Inténtalo de nuevo.",
-    modal_erro_invalido: "Código inválido. Inténtalo de nuevo.",
-    hero_eyebrow: "Bienestar Integrativo con Inteligencia Artificial",
-    hero_title1: "Sanación que une",
-    hero_title2: "ciencia",
-    hero_title3: "y",
-    hero_title4: "alma",
-    hero_subtitle: "Una guía de bienestar disponible para ti, en cualquier momento.",
-    hero_body: "NewCosmos integra prácticas holísticas, autoconocimiento y desarrollo personal en sesiones personalizadas — guiadas por inteligencia artificial entrenada con profundidad holística y sensibilidad humana.",
-    hero_btn_primary: "Probar gratis",
-    hero_btn_ghost: "Cómo funciona",
-    hero_btn_cliente: "✦ Ya soy cliente",
-    section_processo: "El proceso",
-    como_title: "Simple de empezar.",
-    como_title_em: "Profundo de vivir.",
-    como_1_title: "Agenda tu sesión",
-    como_1_desc: "Elige el día y horario que mejor se adapte a tu rutina. Primera sesión siempre gratuita, sin compromiso.",
-    como_2_title: "Conéctate con tu guía",
-    como_2_desc: "A la hora programada, accede al chat directamente desde el navegador — sin instalar nada, en móvil o computadora.",
-    como_3_title: "Sesión personalizada",
-    como_3_desc: "Tu guía de bienestar conduce la sesión con escucha activa, prácticas integrativas y protocolos adaptados a tu momento.",
-    como_4_title: "Evoluciona con continuidad",
-    como_4_desc: "Cada sesión construye sobre la anterior. Tu viaje e historial se preservan para un acompañamiento real.",
-    section_metodologia: "Metodología",
-    abord_title: "Prácticas que",
-    abord_title_em: "transforman",
-    abord_desc: "Entrenado con una biblioteca integrativa de conocimiento holístico — uniendo el rigor de las prácticas basadas en evidencias con la profundidad de las tradiciones de sanación.",
-    abord_1_name: "Prácticas Integrativas",
-    abord_1_desc: "Enfoques reconocidos por las autoridades de salud para promover el bienestar y el equilibrio mente-cuerpo.",
-    abord_2_name: "Cuidado Holístico",
-    abord_2_desc: "Protocolos que contemplan cuerpo, mente y energía — incluyendo biorresonancia y prácticas complementarias.",
-    abord_3_name: "Espiritualidad Aplicada",
-    abord_3_desc: "Meditación guiada, prácticas contemplativas y perspectivas transpersonales sin dogmas religiosos.",
-    abord_4_name: "Desarrollo Personal",
-    abord_4_desc: "Herramientas basadas en evidencias para regulación emocional, autoconocimiento y gestión del estrés.",
-    abord_center: "Integración\nmente · cuerpo · alma",
-    section_planos: "Planes",
-    planos_title: "Invierte en tu",
-    planos_title_em: "bienestar",
-    plano_avulso_nome: "Sesión individual",
-    plano_avulso_periodo: "por sesión única",
-    plano_avulso_f1: "1 sesión completa de autoconocimiento",
-    plano_avulso_f2: "Hasta 60 minutos de conversación",
-    plano_avulso_f3: "eBook \"7 Prácticas Holísticas\" de regalo",
-    plano_avulso_btn: "Comenzar",
-    plano_essencial_nome: "Esencial",
-    plano_essencial_badge: "Más elegido",
-    plano_essencial_periodo: "por mes · 4 sesiones (1 por semana)",
-    plano_essencial_f1: "4 sesiones por mes (1 por semana)",
-    plano_essencial_f2: "Historial completo preservado",
-    plano_essencial_f3: "Protocolos de bienestar personalizados",
-    plano_essencial_f4: "Resumen mensual de tu viaje",
-    plano_essencial_f5: "Prácticas y ejercicios entre sesiones",
-    plano_essencial_btn: "Suscribirse ahora",
-    plano_transf_nome: "Transformación",
-    plano_transf_periodo: "por mes · 8 sesiones (2 por semana)",
-    plano_transf_f1: "8 sesiones por mes (2 por semana)",
-    plano_transf_f2: "Todo del plan Esencial",
-    plano_transf_f3: "Protocolos de biorresonancia QMR",
-    plano_transf_f4: "Informes PDF detallados del viaje",
-    plano_transf_f5: "Seguimiento de métricas de bienestar",
-    plano_transf_f6: "Soporte prioritario y acceso anticipado",
-    plano_transf_btn: "Suscribirse ahora",
-    free_tag: "✦ Oferta de bienvenida",
-    free_title: "Tu primera sesión es",
-    free_title_em: "gratuita",
-    free_desc: "Prueba sin compromiso. Agenda ahora tu sesión de 45 minutos y descubre cómo las prácticas integrativas con IA pueden transformar tu viaje de bienestar.",
-    free_btn: "Agendar sesión gratuita",
-    section_experiencias: "Experiencias",
-    dep_title: "Lo que dicen",
-    dep_title_em: "nuestros clientes",
-    section_duvidas: "Preguntas",
-    faq_title: "Preguntas",
-    faq_title_em: "frecuentes",
-    faq_1_q: "¿NewCosmos reemplaza a un psicólogo o médico?",
-    faq_1_a: "No. NewCosmos es un servicio de apoyo al bienestar y desarrollo personal — no reemplaza el acompañamiento médico o psicológico profesional. No realizamos diagnósticos, no prescribimos medicamentos y no ofrecemos tratamiento clínico.",
-    faq_2_q: "¿Mis conversaciones son privadas y seguras?",
-    faq_2_a: "Sí. Todas las sesiones están encriptadas y tus datos son tratados con total confidencialidad. Tus conversaciones no se comparten con terceros.",
-    faq_3_q: "¿Puedo cancelar mi suscripción en cualquier momento?",
-    faq_3_a: "Sí, completamente. Los planes Esencial y Transformación pueden cancelarse en cualquier momento sin penalización.",
-    faq_4_q: "¿Cómo funciona la sesión gratuita?",
-    faq_4_a: "Agendas a través de nuestro sistema, recibes un enlace por correo y accedes al chat a la hora marcada. La sesión dura hasta 45 minutos. No se requiere tarjeta de crédito.",
-    faq_5_q: "¿Necesito instalar alguna aplicación?",
-    faq_5_a: "No. Las sesiones se realizan directamente en el navegador — en móvil o computadora.",
-    faq_6_q: "¿El guía de bienestar recuerda las sesiones anteriores?",
-    faq_6_a: "Sí, en los planes Esencial y Transformación. Tu historial completo se preserva para una continuidad real en el acompañamiento.",
-    disclaimer: "Aviso importante: NewCosmos es un servicio de bienestar basado en inteligencia artificial. No realizamos diagnósticos ni prescribimos medicamentos. En crisis o emergencia, busca inmediatamente servicios de salud mental en tu región.",
-    footer_termos: "Términos de uso",
-    footer_privacidade: "Privacidad",
-    footer_contato: "Contacto",
-    footer_copy: "© 2026 NewCosmos — Bienestar Integrativo con IA. Todos los derechos reservados.",
     chat_idioma: "es",
     chat_placeholder: "Comparte lo que está en tu corazón...",
     chat_hint: "Enter para enviar · Shift+Enter para nueva línea · 📎 para adjuntar",
@@ -1792,116 +1157,7 @@ const i18n = {
     chat_role: "Guía de Bienestar Integrativo",
     chat_soul_lang: "Responde siempre en español.",
   },
-
   it: {
-    nav_como_funciona: "Come funziona",
-    nav_abordagens: "Approcci",
-    nav_planos: "Piani",
-    nav_faq: "FAQ",
-    nav_cliente: "Sono già cliente",
-    nav_sessao_gratuita: "Sessione gratuita",
-    modal_titulo: "Accedi alla mia Sessione",
-    modal_texto: "Inserisci il codice di accesso inviato alla tua email dopo la conferma del pagamento.",
-    modal_placeholder: "Incolla il tuo codice qui",
-    modal_btn: "Entra nel mio Spazio ✦",
-    modal_verificando: "Verifica in corso...",
-    modal_sem_email: "Non hai ricevuto l'email?",
-    modal_contato: "Contattaci",
-    modal_erro_vazio: "Per favore, inserisci il tuo codice di accesso.",
-    modal_erro_nao_encontrado: "Codice non trovato. Verifica se l'hai copiato correttamente.",
-    modal_erro_expirado: "Questo codice è scaduto. Contattaci per rinnovarlo.",
-    modal_erro_usado: "Questa sessione è già stata effettuata. Acquista un nuovo accesso.",
-    modal_erro_conexao: "Errore di connessione. Riprova.",
-    modal_erro_invalido: "Codice non valido. Riprova.",
-    hero_eyebrow: "Benessere Integrativo con Intelligenza Artificiale",
-    hero_title1: "Guarigione che unisce",
-    hero_title2: "scienza",
-    hero_title3: "e",
-    hero_title4: "anima",
-    hero_subtitle: "Una guida al benessere disponibile per te, in qualsiasi momento.",
-    hero_body: "NewCosmos integra pratiche olistiche, autoconoscenza e sviluppo personale in sessioni personalizzate — guidate da intelligenza artificiale addestrata con profondità olistica e sensibilità umana.",
-    hero_btn_primary: "Prova gratuitamente",
-    hero_btn_ghost: "Come funziona",
-    hero_btn_cliente: "✦ Sono già cliente",
-    section_processo: "Il processo",
-    como_title: "Semplice da iniziare.",
-    como_title_em: "Profondo da vivere.",
-    como_1_title: "Prenota la tua sessione",
-    como_1_desc: "Scegli il giorno e l'orario più adatto alla tua routine. Prima sessione sempre gratuita, senza impegno.",
-    como_2_title: "Connettiti alla tua guida",
-    como_2_desc: "All'orario prenotato, accedi alla chat direttamente dal browser — senza installare nulla, su mobile o computer.",
-    como_3_title: "Sessione personalizzata",
-    como_3_desc: "La tua guida al benessere conduce la sessione con ascolto attivo, pratiche integrative e protocolli adattati al tuo momento.",
-    como_4_title: "Cresci con continuità",
-    como_4_desc: "Ogni sessione costruisce sulla precedente. Il tuo percorso e la tua storia vengono preservati per un supporto reale e continuo.",
-    section_metodologia: "Metodologia",
-    abord_title: "Pratiche che",
-    abord_title_em: "trasformano",
-    abord_desc: "Addestrato con una biblioteca integrativa di conoscenza olistica — unendo il rigore delle pratiche basate sull'evidenza con la profondità delle tradizioni di guarigione.",
-    abord_1_name: "Pratiche Integrative",
-    abord_1_desc: "Approcci riconosciuti dalle autorità sanitarie per promuovere il benessere e l'equilibrio mente-corpo.",
-    abord_2_name: "Cura Olistica",
-    abord_2_desc: "Protocolli che contemplano corpo, mente ed energia — inclusa la biorisonanza e le pratiche complementari.",
-    abord_3_name: "Spiritualità Applicata",
-    abord_3_desc: "Meditazione guidata, pratiche contemplative e prospettive transpersonali senza dogmi religiosi.",
-    abord_4_name: "Sviluppo Personale",
-    abord_4_desc: "Strumenti basati sull'evidenza per la regolazione emotiva, l'autoconoscenza e la gestione dello stress.",
-    abord_center: "Integrazione\nmente · corpo · anima",
-    section_planos: "Piani",
-    planos_title: "Investi nel tuo",
-    planos_title_em: "benessere",
-    plano_avulso_nome: "Sessione singola",
-    plano_avulso_periodo: "per sessione singola",
-    plano_avulso_f1: "1 sessione completa di autoconoscenza",
-    plano_avulso_f2: "Fino a 60 minuti di conversazione",
-    plano_avulso_f3: "eBook \"7 Pratiche Olistiche\" in omaggio",
-    plano_avulso_btn: "Inizia",
-    plano_essencial_nome: "Essenziale",
-    plano_essencial_badge: "Più scelto",
-    plano_essencial_periodo: "al mese · 4 sessioni (1 a settimana)",
-    plano_essencial_f1: "4 sessioni al mese (1 a settimana)",
-    plano_essencial_f2: "Storico completo preservato",
-    plano_essencial_f3: "Protocolli di benessere personalizzati",
-    plano_essencial_f4: "Riepilogo mensile del tuo percorso",
-    plano_essencial_f5: "Pratiche ed esercizi tra le sessioni",
-    plano_essencial_btn: "Abbonati ora",
-    plano_transf_nome: "Trasformazione",
-    plano_transf_periodo: "al mese · 8 sessioni (2 a settimana)",
-    plano_transf_f1: "8 sessioni al mese (2 a settimana)",
-    plano_transf_f2: "Tutto del piano Essenziale",
-    plano_transf_f3: "Protocolli di biorisonanza QMR",
-    plano_transf_f4: "Rapporti PDF dettagliati del percorso",
-    plano_transf_f5: "Monitoraggio delle metriche di benessere",
-    plano_transf_f6: "Supporto prioritario e accesso anticipato",
-    plano_transf_btn: "Abbonati ora",
-    free_tag: "✦ Offerta di benvenuto",
-    free_title: "La tua prima sessione è",
-    free_title_em: "gratuita",
-    free_desc: "Prova senza impegno. Prenota ora la tua sessione di 45 minuti e scopri come le pratiche integrative con IA possono trasformare il tuo percorso di benessere.",
-    free_btn: "Prenota sessione gratuita",
-    section_experiencias: "Esperienze",
-    dep_title: "Cosa dicono i nostri",
-    dep_title_em: "clienti",
-    section_duvidas: "Domande",
-    faq_title: "Domande",
-    faq_title_em: "frequenti",
-    faq_1_q: "NewCosmos sostituisce uno psicologo o un medico?",
-    faq_1_a: "No. NewCosmos è un servizio di supporto al benessere e sviluppo personale — non sostituisce l'assistenza medica o psicologica professionale. Non effettuiamo diagnosi, non prescriviamo farmaci e non offriamo trattamento clinico.",
-    faq_2_q: "Le mie conversazioni sono private e sicure?",
-    faq_2_a: "Sì. Tutte le sessioni sono criptate e i tuoi dati vengono trattati con totale riservatezza. Le tue conversazioni non vengono condivise con terzi.",
-    faq_3_q: "Posso cancellare il mio abbonamento in qualsiasi momento?",
-    faq_3_a: "Sì, completamente. I piani Essenziale e Trasformazione possono essere cancellati in qualsiasi momento senza penalità.",
-    faq_4_q: "Come funziona la sessione gratuita?",
-    faq_4_a: "Prenoti tramite il nostro sistema, ricevi un link via email e accedi alla chat all'orario stabilito. La sessione dura fino a 45 minuti. Non è necessaria la carta di credito.",
-    faq_5_q: "Devo installare qualche applicazione?",
-    faq_5_a: "No. Le sessioni si svolgono direttamente nel browser — su mobile o computer.",
-    faq_6_q: "La guida al benessere ricorda le sessioni precedenti?",
-    faq_6_a: "Sì, nei piani Essenziale e Trasformazione. La tua storia completa viene preservata per una continuità reale nel supporto del tuo percorso.",
-    disclaimer: "Avviso importante: NewCosmos è un servizio di benessere basato sull'intelligenza artificiale. Non effettuiamo diagnosi né prescriviamo farmaci. In situazioni di crisi o emergenza, rivolgiti immediatamente ai servizi di salute mentale della tua regione.",
-    footer_termos: "Termini di utilizzo",
-    footer_privacidade: "Privacy",
-    footer_contato: "Contatto",
-    footer_copy: "© 2026 NewCosmos — Benessere Integrativo con IA. Tutti i diritti riservati.",
     chat_idioma: "it",
     chat_placeholder: "Condividi ciò che hai nel cuore...",
     chat_hint: "Invio per inviare · Shift+Invio per nuova riga · 📎 per allegare",
@@ -1914,42 +1170,24 @@ const i18n = {
   }
 };
 
-
-// Detectar idioma salvo do site
 const chatLang = sessionStorage.getItem('nc_lang') || localStorage.getItem('nc_lang') || 'pt';
 const chatT = i18n[chatLang] || i18n.pt;
 
-// Aplicar traduções no chat
 document.addEventListener('DOMContentLoaded', () => {
-  // Placeholder
   const input = document.getElementById('msgInput');
   if (input) input.placeholder = chatT.chat_placeholder;
-
-  // Hint
   const hint = document.querySelector('.input-hint');
   if (hint) hint.textContent = chatT.chat_hint;
-
-  // Botões header
   const btns = document.querySelectorAll('.hbtn');
   if (btns[0]) btns[0].textContent = chatT.chat_novo;
   if (btns[1]) btns[1].textContent = chatT.chat_inicio;
-
-  // Warning banner
   const banner = document.getElementById('time-warning-banner');
   if (banner) banner.textContent = chatT.chat_aviso_tempo;
-
-  // Disclaimer
   const disc = document.querySelector('.disclaimer-toast');
   if (disc) disc.innerHTML = '<strong>' + (chatLang === 'pt' ? 'Espaço de bem-estar' : chatLang === 'en' ? 'Wellness space' : chatLang === 'es' ? 'Espacio de bienestar' : 'Spazio di benessere') + '.</strong> ' + chatT.chat_disclaimer;
-
-  // Role do agente
   const role = document.querySelector('.agent-role');
   if (role) role.textContent = chatT.chat_role;
-
-  // Html lang
   document.documentElement.lang = chatLang;
-
-  // Atualizar SOUL para responder no idioma correto
   window.CHAT_LANG_INSTRUCTION = chatT.chat_soul_lang;
 });
 </script>
