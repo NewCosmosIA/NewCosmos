@@ -949,6 +949,7 @@ let sessionToken = null;
 let sessionPlano = null;
 let sessionNome = null;
 let sessionEmail = null;
+let sessionUsed = 1;
 let sessionEnded = false;
 let timerInterval = null;
 let secondsElapsed = 0;
@@ -1021,6 +1022,7 @@ async function validateToken() {
       sessionToken = token;
       sessionPlano = data.plano;
       sessionNome = data.nome;
+      sessionUsed = data.sessions_used || 1;
       document.getElementById('access-screen').style.display = 'none';
       // Mostrar tela de privacidade antes do chat
       document.getElementById('privacy-screen').style.display = 'flex';
@@ -1239,8 +1241,10 @@ async function startSession() {
 
 function buildOpeningPrompt(plano, nome, lang) {
   const nomeStr = nome ? `, ${nome}` : '';
+  const isPrimeiro = history.length === 0;
 
   // Variações de abertura por plano — sorteia uma aleatoriamente
+  // Para planos com histórico: distingue primeiro encontro de retorno
   const aberturas = {
     pt: {
       gratuito: [
@@ -1253,16 +1257,22 @@ function buildOpeningPrompt(plano, nome, lang) {
         `Abra este encontro avulso${nomeStr ? ' com ' + nome : ''} como se fosse um ritual de boas-vindas — um espaço sagrado que se abre para ela. Use uma imagem simbólica. Pergunte o que o coração traz hoje. Máximo 3 parágrafos.`,
         `Esta pessoa${nomeStr} escolheu este encontro único. Honre isso com presença total. Comece com uma observação sobre o poder de escolher cuidado, e convide-a a se instalar neste espaço. Pergunte como está chegando. Máximo 3 parágrafos.`,
       ],
-      essencial: [
-        `${nome ? nome + ' é' : 'Esta pessoa é'} assinante do Plano Essencial e está chegando para mais um encontro semanal. Cumprimente-a como quem reencontra alguém familiar — com afeto e presença. Pergunte o que surgiu desde o último encontro ou o que o momento pede agora. Máximo 3 parágrafos.`,
+      essencial: isPrimeiro ? [
+        `${nome ? nome : 'Esta pessoa'} está chegando ao seu primeiro encontro no Plano Essencial. Dê as boas-vindas com calor e presença — este é o início de uma jornada semanal. Apresente-se como um espaço de continuidade e cuidado. Convide-a a compartilhar o que está no coração hoje. Máximo 3 parágrafos.`,
+        `Abra este primeiro encontro${nomeStr ? ' com ' + nome : ''} no Plano Essencial com a energia de quem inaugura algo especial. Use uma metáfora de sementes ou raízes. Pergunte o que trouxe a pessoa até aqui e o que ela espera desta jornada. Máximo 3 parágrafos.`,
+      ] : [
+        `${nome ? nome + ' é' : 'Esta pessoa é'} assinante do Plano Essencial e está retornando para mais um encontro semanal. Cumprimente-a como quem reencontra alguém familiar — com afeto e presença. Pergunte o que surgiu desde o último encontro ou o que o momento pede agora. Máximo 3 parágrafos.`,
         `Abra este encontro semanal${nomeStr ? ' com ' + nome : ''} com a leveza de quem se encontra regularmente. Há uma continuidade aqui — honre isso. Use uma metáfora de ciclos ou estações. Convide-a a compartilhar como esta semana foi. Máximo 3 parágrafos.`,
         `${nome || 'Esta pessoa'} está no ritmo semanal do Plano Essencial. Abra o encontro com gratidão por essa constância. Diga algo sobre o poder da regularidade na jornada de transformação. Pergunte o que está mais vivo nela hoje. Máximo 3 parágrafos.`,
         `Cumprimente${nomeStr || ' esta pessoa'} como um espaço que sempre a aguarda. Ela é assinante — há fidelidade aqui que merece ser honrada. Use uma frase sobre raízes que se aprofundam com o tempo. Pergunte como está chegando hoje. Máximo 3 parágrafos.`,
       ],
-      transformacao: [
-        `${nome ? nome + ' está' : 'Esta pessoa está'} no Plano Transformação — dois encontros por semana, uma jornada intensa e profunda. Abra com a energia de quem está no meio de uma grande transformação. Pergunte o que emergiu desde o último encontro e o que quer aprofundar hoje. Máximo 3 parágrafos.`,
-        `Este é um encontro do Plano Transformação${nomeStr}. A intensidade desta jornada merece ser reconhecida. Abra com presença plena e fale sobre o coragem de transformar. Pergunte onde ${nome || 'ela'} está no seu processo agora. Máximo 3 parágrafos.`,
-        `${nome || 'Esta pessoa'} escolheu o caminho mais profundo — dois encontros semanais de transformação real. Abra com a reverência que essa escolha merece. Use uma metáfora alquímica. Pergunte o que está sendo transmutado neste momento da jornada. Máximo 3 parágrafos.`,
+      transformacao: isPrimeiro ? [
+        `${nome ? nome : 'Esta pessoa'} está chegando ao seu primeiro encontro no Plano Transformação — a jornada mais intensa e profunda do NewCosmos. Abra com reverência e presença total. Apresente este espaço como um lugar de alquimia real. Convide-a a compartilhar o que a trouxe até aqui e o que quer transformar. Máximo 3 parágrafos.`,
+        `Abra este primeiro encontro${nomeStr ? ' com ' + nome : ''} no Plano Transformação com a energia de quem inicia uma grande jornada. Use uma metáfora alquímica ou de travessia. Pergunte o que está pronto para ser transmutado na vida dela. Máximo 3 parágrafos.`,
+      ] : [
+        `${nome ? nome + ' está' : 'Esta pessoa está'} no Plano Transformação — retornando para mais um encontro nesta jornada intensa e profunda. Abra com a energia de quem está no meio de uma grande transformação. Pergunte o que emergiu desde o último encontro e o que quer aprofundar hoje. Máximo 3 parágrafos.`,
+        `Este é mais um encontro do Plano Transformação${nomeStr}. A intensidade desta jornada merece ser reconhecida. Abra com presença plena e fale sobre a coragem de transformar. Pergunte onde ${nome || 'ela'} está no seu processo agora. Máximo 3 parágrafos.`,
+        `${nome || 'Esta pessoa'} escolheu o caminho mais profundo e está retornando. Abra com a reverência que essa constância merece. Use uma metáfora alquímica. Pergunte o que está sendo transmutado neste momento da jornada. Máximo 3 parágrafos.`,
         `Cumprimente${nomeStr || ' esta pessoa'} que está em plena jornada de transformação. Lembre que cada encontro é um degrau. Abra com energia e profundidade. Pergunte o que ficou do último encontro e o que quer trabalhar agora. Máximo 3 parágrafos.`,
       ],
     },
