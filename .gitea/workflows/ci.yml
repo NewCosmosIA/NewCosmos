@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: JS syntax check (api/)
+        run: |
+          fail=0
+          for f in api/*.js; do node --check "$f" || fail=1; done
+          exit $fail
+
+      - name: Scan de segredos
+        run: |
+          if grep -rEn 'sk-ant-[A-Za-z0-9]{8,}|SUPABASE_SECRET_KEY *= *["'\''][A-Za-z0-9._-]{16,}|BEGIN PRIVATE KEY' --include='*.js' --include='*.html' . 2>/dev/null; then
+            echo "::error::Possível segredo versionado"; exit 1
+          fi
+          echo "OK"
+
+      - name: Compliance — proibir 'terapia/terapeuta'
+        run: |
+          if grep -rniE 'terap[êe]utic|terapeuta|\bterapia\b' --include='*.js' --include='*.html' . 2>/dev/null; then
+            echo "::error::Uso proibido de 'terapia/terapeuta' — usar bem-estar/autoconhecimento"; exit 1
+          fi
+          echo "OK — sem termos proibidos"

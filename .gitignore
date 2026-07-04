@@ -1,0 +1,18 @@
+# Dependências
+node_modules/
+
+# Segredos / ambiente
+.env
+.env*.local
+*-credentials.txt
+
+# Vercel
+.vercel
+
+# Ferramentas de IA
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,2596 @@
+<!doctype html>
+<!--
+  DISTRIBUIÇÃO DESTE MANUAL
+  Fonte master: /Volumes/DOCKER-SSD/00/willaudios/Manual_Universal_IA_Criar_Projeto_Organizado.html
+  Localização padrão em cada projeto: docs/reference/Manual_Universal_IA_Criar_Projeto_Organizado.html
+  Projetos com cópia: aci, astyle, mullherestalento, pasana, profissionalmaster, verazeletro, viviansampaio, vmahub
+  Para propagar uma atualização: editar a fonte master e rodar /Volumes/DOCKER-SSD/00/willaudios/sync_manual.sh
+  Regra: nunca editar as cópias diretamente; sempre editar a fonte e sincronizar.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manual Universal para IA Criar Projetos Completos e Organizados</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --panel-2: #f0f5ff;
+      --text: #172033;
+      --muted: #5b667a;
+      --line: #dce3f0;
+      --brand: #2457d6;
+      --brand-2: #0f7c6c;
+      --danger: #b42318;
+      --warn: #b54708;
+      --ok: #027a48;
+      --code-bg: #101828;
+      --code-text: #eef4ff;
+      --shadow: 0 16px 40px rgba(16, 24, 40, .08);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .shell {
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 28px 20px;
+      border-right: 1px solid var(--line);
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(14px);
+    }
+    aside .logo {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    .mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+    aside h1 {
+      font-size: 15px;
+      line-height: 1.2;
+      margin: 0;
+    }
+    aside p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 4px 0 0;
+    }
+    nav {
+      display: grid;
+      gap: 6px;
+      margin-top: 18px;
+    }
+    nav a {
+      color: #344054;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+      border: 1px solid transparent;
+    }
+    nav a:hover {
+      text-decoration: none;
+      background: var(--panel-2);
+      border-color: var(--line);
+    }
+    main {
+      min-width: 0;
+      padding: 36px;
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: 46px;
+      background:
+        radial-gradient(circle at top right, rgba(36,87,214,.22), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(15,124,108,.18), transparent 36%),
+        linear-gradient(135deg, #ffffff 0%, #eef4ff 100%);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .hero h2 {
+      font-size: clamp(32px, 4vw, 58px);
+      line-height: 1.02;
+      margin: 0 0 18px;
+      letter-spacing: -1.8px;
+    }
+    .hero .subtitle {
+      font-size: 19px;
+      max-width: 920px;
+      color: #344054;
+      margin: 0 0 26px;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    button, .btn {
+      border: 0;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 12px 16px;
+      background: var(--brand);
+      color: white;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(36,87,214,.18);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    button.secondary, .btn.secondary {
+      color: var(--brand);
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+    section {
+      margin-top: 30px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      scroll-margin-top: 20px;
+    }
+    .section-kicker {
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 8px;
+    }
+    section h2 {
+      margin: 0 0 14px;
+      font-size: 30px;
+      letter-spacing: -.6px;
+      line-height: 1.15;
+    }
+    section h3 {
+      margin: 28px 0 10px;
+      font-size: 21px;
+      letter-spacing: -.2px;
+    }
+    section h4 {
+      margin: 20px 0 8px;
+      font-size: 17px;
+    }
+    p { margin: 10px 0; }
+    .lead { font-size: 18px; color: #344054; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .card {
+      grid-column: span 4;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+    }
+    .card.wide { grid-column: span 6; }
+    .card.full { grid-column: 1 / -1; }
+    .card h3, .card h4 { margin-top: 0; }
+    .mini {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .callout {
+      border-radius: 16px;
+      padding: 18px 18px 18px 20px;
+      border: 1px solid var(--line);
+      background: #f8fbff;
+      margin: 18px 0;
+    }
+    .callout strong { color: #101828; }
+    .callout.ok { background: #ecfdf3; border-color: #abefc6; }
+    .callout.warn { background: #fffaeb; border-color: #fedf89; }
+    .callout.danger { background: #fef3f2; border-color: #fecdca; }
+    .pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: var(--brand);
+      font-weight: 800;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .pill.ok { background: #ecfdf3; color: var(--ok); }
+    .pill.warn { background: #fffaeb; color: var(--warn); }
+    .pill.danger { background: #fef3f2; color: var(--danger); }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 16px 0;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      display: table;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f2f6ff;
+      font-size: 13px;
+      color: #344054;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    tr:last-child td { border-bottom: 0; }
+    ul, ol { padding-left: 24px; }
+    li { margin: 6px 0; }
+    .code-wrap {
+      position: relative;
+      margin: 16px 0;
+    }
+    pre {
+      margin: 0;
+      overflow: auto;
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--code-bg);
+      color: var(--code-text);
+      border: 1px solid #263248;
+      line-height: 1.48;
+      font-size: 13px;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+    p code, li code, td code {
+      background: #eef2f7;
+      border: 1px solid #d0d7e2;
+      padding: 2px 6px;
+      border-radius: 7px;
+      color: #101828;
+      font-size: .92em;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 7px 9px;
+      border-radius: 9px;
+      box-shadow: none;
+      font-size: 12px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+      color: white;
+    }
+    .flow {
+      counter-reset: step;
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .step {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 16px 16px 60px;
+      background: #fff;
+    }
+    .step:before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--brand);
+      color: white;
+      font-weight: 900;
+    }
+    .step h3, .step h4 { margin-top: 0; }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: #fff;
+      margin: 12px 0;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 900;
+      color: #243b66;
+    }
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .yes, .no {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+    .yes { background: #ecfdf3; border-color: #abefc6; }
+    .no { background: #fef3f2; border-color: #fecdca; }
+    .footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 30px 10px 50px;
+      font-size: 13px;
+    }
+    .tracks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .track {
+      display: block;
+      position: relative;
+      padding: 20px 20px 20px 22px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: inherit;
+      overflow: hidden;
+    }
+    .track:hover { text-decoration: none; border-color: var(--brand); box-shadow: var(--shadow); }
+    .track:before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--brand), var(--brand-2));
+    }
+    .track.legacy:before { background: linear-gradient(180deg, var(--warn), #d97706); }
+    .track .track-kicker {
+      font-size: 12px; font-weight: 900; text-transform: uppercase;
+      letter-spacing: .12em; color: var(--brand);
+    }
+    .track.legacy .track-kicker { color: var(--warn); }
+    .track h3 { margin: 6px 0 6px; font-size: 20px; }
+    .track p { margin: 0; font-size: 14px; color: var(--muted); }
+    .track .track-go { margin-top: 12px; font-weight: 800; font-size: 13px; color: var(--brand); }
+    .track.legacy .track-go { color: var(--warn); }
+    .mobile-toc {
+      display: none;
+      margin: 18px 0 0;
+    }
+    @media (max-width: 1040px) {
+      .shell { grid-template-columns: 1fr; }
+      aside { display: none; }
+      main { padding: 18px; }
+      .hero { padding: 28px; }
+      .mobile-toc { display: block; }
+      .card, .card.wide { grid-column: 1 / -1; }
+      .matrix { grid-template-columns: 1fr; }
+      .tracks { grid-template-columns: 1fr; }
+      table { display: block; overflow-x: auto; }
+    }
+    @media print {
+      body { background: white; }
+      aside, .actions, .copy-btn, .mobile-toc { display: none !important; }
+      .shell { display: block; max-width: none; }
+      main { padding: 0; }
+      section, .hero { box-shadow: none; break-inside: avoid; border-color: #d0d5dd; }
+      a { color: #101828; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside>
+      <div class="logo">
+        <div class="mark">IA</div>
+        <div>
+          <h1>Manual Universal de Projetos com IA</h1>
+          <p>Arquitetura · Organização · Qualidade · Execução</p>
+        </div>
+      </div>
+      <nav aria-label="Índice do documento">
+        <a href="#objetivo">1. Objetivo do manual</a>
+        <a href="#uso">2. Como usar</a>
+        <a href="#principios">3. Princípios obrigatórios</a>
+        <a href="#perfil-ia">4. Papel da IA</a>
+        <a href="#entrada">5. Entrada mínima</a>
+        <a href="#fluxo-zero">6. Criar projeto do zero</a>
+        <a href="#legado">7. Projetos existentes e legados</a>
+        <a href="#estrutura">8. Estrutura do repositório</a>
+        <a href="#documentos">9. Documentos obrigatórios</a>
+        <a href="#docs-feature">10. Documentação por feature</a>
+        <a href="#features">11. Arquitetura por features</a>
+        <a href="#linhas">12. Regra dos 200 linhas</a>
+        <a href="#git">13. Git, branches e PR</a>
+        <a href="#implementacao">14. Implementação por módulo</a>
+        <a href="#testes">15. Testes e cobertura</a>
+        <a href="#cicd">16. CI/CD</a>
+        <a href="#observabilidade">17. Observabilidade e monitoramento</a>
+        <a href="#qualidade">18. Qualidade técnica</a>
+        <a href="#seguranca">19. Segurança</a>
+        <a href="#banco">20. Banco de dados</a>
+        <a href="#api">21. API e contratos</a>
+        <a href="#frontend">22. Frontend</a>
+        <a href="#backend">23. Backend</a>
+        <a href="#ia-projetos">24. Projetos com IA</a>
+        <a href="#templates">25. Templates prontos</a>
+        <a href="#prompt">26. Prompt mestre</a>
+        <a href="#checklists">27. Checklists</a>
+        <a href="#antipadroes">28. Anti-padrões</a>
+        <a href="#pronto">29. Definição de pronto</a>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="hero">
+        <div class="section-kicker">Documento operacional universal</div>
+        <h2>Manual para IA criar qualquer projeto completo, organizado, testável e pronto para evolução</h2>
+        <p class="subtitle">Este relatório define um padrão de trabalho para uma IA planejar, estruturar, implementar, testar, documentar e preparar um projeto de software com qualidade profissional, desde o primeiro arquivo até o fluxo de pull request e deploy.</p>
+        <div class="badge-row">
+          <span class="badge">Arquitetura modular</span>
+          <span class="badge">Arquivos pequenos</span>
+          <span class="badge">Branch por tarefa</span>
+          <span class="badge">Sem duplicidade</span>
+          <span class="badge">Testes obrigatórios</span>
+          <span class="badge">CI/CD</span>
+          <span class="badge">Documentação viva</span>
+          <span class="badge">Observabilidade</span>
+          <span class="badge">Docs por feature</span>
+          <span class="badge">Projetos legados</span>
+        </div>
+        <div class="tracks">
+          <a class="track" href="#fluxo-zero">
+            <div class="track-kicker">Trilha A · Projeto novo</div>
+            <h3>Vou começar um projeto do zero</h3>
+            <p>Siga o fluxo completo de criação: brief, arquitetura, estrutura modular, fundação técnica, features em ciclos, testes e pull request.</p>
+            <div class="track-go">Começar pelo fluxo do zero →</div>
+          </a>
+          <a class="track legacy" href="#legado">
+            <div class="track-kicker">Trilha B · Projeto existente</div>
+            <h3>Já tenho um projeto rodando</h3>
+            <p>Antes de codar, contextualize o que já existe: mapeamento, documentação por feature retroativa, resolução de duplicidade e adoção gradual de branches, testes e CI/CD.</p>
+            <div class="track-go">Ir para projetos existentes →</div>
+          </a>
+        </div>
+        <div class="actions">
+          <a class="btn" href="#prompt">Ir para o prompt mestre</a>
+          <button class="secondary" onclick="window.print()">Imprimir ou salvar em PDF</button>
+        </div>
+        <details class="mobile-toc">
+          <summary>Mostrar índice</summary>
+          <nav>
+            <a href="#objetivo">1. Objetivo do manual</a>
+            <a href="#uso">2. Como usar</a>
+            <a href="#principios">3. Princípios obrigatórios</a>
+            <a href="#perfil-ia">4. Papel da IA</a>
+            <a href="#entrada">5. Entrada mínima</a>
+            <a href="#fluxo-zero">6. Criar projeto do zero</a>
+            <a href="#legado">7. Projetos existentes e legados</a>
+            <a href="#estrutura">8. Estrutura do repositório</a>
+            <a href="#documentos">9. Documentos obrigatórios</a>
+            <a href="#docs-feature">10. Documentação por feature</a>
+            <a href="#features">11. Arquitetura por features</a>
+            <a href="#linhas">12. Regra dos 200 linhas</a>
+            <a href="#git">13. Git, branches e PR</a>
+            <a href="#implementacao">14. Implementação por módulo</a>
+            <a href="#testes">15. Testes e cobertura</a>
+            <a href="#cicd">16. CI/CD</a>
+            <a href="#observabilidade">17. Observabilidade e monitoramento</a>
+            <a href="#qualidade">18. Qualidade técnica</a>
+            <a href="#seguranca">19. Segurança</a>
+            <a href="#banco">20. Banco de dados</a>
+            <a href="#api">21. API e contratos</a>
+            <a href="#frontend">22. Frontend</a>
+            <a href="#backend">23. Backend</a>
+            <a href="#ia-projetos">24. Projetos com IA</a>
+            <a href="#templates">25. Templates prontos</a>
+            <a href="#prompt">26. Prompt mestre</a>
+            <a href="#checklists">27. Checklists</a>
+            <a href="#antipadroes">28. Anti-padrões</a>
+            <a href="#pronto">29. Definição de pronto</a>
+          </nav>
+        </details>
+      </div>
+
+      <section id="objetivo">
+        <div class="section-kicker">1. Finalidade</div>
+        <h2>Objetivo do manual</h2>
+        <p class="lead">Este documento serve como uma regra operacional para qualquer IA conectada a um projeto de software. A IA deve usá-lo para criar projetos completos, bem separados por responsabilidade, com código legível, documentação, testes, pipeline de validação e fluxo seguro de versionamento.</p>
+        <div class="callout ok">
+          <strong>Resultado esperado:</strong> ao receber uma ideia de projeto, a IA deve conseguir transformar essa ideia em um repositório organizado, com arquitetura clara, padrões de código, módulos bem definidos, documentação mínima, testes e preparação para evolução contínua.
+        </div>
+        <h3>O que este manual resolve</h3>
+        <div class="grid">
+          <div class="card">
+            <h4>Evita projeto bagunçado</h4>
+            <p>Impede arquivos gigantes, pastas genéricas, duplicidade de funções, mistura de regra de negócio com interface e alterações sem controle.</p>
+          </div>
+          <div class="card">
+            <h4>Cria uma base escalável</h4>
+            <p>Define uma estrutura onde novas features entram em módulos próprios, com testes e documentação desde o início.</p>
+          </div>
+          <div class="card">
+            <h4>Melhora o trabalho da IA</h4>
+            <p>Arquivos menores, nomes claros e mapas de feature tornam o contexto mais fácil de interpretar e reduzem erros de implementação.</p>
+          </div>
+          <div class="card">
+            <h4>Protege a branch principal</h4>
+            <p>Todo trabalho deve acontecer em branches próprias, com revisão por diff e pull request antes de chegar à versão principal.</p>
+          </div>
+          <div class="card">
+            <h4>Força qualidade</h4>
+            <p>Código novo deve ser acompanhado por testes, lint, typecheck, build e validações automáticas.</p>
+          </div>
+          <div class="card">
+            <h4>Cria documentação viva</h4>
+            <p>A IA deve registrar arquitetura, decisões, mapa de funcionalidades, contratos de API, estratégia de testes e regras de evolução.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="uso">
+        <div class="section-kicker">2. Aplicação prática</div>
+        <h2>Como usar este relatório com uma IA</h2>
+        <p>Este documento pode ser usado de três formas:</p>
+        <table>
+          <thead>
+            <tr><th>Uso</th><th>Quando aplicar</th><th>Como a IA deve agir</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Criação do zero</strong></td>
+              <td>Quando o projeto ainda não existe.</td>
+              <td>A IA cria estrutura, documentação, arquitetura, configurações, módulos iniciais, testes e pipeline.</td>
+            </tr>
+            <tr>
+              <td><strong>Projeto existente</strong></td>
+              <td>Quando já existe um repositório com código.</td>
+              <td>A IA primeiro audita o projeto, entende a arquitetura, cria branch e só depois altera o necessário. Fluxo completo em <a href="#legado">projetos existentes e legados</a>.</td>
+            </tr>
+            <tr>
+              <td><strong>Padronização contínua</strong></td>
+              <td>Quando várias conversas, agentes ou pessoas vão trabalhar no mesmo sistema.</td>
+              <td>A IA usa as mesmas regras para toda tarefa: escopo pequeno, sem duplicidade, testes, diff e PR.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Regra de execução</h3>
+        <p>A IA não deve começar escrevendo código imediatamente. Primeiro ela deve entender o objetivo, propor a arquitetura, criar a base do repositório, definir os documentos de controle e só então implementar as features.</p>
+        <div class="callout warn">
+          <strong>Importante:</strong> quando o pedido do usuário for incompleto, a IA não deve travar. Ela deve assumir padrões seguros, registrar as decisões tomadas e continuar com uma primeira versão funcional e bem organizada.
+        </div>
+      </section>
+
+      <section id="principios">
+        <div class="section-kicker">3. Regras centrais</div>
+        <h2>Princípios obrigatórios de qualquer projeto</h2>
+        <p>Estes princípios são a base do padrão. Eles devem ser respeitados independentemente da linguagem, framework, banco de dados ou tipo de aplicação.</p>
+        <div class="grid">
+          <div class="card wide">
+            <h3>1. Uma responsabilidade por arquivo</h3>
+            <p>Cada arquivo deve ter um motivo claro para existir. Um arquivo não deve misturar interface, regra de negócio, acesso a banco, validação, configuração e teste.</p>
+          </div>
+          <div class="card wide">
+            <h3>2. Uma feature por módulo</h3>
+            <p>Funcionalidades devem ser agrupadas por domínio ou feature, e não espalhadas em pastas genéricas sem contexto.</p>
+          </div>
+          <div class="card wide">
+            <h3>3. Não duplicar funcionalidade</h3>
+            <p>Antes de criar uma função, tela, endpoint, service, componente ou tabela, a IA deve procurar se já existe algo igual ou parecido.</p>
+          </div>
+          <div class="card wide">
+            <h3>4. Código novo exige teste</h3>
+            <p>Toda regra de negócio nova ou alterada deve ter teste. Correção de bug deve vir acompanhada de teste que prove a correção.</p>
+          </div>
+          <div class="card wide">
+            <h3>5. Branch principal protegida</h3>
+            <p>A branch principal deve receber mudanças apenas por pull request, revisão de diff e validação automática.</p>
+          </div>
+          <div class="card wide">
+            <h3>6. Documentação acompanha código</h3>
+            <p>Quando a IA cria ou altera uma feature, a documentação de arquitetura, feature map, API e decisões deve ser atualizada.</p>
+          </div>
+        </div>
+        <h3>Resumo executivo das regras</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>REGRA 1: Não trabalhar direto na main.
+REGRA 2: Criar branch por tarefa ou módulo.
+REGRA 3: Planejar antes de codar.
+REGRA 4: Procurar antes de criar para evitar duplicidade.
+REGRA 5: Manter arquivos pequenos e coesos.
+REGRA 6: Separar controller, service, repository, validators, types e tests.
+REGRA 7: Testar regra de negócio nova ou alterada.
+REGRA 8: Rodar lint, typecheck, testes e build.
+REGRA 9: Revisar o diff antes de concluir.
+REGRA 10: Atualizar documentação junto com o código.</code></pre></div>
+      </section>
+
+      <section id="perfil-ia">
+        <div class="section-kicker">4. Comportamento esperado</div>
+        <h2>Papel da IA dentro do projeto</h2>
+        <p>A IA deve atuar como uma equipe técnica completa. Ela não deve apenas gerar código: deve coordenar, organizar, revisar, testar e documentar.</p>
+        <table>
+          <thead>
+            <tr><th>Papel</th><th>Responsabilidade</th><th>Resultado esperado</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Arquiteta</strong></td>
+              <td>Define camadas, módulos, limites de responsabilidade, padrões e estrutura de pastas.</td>
+              <td>Projeto nasce organizado e pronto para crescer.</td>
+            </tr>
+            <tr>
+              <td><strong>Coordenadora técnica</strong></td>
+              <td>Divide trabalho por branches, features, tarefas e PRs pequenos.</td>
+              <td>Alterações rastreáveis, sem conflito e sem bagunça.</td>
+            </tr>
+            <tr>
+              <td><strong>Desenvolvedora</strong></td>
+              <td>Implementa código limpo, pequeno, tipado quando possível e aderente ao padrão.</td>
+              <td>Funcionalidades funcionando com baixo acoplamento.</td>
+            </tr>
+            <tr>
+              <td><strong>Revisora</strong></td>
+              <td>Analisa diff, risco, duplicidade, nomes, responsabilidades, testes e impacto.</td>
+              <td>Menos regressões e mudanças fora de escopo.</td>
+            </tr>
+            <tr>
+              <td><strong>QA automatizado</strong></td>
+              <td>Cria testes unitários, integração, e2e quando necessário e valida cobertura.</td>
+              <td>Erros são encontrados antes do deploy.</td>
+            </tr>
+            <tr>
+              <td><strong>DevOps</strong></td>
+              <td>Configura CI/CD, variáveis de ambiente, build, deploy e gates de qualidade.</td>
+              <td>Pipeline confiável para publicar com segurança.</td>
+            </tr>
+            <tr>
+              <td><strong>Documentadora</strong></td>
+              <td>Mantém README, arquitetura, decisões, mapa de features e guias operacionais.</td>
+              <td>O projeto permanece compreensível para humanos e IAs.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout ok">
+          <strong>Mandamento operacional:</strong> a IA deve sempre entregar uma base que outro desenvolvedor ou outra IA consiga continuar sem precisar adivinhar a arquitetura.
+        </div>
+      </section>
+
+      <section id="entrada">
+        <div class="section-kicker">5. Informações iniciais</div>
+        <h2>Entrada mínima para criar qualquer projeto</h2>
+        <p>Quando receber uma ideia, a IA deve transformar a ideia em especificação. Mesmo quando o usuário não fornecer todos os detalhes, a IA deve criar uma base racional e registrar as suposições.</p>
+        <h3>Dados que a IA deve coletar ou inferir</h3>
+        <table>
+          <thead>
+            <tr><th>Categoria</th><th>Pergunta</th><th>Se não houver resposta</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Objetivo</td>
+              <td>Qual problema o projeto resolve?</td>
+              <td>Definir objetivo resumido com base no pedido.</td>
+            </tr>
+            <tr>
+              <td>Usuários</td>
+              <td>Quem usa o sistema?</td>
+              <td>Criar personas iniciais: administrador, usuário comum e operador.</td>
+            </tr>
+            <tr>
+              <td>Tipo de produto</td>
+              <td>Web app, API, mobile, automação, dashboard, SaaS, CLI, agente de IA?</td>
+              <td>Escolher arquitetura modular compatível com o pedido.</td>
+            </tr>
+            <tr>
+              <td>Stack</td>
+              <td>Qual tecnologia deve ser usada?</td>
+              <td>Propor stack padrão e documentar a escolha.</td>
+            </tr>
+            <tr>
+              <td>Banco</td>
+              <td>Precisa persistir dados?</td>
+              <td>Se houver usuários, transações ou histórico, incluir banco e migrations.</td>
+            </tr>
+            <tr>
+              <td>Autenticação</td>
+              <td>Precisa login, permissões e papéis?</td>
+              <td>Incluir autenticação quando houver dados privados ou área administrativa.</td>
+            </tr>
+            <tr>
+              <td>Deploy</td>
+              <td>Onde será publicado?</td>
+              <td>Criar pipeline genérico e documentar opções.</td>
+            </tr>
+            <tr>
+              <td>Qualidade</td>
+              <td>Qual cobertura de testes mínima?</td>
+              <td>Adotar baseline inicial e meta de crescimento, com testes para código novo.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Especificação inicial que a IA deve gerar</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># PROJECT_BRIEF.md
+
+## Nome do projeto
+&lt;nome-do-projeto&gt;
+
+## Objetivo
+&lt;o que o projeto resolve&gt;
+
+## Público-alvo
+&lt;quem usa&gt;
+
+## Problema principal
+&lt;dor que o sistema resolve&gt;
+
+## Solução proposta
+&lt;como o sistema resolve&gt;
+
+## Escopo da primeira versão
+- &lt;feature 1&gt;
+- &lt;feature 2&gt;
+- &lt;feature 3&gt;
+
+## Fora do escopo da primeira versão
+- &lt;o que não será feito agora&gt;
+
+## Stack proposta
+- Frontend: &lt;tecnologia&gt;
+- Backend: &lt;tecnologia&gt;
+- Banco: &lt;tecnologia&gt;
+- Testes: &lt;ferramentas&gt;
+- Deploy: &lt;plataforma&gt;
+
+## Premissas
+- &lt;decisões tomadas por falta de informação&gt;
+
+## Riscos iniciais
+- &lt;riscos técnicos ou de produto&gt;</code></pre></div>
+      </section>
+
+      <section id="fluxo-zero">
+        <div class="section-kicker">6. Processo principal</div>
+        <h2>Fluxo para a IA criar um projeto do zero</h2>
+        <p class="lead">A IA deve executar o projeto em fases. Cada fase produz arquivos, decisões e validações. O objetivo é impedir que o projeto nasça como um bloco de código improvisado.</p>
+        <div class="flow">
+          <div class="step">
+            <h3>Entender a ideia e criar o brief</h3>
+            <p>Converter o pedido em objetivo, escopo, usuários, funcionalidades, restrições e premissas. Criar <code>docs/PROJECT_BRIEF.md</code>.</p>
+          </div>
+          <div class="step">
+            <h3>Escolher arquitetura e stack</h3>
+            <p>Definir camadas, tecnologias, banco, autenticação, testes e deploy. Registrar decisões em <code>docs/ARCHITECTURE.md</code> e <code>docs/DECISIONS/</code>.</p>
+          </div>
+          <div class="step">
+            <h3>Criar repositório e branch inicial</h3>
+            <p>Inicializar Git, criar branch <code>init/project-foundation</code>, adicionar <code>.gitignore</code>, <code>.editorconfig</code>, README, docs e configurações.</p>
+          </div>
+          <div class="step">
+            <h3>Criar estrutura modular</h3>
+            <p>Montar pastas por domínio/feature, separar <code>shared</code>, <code>config</code>, <code>tests</code>, <code>docs</code>, <code>scripts</code> e <code>.github/workflows</code>.</p>
+          </div>
+          <div class="step">
+            <h3>Implementar fundação técnica</h3>
+            <p>Configurar ambiente, validação, logger, tratamento de erro, conexão com banco, roteamento, layout base, autenticação se necessário e padrões de resposta.</p>
+          </div>
+          <div class="step">
+            <h3>Implementar features em ciclos pequenos</h3>
+            <p>Cada feature deve ter especificação, arquivos próprios, testes, atualização do mapa de features e PR separado.</p>
+          </div>
+          <div class="step">
+            <h3>Configurar qualidade automática</h3>
+            <p>Adicionar lint, formatação, typecheck, testes, cobertura, build e pipeline de CI/CD.</p>
+          </div>
+          <div class="step">
+            <h3>Revisar diff e preparar pull request</h3>
+            <p>Conferir alterações contra a branch principal, explicar impacto, riscos, testes e documentação atualizada.</p>
+          </div>
+          <div class="step">
+            <h3>Entregar versão executável</h3>
+            <p>O projeto deve rodar localmente, ter instruções claras, testes passando e caminho de deploy definido.</p>
+          </div>
+        </div>
+        <h3>Ordem mínima de arquivos criados na fundação</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>1. README.md
+2. .gitignore
+3. .editorconfig
+4. .env.example
+5. docs/PROJECT_BRIEF.md
+6. docs/AI_PROJECT_RULES.md
+7. docs/ARCHITECTURE.md
+8. docs/FEATURE_MAP.md
+9. docs/TEST_STRATEGY.md
+10. docs/DEPLOYMENT.md
+11. docs/DECISIONS/0001-initial-architecture.md
+12. src/ ou apps/ ou packages/
+13. tests/
+14. scripts/
+15. .github/pull_request_template.md
+16. .github/workflows/ci.yml</code></pre></div>
+      </section>
+
+      <section id="legado">
+        <div class="section-kicker">7. Projetos existentes e legados</div>
+        <h2>Adotar o manual em um projeto que já está rodando</h2>
+        <p class="lead">Este manual foi pensado principalmente para projetos novos, onde tudo nasce organizado. Mas a maioria das pessoas já tem um projeto em andamento, com muita coisa acontecendo. Esta é a trilha para esse caso: aqui o primeiro passo não é codar, é <strong>contextualizar o que já existe</strong>.</p>
+        <div class="callout warn">
+          <strong>Atenção:</strong> em um projeto existente, começar a alterar código sem antes mapear e documentar é receita para duplicar funcionalidade e quebrar o que já funciona. Quem tem experiência improvisa; quem está começando se perde. Por isso esta seção existe.
+        </div>
+
+        <h3>Novo x existente: qual trilha seguir</h3>
+        <div class="matrix">
+          <div class="yes">
+            <strong>Projeto novo (Trilha A)</strong>
+            <ul>
+              <li>Comece pelo <a href="#fluxo-zero">fluxo do zero</a>.</li>
+              <li>Estrutura, docs e testes nascem junto com o código.</li>
+              <li>Convenções aplicadas desde o primeiro arquivo.</li>
+            </ul>
+          </div>
+          <div class="no" style="background:#fffaeb;border-color:#fedf89;">
+            <strong>Projeto existente (Trilha B)</strong>
+            <ul>
+              <li>Primeiro mapeie e documente o que já existe.</li>
+              <li>Segregue a documentação por feature retroativamente.</li>
+              <li>Adote branches, testes e CI/CD de forma gradual.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Fluxo para adotar o padrão em um projeto existente</h3>
+        <div class="flow">
+          <div class="step">
+            <h4>Mapear o que já existe</h4>
+            <p>Peça à IA para varrer o repositório e produzir um mapa: features atuais, módulos, pontos de entrada, dependências e onde estão as maiores dores (arquivos grandes, duplicidade, áreas sem teste).</p>
+          </div>
+          <div class="step">
+            <h4>Gerar documentação por feature retroativa</h4>
+            <p>Para cada feature já existente, crie o pacote de <a href="#docs-feature">documentação por feature</a> (README, contexto, contrato de API, instruções). Isso dá à IA o contexto que faltava para trabalhar sem quebrar nada.</p>
+          </div>
+          <div class="step">
+            <h4>Identificar e resolver duplicidade</h4>
+            <p>Antes de criar qualquer coisa nova, procure se já existe. Consolide funcionalidades repetidas e registre o que foi unificado.</p>
+          </div>
+          <div class="step">
+            <h4>Introduzir testes de caracterização</h4>
+            <p>Em código legado sem testes, escreva testes que capturam o comportamento atual antes de mudar. Eles viram a rede de segurança contra regressão.</p>
+          </div>
+          <div class="step">
+            <h4>Adotar branches, PR e CI/CD gradualmente</h4>
+            <p>Passe a trabalhar em branches fora da principal, com merge por diff e pull request. Ligue lint, typecheck e testes no CI aos poucos, começando pelas áreas mais críticas.</p>
+          </div>
+          <div class="step">
+            <h4>Ligar observabilidade</h4>
+            <p>Configure monitoramento e crash analytics (<a href="#observabilidade">observabilidade</a>) para acompanhar a saúde do sistema enquanto ele evolui.</p>
+          </div>
+        </div>
+
+        <div class="callout ok">
+          <strong>Definição de pronto (projeto existente):</strong> o que existia está mapeado e documentado por feature, duplicidades conhecidas foram resolvidas, mudanças passaram a acontecer em branch com testes, e o sistema tem monitoramento mínimo — sem precisar reescrever tudo de uma vez.
+        </div>
+
+        <h3>Prompt para adotar o padrão em um projeto existente</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>Assuma este projeto EXISTENTE como arquiteto e coordenador. Não altere
+comportamento ainda. Primeiro:
+1. Mapeie o repositório: features, módulos, pontos de entrada, dependências
+   e maiores dores (arquivos grandes, duplicidade, áreas sem teste).
+2. Para cada feature existente, crie documentação segregada dentro da própria
+   feature: README, contexto, contrato de API e instructions.
+3. Aponte duplicidades de funcionalidade e proponha consolidação.
+4. Sugira testes de caracterização para o comportamento atual antes de mudanças.
+5. Proponha um plano gradual de branches, pull request por diff e CI/CD.
+6. Proponha observabilidade mínima (métricas/alertas no backend, crash
+   analytics no app) para acompanhar a saúde do sistema.
+Entregue o mapa e o plano antes de escrever qualquer código novo.</code></pre></div>
+      </section>
+
+      <section id="estrutura">
+        <div class="section-kicker">8. Organização física</div>
+        <h2>Estrutura padrão do repositório</h2>
+        <p>A estrutura abaixo é uma base universal. A IA deve adaptar conforme o tipo de projeto, mas não deve abandonar a separação entre código, documentação, testes, scripts, configuração e pipeline.</p>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>&lt;project-root&gt;/
+  README.md
+  CONTRIBUTING.md
+  .gitignore
+  .editorconfig
+  .env.example
+
+  docs/
+    PROJECT_BRIEF.md
+    AI_PROJECT_RULES.md
+    ARCHITECTURE.md
+    FEATURE_MAP.md
+    API_CONTRACT.md
+    DATABASE.md
+    TEST_STRATEGY.md
+    DEPLOYMENT.md
+    SECURITY.md
+    DECISIONS/
+      0001-initial-architecture.md
+
+  src/
+    app/
+      app.*
+      routes.*
+      bootstrap.*
+
+    features/
+      &lt;feature-name&gt;/
+        docs/                  # em projetos grandes: README, contexto, contrato e instruções da feature
+        &lt;feature&gt;.controller.*
+        &lt;feature&gt;.service.*
+        &lt;feature&gt;.repository.*
+        &lt;feature&gt;.validators.*
+        &lt;feature&gt;.types.*
+        &lt;feature&gt;.constants.*
+        &lt;feature&gt;.mapper.*
+        &lt;feature&gt;.test.*
+        index.*
+
+    shared/
+      config/
+      database/
+      errors/
+      logging/
+      utils/
+      validators/
+      types/
+      events/
+
+  tests/
+    unit/
+    integration/
+    e2e/
+    fixtures/
+
+  scripts/
+    check-file-size.*
+    check-duplicates.*
+    seed.*
+
+  .github/
+    pull_request_template.md
+    workflows/
+      ci.yml</code></pre></div>
+        <h3>Quando usar monorepo</h3>
+        <p>Se o projeto tiver frontend, backend, pacotes compartilhados, mobile ou workers separados, a IA pode usar uma estrutura de monorepo.</p>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>&lt;project-root&gt;/
+  apps/
+    web/
+    api/
+    mobile/
+    worker/
+
+  packages/
+    ui/
+    config/
+    database/
+    auth/
+    contracts/
+    eslint-config/
+    test-utils/
+
+  docs/
+  tests/
+  scripts/
+  .github/
+  README.md</code></pre></div>
+        <h3>Regras para nomear pastas</h3>
+        <table>
+          <thead>
+            <tr><th>Pasta</th><th>Uso correto</th><th>Evitar</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>features/</code></td>
+              <td>Funcionalidades de domínio: users, companies, billing, reports.</td>
+              <td>Colocar utilitários globais ou configurações.</td>
+            </tr>
+            <tr>
+              <td><code>shared/</code></td>
+              <td>Código reutilizado por várias features.</td>
+              <td>Virar depósito de qualquer coisa sem dono.</td>
+            </tr>
+            <tr>
+              <td><code>app/</code></td>
+              <td>Inicialização, rotas principais e composição da aplicação.</td>
+              <td>Regras de negócio específicas.</td>
+            </tr>
+            <tr>
+              <td><code>docs/</code></td>
+              <td>Documentação técnica viva.</td>
+              <td>Documentação desatualizada sem vínculo com o código.</td>
+            </tr>
+            <tr>
+              <td><code>tests/</code></td>
+              <td>Testes globais, integração, e2e, fixtures.</td>
+              <td>Testes unitários de feature longe da feature sem motivo.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="documentos">
+        <div class="section-kicker">9. Documentação viva</div>
+        <h2>Documentos obrigatórios do projeto</h2>
+        <p>Um projeto bem organizado precisa explicar sua própria estrutura. A IA deve criar e manter estes documentos desde o início.</p>
+        <table>
+          <thead>
+            <tr><th>Documento</th><th>Função</th><th>Atualizar quando</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>README.md</code></td>
+              <td>Explica o projeto, instalação, execução, testes e comandos principais.</td>
+              <td>Sempre que mudar setup, scripts, arquitetura ou uso.</td>
+            </tr>
+            <tr>
+              <td><code>docs/PROJECT_BRIEF.md</code></td>
+              <td>Define objetivo, escopo, usuários, premissas e riscos.</td>
+              <td>Quando o escopo de produto mudar.</td>
+            </tr>
+            <tr>
+              <td><code>docs/AI_PROJECT_RULES.md</code></td>
+              <td>Regras que toda IA deve seguir ao mexer no projeto.</td>
+              <td>Quando padrões de trabalho mudarem.</td>
+            </tr>
+            <tr>
+              <td><code>docs/ARCHITECTURE.md</code></td>
+              <td>Descreve camadas, módulos, fluxo de dados e decisões técnicas.</td>
+              <td>Quando criar módulo, integração ou mudar arquitetura.</td>
+            </tr>
+            <tr>
+              <td><code>docs/FEATURE_MAP.md</code></td>
+              <td>Mapa de funcionalidades existentes para evitar duplicidade.</td>
+              <td>A cada feature criada, alterada ou removida.</td>
+            </tr>
+            <tr>
+              <td><code>docs/API_CONTRACT.md</code></td>
+              <td>Contratos de endpoints, payloads, respostas e erros.</td>
+              <td>Quando API mudar.</td>
+            </tr>
+            <tr>
+              <td><code>docs/DATABASE.md</code></td>
+              <td>Modelo de dados, tabelas, relacionamentos e migrations.</td>
+              <td>Quando banco mudar.</td>
+            </tr>
+            <tr>
+              <td><code>docs/TEST_STRATEGY.md</code></td>
+              <td>Política de testes, cobertura e comandos.</td>
+              <td>Quando criar novo tipo de teste ou mudar meta.</td>
+            </tr>
+            <tr>
+              <td><code>docs/DEPLOYMENT.md</code></td>
+              <td>Como publicar, ambientes, variáveis e rollback.</td>
+              <td>Quando pipeline ou deploy mudar.</td>
+            </tr>
+            <tr>
+              <td><code>docs/DECISIONS/</code></td>
+              <td>Registra decisões arquiteturais importantes.</td>
+              <td>Quando uma escolha técnica impactar o projeto.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Regra de documentação</h3>
+        <div class="callout warn">
+          <strong>Código sem documentação mínima não está completo.</strong> A IA deve registrar o que foi criado, por que foi criado, onde está, como testar e como evoluir.
+        </div>
+        <p>Em projetos grandes, estes documentos não devem viver apenas na raiz: cada feature deve carregar seu próprio pacote de documentação. Veja <a href="#docs-feature">documentação por feature</a>.</p>
+      </section>
+
+      <section id="docs-feature">
+        <div class="section-kicker">10. Documentação por feature</div>
+        <h2>Documentação segregada: um conjunto de docs por feature</h2>
+        <p class="lead">Em projetos grandes, uma documentação geral única vira um bloco difícil de manter e de ler. O padrão superior é segregar: cada feature carrega a sua própria documentação, o seu contrato de API e as suas instruções, ao lado do próprio código.</p>
+        <div class="callout">
+          <strong>Ideia central:</strong> quando uma IA vai mexer em uma parte do sistema, ela deve encontrar ali mesmo, dentro da feature, todo o contexto de que precisa — sem ter que varrer uma documentação global gigante para achar o pedaço certo.
+        </div>
+
+        <h3>Global x por feature</h3>
+        <div class="matrix">
+          <div class="no">
+            <strong>Documentação só global</strong>
+            <ul>
+              <li>Tudo empilhado em <code>docs/</code> na raiz.</li>
+              <li>A IA lê muito para achar pouco contexto útil.</li>
+              <li>Fácil ficar desatualizada e desconectada do código.</li>
+              <li>Escala mal em projetos grandes.</li>
+            </ul>
+          </div>
+          <div class="yes">
+            <strong>Documentação por feature</strong>
+            <ul>
+              <li>Cada feature tem o seu próprio contexto ao lado do código.</li>
+              <li>A IA lê apenas o documento da feature que vai tocar.</li>
+              <li>Atualizar a feature e atualizar o doc andam juntos.</li>
+              <li>Escala bem: novas features chegam autoexplicadas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Estrutura de exemplo</h3>
+        <p>Exemplos reais de um e-commerce: as features <code>carrinho</code> e <code>busca</code>, cada uma com todo o seu contexto documentado para as IAs lerem quando forem mexer nelas.</p>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>src/features/
+├─ carrinho/
+│  ├─ docs/
+│  │  ├─ README.md            # o que a feature faz e como usar
+│  │  ├─ contexto.md          # regras de negócio e decisões
+│  │  ├─ api-contract.md      # contrato de API da feature
+│  │  └─ instructions.md      # instruções para a IA ao editar
+│  ├─ components/
+│  ├─ services/
+│  └─ tests/
+└─ busca/
+   ├─ docs/
+   │  ├─ README.md
+   │  ├─ contexto.md
+   │  ├─ api-contract.md
+   │  └─ instructions.md
+   ├─ components/
+   ├─ services/
+   └─ tests/</code></pre></div>
+
+        <div class="callout ok">
+          <strong>Regra prática:</strong> os documentos que o manual manda criar (README, contrato de API, instruções, contexto) não precisam viver só na raiz. Em projetos grandes, crie-os dentro de cada feature. Mantenha na raiz apenas o que é realmente transversal ao projeto inteiro.
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="section-kicker">11. Design modular</div>
+        <h2>Arquitetura por features</h2>
+        <p>O padrão recomendado é organizar o projeto por funcionalidades. Isso evita que o código fique espalhado em pastas genéricas e facilita o trabalho de qualquer IA ou desenvolvedor.</p>
+        <h3>Modelo de uma feature completa</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>src/features/users/
+  users.controller.ts      # Entrada: rotas, request, response
+  users.service.ts         # Regras de negócio
+  users.repository.ts      # Banco ou persistência
+  users.validators.ts      # Validação de entrada
+  users.types.ts           # Tipos e interfaces
+  users.constants.ts       # Constantes da feature
+  users.mapper.ts          # Conversão de entidades/DTOs
+  users.events.ts          # Eventos gerados pela feature, se existir
+  users.test.ts            # Testes unitários principais
+  users.integration.test.ts# Testes de integração, se necessário
+  index.ts                 # Exportações controladas</code></pre></div>
+        <h3>Responsabilidades por camada</h3>
+        <table>
+          <thead>
+            <tr><th>Camada</th><th>Pode fazer</th><th>Não pode fazer</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Controller / Route</td>
+              <td>Receber entrada, chamar validação, chamar service, retornar resposta.</td>
+              <td>Conter regra de negócio pesada ou query direta no banco.</td>
+            </tr>
+            <tr>
+              <td>Service / Use Case</td>
+              <td>Executar regra de negócio, orquestrar repositórios, validar fluxo.</td>
+              <td>Depender diretamente de UI ou detalhes de HTTP.</td>
+            </tr>
+            <tr>
+              <td>Repository / Gateway</td>
+              <td>Isolar acesso ao banco, API externa ou storage.</td>
+              <td>Conter regra de negócio que deveria estar no service.</td>
+            </tr>
+            <tr>
+              <td>Validators</td>
+              <td>Validar formato, obrigatoriedade, tipos e limites de entrada.</td>
+              <td>Executar operação de banco ou regra de domínio complexa.</td>
+            </tr>
+            <tr>
+              <td>Types / DTOs</td>
+              <td>Definir contratos internos e externos.</td>
+              <td>Executar lógica.</td>
+            </tr>
+            <tr>
+              <td>Tests</td>
+              <td>Provar comportamento, erros, bordas e regressões.</td>
+              <td>Ser apenas teste superficial sem assert relevante.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Quando mover algo para <code>shared</code></h3>
+        <p>Um código só deve ir para <code>shared</code> quando for usado por duas ou mais features ou quando for claramente infraestrutura do sistema. Não coloque uma função em <code>shared</code> apenas porque não sabe onde ela pertence.</p>
+        <div class="matrix">
+          <div class="yes">
+            <h4>Vai para <code>shared</code></h4>
+            <ul>
+              <li>Logger global.</li>
+              <li>Cliente de banco.</li>
+              <li>Tratamento de erro comum.</li>
+              <li>Validador genérico reutilizado.</li>
+              <li>Tipos globais realmente compartilhados.</li>
+              <li>Funções utilitárias usadas por várias features.</li>
+            </ul>
+          </div>
+          <div class="no">
+            <h4>Não deve ir para <code>shared</code></h4>
+            <ul>
+              <li>Regra específica de uma feature.</li>
+              <li>Componente usado em uma única tela.</li>
+              <li>Query específica de um módulo.</li>
+              <li>Código sem dono claro.</li>
+              <li>Arquivos genéricos como <code>helpers.ts</code> com várias responsabilidades.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="linhas">
+        <div class="section-kicker">12. Tamanho e clareza</div>
+        <h2>Regra operacional dos 200 linhas</h2>
+        <p class="lead">O limite de 200 linhas não é uma lei matemática. É um alerta de arquitetura. Quando um arquivo cresce demais, a IA deve verificar se ele está acumulando responsabilidades.</p>
+        <table>
+          <thead>
+            <tr><th>Tamanho do arquivo</th><th>Status</th><th>Ação obrigatória</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Até 120 linhas</td>
+              <td><span class="pill ok">Saudável</span></td>
+              <td>Manter se estiver coeso.</td>
+            </tr>
+            <tr>
+              <td>121 a 200 linhas</td>
+              <td><span class="pill warn">Atenção</span></td>
+              <td>Revisar se há mistura de responsabilidades.</td>
+            </tr>
+            <tr>
+              <td>201 a 250 linhas</td>
+              <td><span class="pill warn">Alerta</span></td>
+              <td>Fragmentar ou justificar claramente.</td>
+            </tr>
+            <tr>
+              <td>251 a 400 linhas</td>
+              <td><span class="pill danger">Risco</span></td>
+              <td>Refatorar por função, feature ou camada.</td>
+            </tr>
+            <tr>
+              <td>Acima de 400 linhas</td>
+              <td><span class="pill danger">Crítico</span></td>
+              <td>Tratar como dívida arquitetural, exceto arquivo gerado ou caso justificado.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Perguntas que a IA deve fazer ao encontrar arquivo grande</h3>
+        <ul>
+          <li>Este arquivo tem mais de uma responsabilidade?</li>
+          <li>Existe regra de negócio misturada com interface?</li>
+          <li>Existe validação misturada com acesso ao banco?</li>
+          <li>Existem constantes, tipos e helpers que poderiam estar separados?</li>
+          <li>Há funções independentes que deveriam virar módulos próprios?</li>
+          <li>Existe código duplicado dentro do próprio arquivo?</li>
+          <li>O nome do arquivo ainda representa todo o conteúdo?</li>
+          <li>Os testes ficam difíceis porque o arquivo faz coisas demais?</li>
+        </ul>
+        <h3>Exceções permitidas</h3>
+        <p>Alguns arquivos podem passar de 200 linhas, mas precisam de justificativa:</p>
+        <table>
+          <thead>
+            <tr><th>Tipo de arquivo</th><th>Pode passar?</th><th>Condição</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Migrations</td><td>Sim</td><td>Quando geradas pelo histórico do banco.</td></tr>
+            <tr><td>Schemas grandes</td><td>Sim</td><td>Quando representam contrato extenso e bem organizado.</td></tr>
+            <tr><td>Fixtures e mocks</td><td>Sim</td><td>Quando são dados de teste e não lógica.</td></tr>
+            <tr><td>Arquivos gerados</td><td>Sim</td><td>Quando não devem ser editados manualmente.</td></tr>
+            <tr><td>Documentação</td><td>Sim</td><td>Quando a leitura ainda estiver organizada por seções.</td></tr>
+            <tr><td>Testes extensos</td><td>Sim, com cuidado</td><td>Quando muitos cenários pertencem à mesma unidade testada.</td></tr>
+          </tbody>
+        </table>
+        <h3>Forma correta de fragmentar</h3>
+        <div class="matrix">
+          <div class="no">
+            <h4>Errado</h4>
+            <div class="code-wrap"><pre><code>big-file-part-1.ts
+big-file-part-2.ts
+big-file-part-3.ts</code></pre></div>
+            <p>Dividir por tamanho sem responsabilidade clara cria bagunça em pedaços menores.</p>
+          </div>
+          <div class="yes">
+            <h4>Certo</h4>
+            <div class="code-wrap"><pre><code>users.service.ts
+users.repository.ts
+users.validators.ts
+users.types.ts
+users.mapper.ts</code></pre></div>
+            <p>Dividir por responsabilidade melhora leitura, teste, manutenção e contexto para IA.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="git">
+        <div class="section-kicker">13. Versionamento seguro</div>
+        <h2>Git, branches, pull request e merge por diff</h2>
+        <p>O projeto deve ser versionado desde o início. A branch principal representa a versão estável. Toda alteração relevante deve acontecer em uma branch separada e ser enviada por pull request.</p>
+        <h3>Branches recomendadas</h3>
+        <table>
+          <thead>
+            <tr><th>Tipo</th><th>Padrão</th><th>Exemplo</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fundação</td><td><code>init/&lt;nome&gt;</code></td><td><code>init/project-foundation</code></td></tr>
+            <tr><td>Feature</td><td><code>feature/&lt;nome&gt;</code></td><td><code>feature/user-authentication</code></td></tr>
+            <tr><td>Correção</td><td><code>fix/&lt;nome&gt;</code></td><td><code>fix/login-validation-error</code></td></tr>
+            <tr><td>Refatoração</td><td><code>refactor/&lt;nome&gt;</code></td><td><code>refactor/users-service-split</code></td></tr>
+            <tr><td>Teste</td><td><code>test/&lt;nome&gt;</code></td><td><code>test/billing-rules</code></td></tr>
+            <tr><td>Documentação</td><td><code>docs/&lt;nome&gt;</code></td><td><code>docs/api-contract</code></td></tr>
+            <tr><td>Infra</td><td><code>chore/&lt;nome&gt;</code></td><td><code>chore/setup-ci</code></td></tr>
+          </tbody>
+        </table>
+        <h3>Comandos base</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># iniciar projeto
+mkdir &lt;project-name&gt;
+cd &lt;project-name&gt;
+git init
+
+# criar branch inicial
+git checkout -b init/project-foundation
+
+# ver alterações
+git status
+git diff
+
+# commit
+git add .
+git commit -m "init: create project foundation"
+
+# criar nova branch para feature
+git checkout main
+git pull origin main
+git checkout -b feature/&lt;feature-name&gt;
+
+# revisar diff antes do PR
+git diff main...HEAD</code></pre></div>
+        <h3>Worktrees: várias frentes de trabalho no mesmo repositório</h3>
+        <p>Um mesmo repositório pode manter vários <strong>worktrees</strong>: cópias de trabalho simultâneas, cada uma apontando para uma branch diferente. Isso permite que várias frentes — conversas de IA, agentes ou squads — trabalhem ao mesmo tempo em partes diferentes do sistema sem uma sobrescrever a outra e sem ficar trocando de branch na mesma pasta.</p>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># criar um worktree novo em outra pasta, já em uma branch própria
+git worktree add ../&lt;project&gt;-frontend feature/frontend-checkout
+git worktree add ../&lt;project&gt;-backend feature/backend-checkout
+
+# listar worktrees ativos
+git worktree list
+
+# remover worktree ao concluir a frente de trabalho
+git worktree remove ../&lt;project&gt;-frontend</code></pre></div>
+        <h3>Regras para trabalho paralelo com múltiplas frentes</h3>
+        <ul>
+          <li>Uma branch por frente de trabalho: cada squad, agente ou conversa de IA atua em uma branch própria por setor importante do sistema (ex.: <code>feature/frontend-busca</code>, <code>feature/backend-busca</code>).</li>
+          <li>Um worktree por frente ativa: frentes simultâneas não devem compartilhar a mesma cópia de trabalho.</li>
+          <li>Cada frente integra suas mudanças pela branch principal via pull request com merge por diff — nunca copiando o projeto inteiro por cima.</li>
+          <li>Antes de abrir uma frente nova, verificar no feature map se outra frente já cobre o mesmo escopo, para não duplicar trabalho.</li>
+          <li>Frentes que tocam os mesmos arquivos devem ser sequenciadas ou coordenadas, não executadas em paralelo às cegas.</li>
+        </ul>
+        <h3>Regra de merge por diff</h3>
+        <p>O merge deve considerar apenas o que foi alterado pela branch. A IA não deve substituir pastas inteiras, recriar projeto por cima do existente nem sobrescrever mudanças de outras frentes de trabalho.</p>
+        <div class="callout danger">
+          <strong>Proibido:</strong> copiar o projeto inteiro novamente para dentro da branch principal quando a tarefa alterou apenas alguns arquivos. Isso causa perda de código, conflito e duplicidade.
+        </div>
+        <h3>Política de pull request</h3>
+        <ul>
+          <li>Um PR deve ter um objetivo claro.</li>
+          <li>Um PR deve ter escopo pequeno.</li>
+          <li>Um PR deve explicar arquivos alterados e motivo.</li>
+          <li>Um PR deve listar testes executados.</li>
+          <li>Um PR deve indicar se documentação foi atualizada.</li>
+          <li>Um PR deve informar se algum arquivo passou do limite recomendado.</li>
+          <li>Um PR não deve misturar feature, refatoração ampla e mudança de infraestrutura sem necessidade.</li>
+        </ul>
+      </section>
+
+      <section id="implementacao">
+        <div class="section-kicker">14. Execução por ciclos</div>
+        <h2>Processo de implementação por módulo ou feature</h2>
+        <p>A IA deve implementar o projeto em ciclos pequenos. Cada ciclo representa uma feature, um ajuste, uma refatoração ou uma etapa de infraestrutura.</p>
+        <h3>Ciclo padrão</h3>
+        <div class="flow">
+          <div class="step">
+            <h3>Definir escopo da feature</h3>
+            <p>Criar uma pequena especificação com objetivo, entradas, saídas, regras de negócio e critérios de aceite.</p>
+          </div>
+          <div class="step">
+            <h3>Verificar se já existe algo parecido</h3>
+            <p>Pesquisar nomes, módulos, endpoints, componentes, services, tabelas e testes relacionados antes de criar arquivos novos.</p>
+          </div>
+          <div class="step">
+            <h3>Desenhar arquivos necessários</h3>
+            <p>Listar quais arquivos serão criados ou alterados e qual responsabilidade cada um terá.</p>
+          </div>
+          <div class="step">
+            <h3>Implementar o mínimo funcional</h3>
+            <p>Criar primeiro o fluxo principal com código simples, claro e testável.</p>
+          </div>
+          <div class="step">
+            <h3>Adicionar validações e erros</h3>
+            <p>Tratar entradas inválidas, permissões, casos vazios, exceções, limites e mensagens consistentes.</p>
+          </div>
+          <div class="step">
+            <h3>Criar testes</h3>
+            <p>Testar caso feliz, casos inválidos, bordas, erros e regressões.</p>
+          </div>
+          <div class="step">
+            <h3>Atualizar documentação</h3>
+            <p>Atualizar feature map, API contract, architecture, database ou decisões quando aplicável.</p>
+          </div>
+          <div class="step">
+            <h3>Executar validações</h3>
+            <p>Rodar lint, typecheck, testes, cobertura e build.</p>
+          </div>
+          <div class="step">
+            <h3>Revisar diff</h3>
+            <p>Conferir se apenas o escopo necessário foi alterado e se não houve duplicidade.</p>
+          </div>
+        </div>
+        <h3>Modelo de especificação de feature</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># Feature: &lt;nome-da-feature&gt;
+
+## Objetivo
+&lt;o que a feature entrega&gt;
+
+## Usuário beneficiado
+&lt;quem usa&gt;
+
+## Fluxo principal
+1. &lt;passo 1&gt;
+2. &lt;passo 2&gt;
+3. &lt;passo 3&gt;
+
+## Regras de negócio
+- &lt;regra 1&gt;
+- &lt;regra 2&gt;
+
+## Entradas
+- &lt;campo&gt;: &lt;tipo&gt; - &lt;obrigatório/opcional&gt;
+
+## Saídas
+- &lt;resposta esperada&gt;
+
+## Erros previstos
+- &lt;erro&gt;: &lt;quando ocorre&gt;
+
+## Arquivos previstos
+- &lt;arquivo&gt;: &lt;responsabilidade&gt;
+
+## Testes obrigatórios
+- caso feliz
+- entrada inválida
+- permissão negada
+- recurso inexistente
+- regra de negócio crítica</code></pre></div>
+      </section>
+
+      <section id="testes">
+        <div class="section-kicker">15. Garantia contra regressão</div>
+        <h2>Testes e cobertura</h2>
+        <p>Teste não é opcional. A IA deve considerar teste como parte da implementação. O objetivo é detectar erro cedo, permitir refatoração segura e evitar que uma mudança quebre outra parte do sistema.</p>
+        <h3>Tipos de teste</h3>
+        <table>
+          <thead>
+            <tr><th>Tipo</th><th>O que testa</th><th>Quando usar</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Unitário</td>
+              <td>Função, regra ou service isolado.</td>
+              <td>Obrigatório para regra de negócio.</td>
+            </tr>
+            <tr>
+              <td>Integração</td>
+              <td>Comunicação entre módulos, banco, API interna.</td>
+              <td>Quando o valor depende de interação entre camadas.</td>
+            </tr>
+            <tr>
+              <td>E2E</td>
+              <td>Fluxo completo como usuário real.</td>
+              <td>Para fluxos críticos: login, pagamento, cadastro, checkout, geração de relatório.</td>
+            </tr>
+            <tr>
+              <td>Contrato</td>
+              <td>Entrada e saída de APIs, eventos ou integrações.</td>
+              <td>Quando há frontend/backend separados ou integrações externas.</td>
+            </tr>
+            <tr>
+              <td>Smoke</td>
+              <td>Se a aplicação sobe e fluxos mínimos funcionam.</td>
+              <td>Após deploy ou build.</td>
+            </tr>
+            <tr>
+              <td>Regressão</td>
+              <td>Bug corrigido para garantir que não volte.</td>
+              <td>Sempre que corrigir bug.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Política de cobertura</h3>
+        <table>
+          <thead>
+            <tr><th>Cenário</th><th>Meta recomendada</th><th>Regra</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Projeto novo</td>
+              <td>Alta cobertura desde o início.</td>
+              <td>Código de regra de negócio novo deve ter teste.</td>
+            </tr>
+            <tr>
+              <td>Projeto legado</td>
+              <td>Baseline atual + crescimento gradual.</td>
+              <td>Não permitir queda de cobertura.</td>
+            </tr>
+            <tr>
+              <td>Fluxo crítico</td>
+              <td>Cobertura forte com unitário + integração ou e2e.</td>
+              <td>Não publicar sem teste.</td>
+            </tr>
+            <tr>
+              <td>Bug corrigido</td>
+              <td>Teste de regressão obrigatório.</td>
+              <td>O teste deve falhar antes da correção ou comprovar o caso corrigido.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Checklist de teste para IA</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>- [ ] Existe teste para o fluxo principal?
+- [ ] Existe teste para entrada inválida?
+- [ ] Existe teste para ausência de permissão?
+- [ ] Existe teste para recurso inexistente?
+- [ ] Existe teste para regra de negócio crítica?
+- [ ] Existe teste para erro esperado?
+- [ ] Existe teste para bug corrigido?
+- [ ] Os testes não dependem de ordem de execução?
+- [ ] Os mocks são claros e mínimos?
+- [ ] A cobertura não caiu?</code></pre></div>
+        <h3>Higiene de processos: watchers e workers órfãos</h3>
+        <p>Test runners paralelos (vitest, jest e similares) abrem cerca de um worker por núcleo da máquina. Se o processo pai morre sem encerramento limpo — terminal fechado sem <code>Ctrl+C</code>, editor finalizado à força, sessão de IA interrompida — os workers filhos não recebem o sinal de parada, viram órfãos (adotados pelo init, <code>PPID=1</code>) e continuam girando CPU indefinidamente, invisíveis em qualquer terminal. O sintoma é máquina lenta e load average muito acima do número de núcleos.</p>
+        <div class="callout warn">
+          <strong>Regra para a IA:</strong> todo processo iniciado durante uma tarefa (test runner, watcher, dev server, worker) deve ser encerrado ao concluir a tarefa. Em automações e CI, prefira execução única (<code>run</code>) em vez de modo <code>watch</code> — watch é para uso interativo de humanos.
+        </div>
+        <h3>Diagnóstico e limpeza de órfãos</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># top consumidores de CPU
+ps -Ao pid,ppid,pcpu,pmem,comm -r | head -16
+
+# load average (comparar com o nº de núcleos)
+uptime            # núcleos: sysctl -n hw.ncpu (macOS) | nproc (Linux)
+
+# localizar workers órfãos (PPID=1 = sem processo pai vivo)
+ps -Ao pid,ppid,command | awk '$2==1 &amp;&amp; /vitest|jest|node/ {print}'
+
+# encerrar SOMENTE os órfãos (TERM primeiro, -9 nos teimosos)
+ps -Ao pid,ppid,command | awk '$2==1 &amp;&amp; /vitest/ {print $1}' | xargs kill -TERM
+sleep 2
+ps -Ao pid,ppid,command | awk '$2==1 &amp;&amp; /vitest/ {print $1}' | xargs kill -9 2&gt;/dev/null</code></pre></div>
+        <div class="callout danger">
+          <strong>Cuidado:</strong> matar apenas processos com <code>PPID=1</code>. Um teste rodando de verdade tem processo pai vivo e nunca deve ser morto por script — nesses casos, encerre com <code>Ctrl+C</code> no terminal dono. Evite <code>pkill -f</code> genérico, que derruba também execuções legítimas de outras frentes de trabalho.
+        </div>
+      </section>
+
+      <section id="cicd">
+        <div class="section-kicker">16. Automação de validação</div>
+        <h2>Pipeline de CI/CD</h2>
+        <p>CI/CD é a esteira automática que valida o projeto antes de aceitar alterações e, quando configurado, publica em ambientes de teste ou produção. A IA deve criar um pipeline mínimo logo no início.</p>
+        <h3>Pipeline mínimo recomendado</h3>
+        <div class="flow">
+          <div class="step"><h3>Checkout</h3><p>Baixar o código da branch.</p></div>
+          <div class="step"><h3>Instalar dependências</h3><p>Instalar pacotes com lockfile respeitado.</p></div>
+          <div class="step"><h3>Lint</h3><p>Verificar padrão de código.</p></div>
+          <div class="step"><h3>Formatação</h3><p>Validar estilo quando houver ferramenta de formatter.</p></div>
+          <div class="step"><h3>Typecheck</h3><p>Validar tipos em linguagens ou stacks tipadas.</p></div>
+          <div class="step"><h3>Testes</h3><p>Rodar unitários e integração conforme necessário.</p></div>
+          <div class="step"><h3>Cobertura</h3><p>Verificar se a cobertura mínima foi mantida.</p></div>
+          <div class="step"><h3>Build</h3><p>Gerar versão final e provar que compila.</p></div>
+          <div class="step"><h3>Auditoria básica</h3><p>Checar segredos, arquivos grandes, dependências e duplicidade.</p></div>
+          <div class="step"><h3>Deploy</h3><p>Publicar em staging e depois produção, quando configurado.</p></div>
+        </div>
+        <h3>Exemplo genérico de workflow</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup runtime
+        run: echo "Configure aqui Node, Python, Java, Go ou a stack do projeto"
+
+      - name: Install dependencies
+        run: echo "Instale dependências com o gerenciador correto"
+
+      - name: Lint
+        run: echo "Rodar lint"
+
+      - name: Typecheck
+        run: echo "Rodar typecheck se aplicável"
+
+      - name: Tests
+        run: echo "Rodar testes"
+
+      - name: Coverage
+        run: echo "Validar cobertura"
+
+      - name: Build
+        run: echo "Rodar build"
+
+      - name: File size check
+        run: echo "Verificar arquivos grandes e exigir justificativa"</code></pre></div>
+        <h3>Gates que bloqueiam merge</h3>
+        <ul>
+          <li>Testes falhando.</li>
+          <li>Build falhando.</li>
+          <li>Lint ou typecheck falhando.</li>
+          <li>Cobertura caindo sem justificativa.</li>
+          <li>Arquivo grande sem justificativa.</li>
+          <li>Segredo ou chave no código.</li>
+          <li>Duplicidade evidente de módulo ou função.</li>
+          <li>Alteração fora do escopo do PR.</li>
+        </ul>
+        <p>A validação não termina no deploy: depois de publicar, a saúde do sistema deve ser acompanhada por <a href="#observabilidade">observabilidade e monitoramento</a>.</p>
+      </section>
+
+      <section id="observabilidade">
+        <div class="section-kicker">17. Observabilidade e monitoramento</div>
+        <h2>Observabilidade: acompanhar a saúde do sistema em produção</h2>
+        <p class="lead">Um projeto não termina quando o código sobe. É preciso enxergar como ele se comporta rodando de verdade. A IA deve tratar observabilidade como parte da entrega, não como um extra opcional.</p>
+        <div class="callout">
+          <strong>Por que isso importa:</strong> sem monitoramento você só descobre que algo quebrou quando o usuário reclama. Com observabilidade, o próprio sistema avisa onde, quando e por que falhou — reduzindo dor de cabeça e tempo de investigação.
+        </div>
+
+        <h3>Os três pilares da observabilidade</h3>
+        <div class="grid">
+          <div class="card">
+            <h4>Logs</h4>
+            <p class="mini">Registro do que aconteceu, com contexto e nível (info, warn, error). Estruturados, pesquisáveis e sem dados sensíveis.</p>
+          </div>
+          <div class="card">
+            <h4>Métricas</h4>
+            <p class="mini">Números ao longo do tempo: latência, throughput, uso de CPU/memória, taxa de erro, filas. Base para dashboards e alertas.</p>
+          </div>
+          <div class="card">
+            <h4>Traces</h4>
+            <p class="mini">O caminho de uma requisição atravessando serviços. Mostra onde o tempo é gasto e qual etapa falhou.</p>
+          </div>
+        </div>
+
+        <h3>O que monitorar por tipo de projeto</h3>
+        <table>
+          <thead>
+            <tr><th>Tipo</th><th>Foco de monitoramento</th><th>Ferramentas comuns</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Backend / API</strong></td>
+              <td>Latência, taxa de erro, saúde de endpoints, uso de recursos, filas e jobs.</td>
+              <td>Grafana, Prometheus, OpenTelemetry, Sentry, Datadog</td>
+            </tr>
+            <tr>
+              <td><strong>App mobile</strong></td>
+              <td>Crash analytics, sessões, versões afetadas, saúde do app e ANRs.</td>
+              <td>Firebase Crashlytics, Sentry, Bugsnag</td>
+            </tr>
+            <tr>
+              <td><strong>Frontend web</strong></td>
+              <td>Erros de JavaScript, performance de carregamento, eventos de uso.</td>
+              <td>Sentry, LogRocket, analytics de produto</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout ok">
+          <strong>Regra prática:</strong> todo backend sério tem métricas e alertas (ex.: Grafana monitorando). Todo app tem crash analytics acompanhando a saúde. A IA deve deixar isso configurado ou, no mínimo, documentado com instruções claras de como ligar.
+        </div>
+
+        <h3>Checklist de observabilidade</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>- [ ] Logs estruturados com níveis (info, warn, error), sem dados sensíveis.
+- [ ] Métricas de latência, erro e uso de recursos expostas.
+- [ ] Dashboard mínimo de saúde do sistema (ex.: Grafana).
+- [ ] Alertas para erro alto, indisponibilidade e degradação.
+- [ ] Crash analytics configurado em apps (ex.: Crashlytics/Sentry).
+- [ ] Health check de endpoints principais.
+- [ ] Tracing habilitado em fluxos críticos (quando aplicável).
+- [ ] Como ligar/consultar o monitoramento está documentado.</code></pre></div>
+      </section>
+
+      <section id="qualidade">
+        <div class="section-kicker">18. Padrão técnico</div>
+        <h2>Qualidade técnica obrigatória</h2>
+        <p>Qualidade técnica deve ser automatizada e visível. A IA deve criar comandos simples para validar o projeto localmente e no CI.</p>
+        <h3>Comandos esperados</h3>
+        <table>
+          <thead>
+            <tr><th>Comando</th><th>Função</th><th>Obrigatório?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>lint</code></td><td>Verifica padrão de código.</td><td>Sim</td></tr>
+            <tr><td><code>format</code></td><td>Formata o código ou verifica formatação.</td><td>Recomendado</td></tr>
+            <tr><td><code>typecheck</code></td><td>Valida tipos.</td><td>Sim, se a stack permitir</td></tr>
+            <tr><td><code>test</code></td><td>Roda testes.</td><td>Sim</td></tr>
+            <tr><td><code>test:coverage</code></td><td>Mede cobertura.</td><td>Sim</td></tr>
+            <tr><td><code>build</code></td><td>Gera build final.</td><td>Sim</td></tr>
+            <tr><td><code>check:file-size</code></td><td>Identifica arquivos acima do limite.</td><td>Recomendado</td></tr>
+            <tr><td><code>check:duplicates</code></td><td>Ajuda a localizar duplicidades.</td><td>Recomendado</td></tr>
+          </tbody>
+        </table>
+        <h3>Critérios de código limpo</h3>
+        <ul>
+          <li>Nomes devem dizer o que a função, classe, arquivo ou pasta faz.</li>
+          <li>Funções devem ser pequenas e ter um objetivo claro.</li>
+          <li>Evitar parâmetros demais; usar objetos de entrada quando fizer sentido.</li>
+          <li>Evitar anotações tentando justificar código confuso; melhorar o código primeiro.</li>
+          <li>Tratar erros de forma consistente.</li>
+          <li>Não esconder lógica crítica em helpers genéricos.</li>
+          <li>Não criar abstração prematura sem uso real.</li>
+          <li>Não misturar refatoração ampla com feature pequena sem necessidade.</li>
+        </ul>
+      </section>
+
+      <section id="seguranca">
+        <div class="section-kicker">19. Proteção</div>
+        <h2>Segurança, ambiente e segredos</h2>
+        <p>A IA deve criar o projeto com segurança básica desde o início. Isso inclui variáveis de ambiente, validação, permissões, tratamento de erro e proteção contra exposição de dados sensíveis.</p>
+        <h3>Regras obrigatórias</h3>
+        <ul>
+          <li>Nunca salvar chaves, tokens, senhas ou credenciais reais no repositório.</li>
+          <li>Criar <code>.env.example</code> com nomes das variáveis, sem valores secretos.</li>
+          <li>Adicionar <code>.env</code> ao <code>.gitignore</code>.</li>
+          <li>Validar variáveis de ambiente na inicialização.</li>
+          <li>Não exibir stack trace sensível para usuário final em produção.</li>
+          <li>Validar toda entrada externa.</li>
+          <li>Aplicar controle de permissão quando houver usuários ou dados privados.</li>
+          <li>Registrar eventos importantes sem vazar dados sensíveis.</li>
+        </ul>
+        <h3>Modelo de <code>.env.example</code></h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># Application
+APP_ENV=development
+APP_PORT=3000
+APP_URL=http://localhost:3000
+
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/database
+
+# Auth
+AUTH_SECRET=change-me
+TOKEN_EXPIRES_IN=1d
+
+# External APIs
+EXTERNAL_API_BASE_URL=https://api.example.com
+EXTERNAL_API_KEY=replace-with-real-key-outside-git
+
+# Logging
+LOG_LEVEL=debug</code></pre></div>
+      </section>
+
+      <section id="banco">
+        <div class="section-kicker">20. Persistência</div>
+        <h2>Banco de dados, entidades e migrations</h2>
+        <p>Quando o projeto precisa salvar dados, a IA deve criar uma camada de persistência organizada, com migrations, seeds, documentação e repositórios por feature.</p>
+        <h3>Regras para banco</h3>
+        <ul>
+          <li>Não acessar banco diretamente da interface.</li>
+          <li>Não espalhar queries em qualquer arquivo.</li>
+          <li>Criar repository ou gateway para isolar persistência.</li>
+          <li>Criar migrations versionadas para mudanças de schema.</li>
+          <li>Criar seeds apenas para dados necessários de desenvolvimento/teste.</li>
+          <li>Documentar tabelas, campos críticos, índices e relacionamentos.</li>
+          <li>Tratar transações em operações críticas.</li>
+          <li>Evitar lógica de negócio escondida em queries difíceis de testar.</li>
+        </ul>
+        <h3>Documento mínimo de banco</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># DATABASE.md
+
+## Visão geral
+&lt;banco utilizado e motivo&gt;
+
+## Entidades principais
+### users
+- id
+- name
+- email
+- password_hash
+- role
+- created_at
+- updated_at
+
+## Relacionamentos
+- users 1:N projects
+- projects 1:N tasks
+
+## Índices
+- users.email único
+
+## Migrations
+- Cada mudança estrutural deve ter migration versionada.
+
+## Seeds
+- Seeds apenas para desenvolvimento e testes.
+
+## Regras de segurança
+- Não salvar senha em texto puro.
+- Não expor campos sensíveis em respostas de API.</code></pre></div>
+      </section>
+
+      <section id="api">
+        <div class="section-kicker">21. Contratos</div>
+        <h2>API, eventos e contratos de integração</h2>
+        <p>Se o projeto tiver API, a IA deve criar contratos claros. Frontend, backend e integrações externas não devem depender de adivinhação.</p>
+        <h3>Padrão de endpoint</h3>
+        <table>
+          <thead>
+            <tr><th>Item</th><th>Regra</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Nome</td><td>Usar recursos no plural quando fizer sentido: <code>/users</code>, <code>/projects</code>.</td></tr>
+            <tr><td>Métodos</td><td>Usar HTTP verbs corretamente: GET, POST, PUT/PATCH, DELETE.</td></tr>
+            <tr><td>Validação</td><td>Validar parâmetros, query, body e headers.</td></tr>
+            <tr><td>Resposta</td><td>Padronizar sucesso e erro.</td></tr>
+            <tr><td>Erros</td><td>Usar códigos claros: 400, 401, 403, 404, 409, 422, 500.</td></tr>
+            <tr><td>Paginação</td><td>Obrigatória em listas potencialmente grandes.</td></tr>
+            <tr><td>Autorização</td><td>Checar permissões em rotas privadas.</td></tr>
+            <tr><td>Documentação</td><td>Atualizar <code>docs/API_CONTRACT.md</code>.</td></tr>
+          </tbody>
+        </table>
+        <h3>Modelo de contrato de API</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># API_CONTRACT.md
+
+## POST /users
+Cria um novo usuário.
+
+### Request
+{
+  "name": "Maria",
+  "email": "maria@example.com",
+  "password": "strong-password"
+}
+
+### Response 201
+{
+  "data": {
+    "id": "user_id",
+    "name": "Maria",
+    "email": "maria@example.com"
+  }
+}
+
+### Errors
+- 400: payload inválido
+- 409: e-mail já cadastrado
+- 500: erro inesperado
+
+### Regras
+- E-mail deve ser único.
+- Senha deve ser armazenada com hash.
+- Resposta não pode expor password_hash.</code></pre></div>
+      </section>
+
+      <section id="frontend">
+        <div class="section-kicker">22. Interface</div>
+        <h2>Frontend, telas e componentes</h2>
+        <p>Projetos com interface devem separar tela, componente, estado, chamada de API, validação e tipos. A IA não deve criar telas gigantes com tudo dentro.</p>
+        <h3>Estrutura sugerida para frontend</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>src/
+  app/
+    routes/
+    layouts/
+    providers/
+
+  features/
+    users/
+      pages/
+        UsersListPage.tsx
+        UserCreatePage.tsx
+      components/
+        UserForm.tsx
+        UserTable.tsx
+      hooks/
+        useUsers.ts
+      services/
+        usersApi.ts
+      schemas/
+        userSchema.ts
+      types/
+        userTypes.ts
+      tests/
+        UserForm.test.tsx
+
+  shared/
+    components/
+      Button.tsx
+      Modal.tsx
+      Input.tsx
+    hooks/
+    utils/
+    styles/
+    api/
+    types/</code></pre></div>
+        <h3>Regras de frontend</h3>
+        <ul>
+          <li>Páginas coordenam fluxo, mas não devem conter lógica pesada.</li>
+          <li>Componentes visuais devem ser reutilizáveis e pequenos.</li>
+          <li>Chamadas de API devem ficar em services ou clients próprios.</li>
+          <li>Validação de formulário deve ficar em schema ou validator.</li>
+          <li>Estados complexos devem ser isolados em hooks, stores ou services.</li>
+          <li>Componentes compartilhados devem ter API simples e documentada.</li>
+          <li>Telas críticas devem ter testes de comportamento.</li>
+        </ul>
+        <h3>Separação correta</h3>
+        <table>
+          <thead>
+            <tr><th>Arquivo</th><th>Responsabilidade</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>UserCreatePage.tsx</code></td><td>Montar layout da página e conectar fluxo.</td></tr>
+            <tr><td><code>UserForm.tsx</code></td><td>Renderizar formulário e emitir submit.</td></tr>
+            <tr><td><code>userSchema.ts</code></td><td>Validar dados do formulário.</td></tr>
+            <tr><td><code>usersApi.ts</code></td><td>Comunicar com backend.</td></tr>
+            <tr><td><code>useUsers.ts</code></td><td>Controlar estado e efeitos relacionados a usuários.</td></tr>
+            <tr><td><code>userTypes.ts</code></td><td>Definir tipos da feature.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="backend">
+        <div class="section-kicker">23. Servidor</div>
+        <h2>Backend, services e regras de negócio</h2>
+        <p>No backend, a IA deve proteger a regra de negócio. Controller não é lugar de regra complexa. Repository não é lugar de decisão de negócio. Service ou use case deve concentrar o comportamento testável.</p>
+        <h3>Estrutura sugerida para backend</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>src/
+  app/
+    server.ts
+    routes.ts
+    container.ts
+
+  features/
+    auth/
+      auth.controller.ts
+      auth.service.ts
+      auth.repository.ts
+      auth.validators.ts
+      auth.types.ts
+      auth.test.ts
+
+    users/
+      users.controller.ts
+      users.service.ts
+      users.repository.ts
+      users.validators.ts
+      users.types.ts
+      users.test.ts
+
+  shared/
+    config/
+      env.ts
+    database/
+      client.ts
+    errors/
+      AppError.ts
+      errorHandler.ts
+    logging/
+      logger.ts
+    security/
+      password.ts
+      tokens.ts
+    utils/</code></pre></div>
+        <h3>Fluxo interno recomendado</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>Request
+  -&gt; Route/Controller
+  -&gt; Validator
+  -&gt; Service/UseCase
+  -&gt; Repository/Gateway
+  -&gt; Database/External API
+  -&gt; Mapper/Presenter
+  -&gt; Response</code></pre></div>
+        <h3>Regras de backend</h3>
+        <ul>
+          <li>Controller deve ser fino.</li>
+          <li>Service deve ser testável sem servidor real.</li>
+          <li>Repository deve isolar detalhes de persistência.</li>
+          <li>Validação deve acontecer antes da regra principal.</li>
+          <li>Erros devem ser padronizados.</li>
+          <li>Logs devem ajudar debug sem vazar dados sensíveis.</li>
+          <li>Operações críticas devem considerar transação.</li>
+          <li>Integrações externas devem ter gateway e testes com mock.</li>
+        </ul>
+      </section>
+
+      <section id="ia-projetos">
+        <div class="section-kicker">24. Projetos que usam IA</div>
+        <h2>Organização especial para projetos com agentes, prompts ou automações de IA</h2>
+        <p>Quando o próprio produto usa IA, prompts, agentes, embeddings, ferramentas ou automações, a IA deve organizar esses elementos como código de produção, e não como textos soltos.</p>
+        <h3>Estrutura recomendada</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>src/
+  ai/
+    agents/
+      planner.agent.ts
+      reviewer.agent.ts
+    prompts/
+      project-planner.prompt.md
+      code-review.prompt.md
+    tools/
+      file-system.tool.ts
+      repository-search.tool.ts
+    schemas/
+      agent-output.schema.ts
+    evaluations/
+      planner.eval.ts
+    guardrails/
+      safety-rules.ts
+      output-validator.ts
+    memory/
+      memory.store.ts
+
+  features/
+  shared/
+
+docs/
+  AI_BEHAVIOR.md
+  PROMPT_REGISTRY.md
+  EVALUATION_STRATEGY.md</code></pre></div>
+        <h3>Regras para prompts</h3>
+        <ul>
+          <li>Prompts importantes devem ficar versionados em arquivos.</li>
+          <li>Cada prompt deve ter objetivo, entrada esperada, saída esperada e restrições.</li>
+          <li>Saídas de IA devem ter schema de validação quando forem usadas pelo sistema.</li>
+          <li>Agentes devem ter responsabilidade clara.</li>
+          <li>Ferramentas de agente devem ter permissão limitada.</li>
+          <li>Resultados importantes devem ter logs e rastreabilidade.</li>
+          <li>Prompts críticos devem ter avaliações automatizadas.</li>
+        </ul>
+        <h3>Modelo de registro de prompt</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># PROMPT_REGISTRY.md
+
+## project-planner.prompt.md
+
+### Objetivo
+Transformar ideia de produto em plano técnico inicial.
+
+### Entrada
+- descrição do projeto
+- restrições técnicas
+- público-alvo
+
+### Saída esperada
+- resumo
+- arquitetura proposta
+- módulos
+- riscos
+- próximos passos
+
+### Restrições
+- não gerar código antes de definir arquitetura
+- não inventar integrações não solicitadas sem registrar premissa
+- retornar saída em formato validável</code></pre></div>
+      </section>
+
+      <section id="templates">
+        <div class="section-kicker">25. Modelos prontos</div>
+        <h2>Templates que a IA deve criar no projeto</h2>
+        <p>Estes modelos podem ser copiados diretamente para os arquivos do repositório.</p>
+
+        <details open>
+          <summary>Template: <code>docs/AI_PROJECT_RULES.md</code></summary>
+          <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># AI_PROJECT_RULES.md
+
+## Regra principal
+A IA deve criar, alterar e revisar este projeto seguindo arquitetura modular, arquivos pequenos, testes obrigatórios, documentação viva e fluxo seguro de Git.
+
+## Antes de implementar
+- Ler README, docs, estrutura de pastas e testes existentes.
+- Identificar stack, módulos e padrões.
+- Criar ou usar branch específica.
+- Procurar funcionalidade existente antes de criar nova.
+- Planejar arquivos que serão criados ou alterados.
+
+## Durante a implementação
+- Não trabalhar direto na main.
+- Não duplicar função, tela, endpoint, service, componente, tabela ou validação.
+- Manter arquivos preferencialmente abaixo de 200 linhas.
+- Separar responsabilidade por camada.
+- Criar testes para regra de negócio.
+- Atualizar documentação aplicável.
+
+## Antes de concluir
+- Rodar lint.
+- Rodar typecheck, se aplicável.
+- Rodar testes.
+- Rodar cobertura.
+- Rodar build.
+- Revisar diff contra a main.
+- Preparar descrição de pull request.
+
+## Definição de pronto
+Uma tarefa só está pronta quando o código está organizado, testado, documentado, sem duplicidade, com diff revisado e pronto para pull request.</code></pre></div>
+        </details>
+
+        <details>
+          <summary>Template: <code>.github/pull_request_template.md</code></summary>
+          <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>## Objetivo
+Explique o que este PR entrega.
+
+## Tipo de alteração
+- [ ] Feature
+- [ ] Correção
+- [ ] Refatoração
+- [ ] Testes
+- [ ] Documentação
+- [ ] Infraestrutura
+
+## Escopo
+Liste o que foi alterado.
+
+## Fora do escopo
+Liste o que não foi alterado.
+
+## Arquivos principais
+- `arquivo`: motivo
+
+## Duplicidade verificada
+- [ ] Procurei funcionalidade existente antes de criar nova.
+- [ ] Reutilizei código existente quando aplicável.
+- [ ] Não criei módulo paralelo desnecessário.
+
+## Testes
+- [ ] Unitários
+- [ ] Integração
+- [ ] E2E
+- [ ] Cobertura
+- [ ] Lint
+- [ ] Typecheck
+- [ ] Build
+
+## Arquivos acima de 200 linhas
+- [ ] Não há
+- [ ] Há, com justificativa abaixo
+
+Justificativa:
+
+## Documentação atualizada
+- [ ] README
+- [ ] ARCHITECTURE
+- [ ] FEATURE_MAP
+- [ ] API_CONTRACT
+- [ ] DATABASE
+- [ ] TEST_STRATEGY
+- [ ] Não se aplica
+
+## Riscos
+Liste riscos técnicos, regressões possíveis ou pontos de atenção.
+
+## Checklist final
+- [ ] Não alterei diretamente a main.
+- [ ] O diff está limitado ao escopo.
+- [ ] Não há credenciais no código.
+- [ ] O projeto roda localmente.
+- [ ] O CI deve passar.</code></pre></div>
+        </details>
+
+        <details>
+          <summary>Template: <code>docs/DECISIONS/0001-initial-architecture.md</code></summary>
+          <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># ADR 0001: Arquitetura inicial
+
+## Status
+Aceita
+
+## Contexto
+O projeto precisa de uma base organizada para crescer com segurança, permitir trabalho por branches, testes automatizados e documentação clara.
+
+## Decisão
+Adotar arquitetura modular por features, com separação entre entrada, regra de negócio, persistência, validação, tipos, testes e documentação.
+
+## Consequências positivas
+- Mais fácil para humanos e IAs entenderem o projeto.
+- Menor risco de duplicidade.
+- Testes ficam mais simples.
+- Alterações ficam menores e rastreáveis.
+
+## Consequências negativas
+- Exige mais disciplina inicial.
+- Pode parecer mais verboso em projetos pequenos.
+
+## Regras relacionadas
+- Arquivos preferencialmente abaixo de 200 linhas.
+- Branch por tarefa.
+- Pull request com diff revisado.
+- Testes para regra de negócio.</code></pre></div>
+        </details>
+
+        <details>
+          <summary>Template: <code>README.md</code></summary>
+          <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code># &lt;Nome do Projeto&gt;
+
+## Objetivo
+&lt;descrição curta do projeto&gt;
+
+## Stack
+- &lt;tecnologia 1&gt;
+- &lt;tecnologia 2&gt;
+- &lt;tecnologia 3&gt;
+
+## Requisitos
+- &lt;runtime&gt;
+- &lt;banco&gt;
+- &lt;gerenciador de pacotes&gt;
+
+## Instalação
+```bash
+&lt;comando de instalação&gt;
+```
+
+## Variáveis de ambiente
+Copie `.env.example` para `.env` e configure os valores.
+
+## Executar localmente
+```bash
+&lt;comando para rodar&gt;
+```
+
+## Testes
+```bash
+&lt;comando de teste&gt;
+```
+
+## Build
+```bash
+&lt;comando de build&gt;
+```
+
+## Estrutura do projeto
+Explique as principais pastas.
+
+## Fluxo de desenvolvimento
+- Criar branch por tarefa.
+- Não trabalhar direto na main.
+- Abrir pull request.
+- Rodar validações antes de merge.
+
+## Documentação
+- docs/PROJECT_BRIEF.md
+- docs/ARCHITECTURE.md
+- docs/FEATURE_MAP.md
+- docs/TEST_STRATEGY.md
+- docs/DEPLOYMENT.md</code></pre></div>
+        </details>
+      </section>
+
+      <section id="prompt">
+        <div class="section-kicker">26. Prompt operacional</div>
+        <h2>Prompt mestre universal para IA criar projetos completos</h2>
+        <p>Use este prompt como instrução principal quando quiser que uma IA crie ou reorganize um projeto completo seguindo este padrão.</p>
+        <div class="code-wrap" id="prompt-master"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>Você é a IA responsável por criar, organizar, implementar, testar e documentar este projeto como Arquiteto de Software, Coordenador Técnico, Desenvolvedor Sênior, QA e DevOps.
+
+Objetivo:
+Criar um projeto completo, organizado, modular, testável, documentado, seguro para evolução e preparado para uso com Git, branches, pull requests, testes e CI/CD.
+
+Regras obrigatórias:
+1. Não comece escrevendo código sem antes transformar o pedido em especificação técnica mínima.
+2. Crie ou atualize os documentos fundamentais do projeto:
+   - README.md
+   - docs/PROJECT_BRIEF.md
+   - docs/AI_PROJECT_RULES.md
+   - docs/ARCHITECTURE.md
+   - docs/FEATURE_MAP.md
+   - docs/API_CONTRACT.md, se houver API
+   - docs/DATABASE.md, se houver banco
+   - docs/TEST_STRATEGY.md
+   - docs/DEPLOYMENT.md
+   - docs/DECISIONS/0001-initial-architecture.md
+3. Organize o código por features ou domínios, evitando pastas genéricas sem responsabilidade clara.
+4. Separe responsabilidades em arquivos dedicados:
+   - controller/route para entrada e saída
+   - service/use case para regra de negócio
+   - repository/gateway para persistência e integrações
+   - validators/schemas para validação
+   - types/dtos para contratos
+   - constants para constantes
+   - tests para testes
+5. Mantenha arquivos preferencialmente abaixo de 200 linhas. Ao passar disso, avalie fragmentação por responsabilidade. Se não fragmentar, registre justificativa.
+6. Antes de criar nova funcionalidade, procure se já existe algo igual ou parecido no projeto.
+7. Não duplique telas, funções, endpoints, services, componentes, tabelas, validações ou regras de negócio.
+8. Não trabalhe diretamente na branch main. Use branch específica:
+   - init/project-foundation
+   - feature/nome-da-feature
+   - fix/nome-do-bug
+   - refactor/nome-do-modulo
+   - test/nome-do-modulo
+   - docs/nome-do-documento
+9. Faça alterações pequenas, rastreáveis e limitadas ao escopo.
+10. Crie testes para toda regra de negócio nova ou alterada.
+11. Ao corrigir bug, crie teste de regressão.
+12. Configure comandos de qualidade:
+   - lint
+   - format, se aplicável
+   - typecheck, se aplicável
+   - test
+   - test:coverage
+   - build
+13. Configure pipeline de CI/CD com validação de lint, typecheck, testes, cobertura e build.
+14. Nunca grave segredos reais no repositório. Use .env.example e .gitignore.
+15. Documente variáveis de ambiente, setup local, testes, build e deploy.
+16. Revise o diff antes de concluir e explique o que mudou, por que mudou e quais testes protegem a alteração.
+17. Prepare uma descrição de pull request com objetivo, escopo, alterações, testes, riscos e documentação atualizada.
+18. Em projetos grandes, segregue a documentação por feature: cada feature deve conter seu próprio README, contexto, contrato de API e instruções, mantendo na raiz apenas o que for transversal ao projeto inteiro.
+19. Planeje observabilidade como parte da entrega: logs estruturados, métricas, alertas e health check no backend; crash analytics em apps. Configure ou, no mínimo, documente como ligar.
+20. Para trabalho paralelo, crie branches por frente/squad em cada setor importante do sistema e use worktrees quando várias frentes atuarem ao mesmo tempo, integrando tudo por pull request com merge por diff.
+21. Encerre todo processo que você iniciar (test runners, watchers, dev servers, workers) ao concluir a tarefa. Em automação, use execução única em vez de modo watch. Nunca deixe processos órfãos consumindo a máquina.
+
+Fluxo obrigatório para projeto do zero:
+1. Criar brief do projeto.
+2. Definir stack e arquitetura.
+3. Criar estrutura de repositório.
+4. Criar documentação base.
+5. Criar configurações iniciais.
+6. Criar fundação técnica.
+7. Implementar primeira feature vertical completa.
+8. Criar testes da feature.
+9. Criar CI/CD.
+10. Planejar observabilidade mínima.
+11. Revisar diff e finalizar com instruções de execução.
+
+Fluxo obrigatório para projeto existente:
+1. Ler estrutura atual, README, docs, testes e configs.
+2. Mapear o repositório: features, módulos, pontos de entrada, dependências e maiores dores (arquivos grandes, duplicidade, áreas sem teste).
+3. Gerar diagnóstico técnico e verificar a cobertura de testes atual.
+4. Criar documentação segregada por feature retroativa (README, contexto, contrato, instruções) para as áreas que serão tocadas.
+5. Identificar duplicidades de funcionalidade e propor consolidação antes de criar algo novo.
+6. Criar testes de caracterização para o comportamento atual antes de alterar código sem testes.
+7. Criar branch específica e alterar somente o necessário.
+8. Rodar validações.
+9. Atualizar documentação.
+10. Propor observabilidade mínima se não existir (métricas e alertas no backend, crash analytics no app).
+11. Preparar PR.
+
+Critério de conclusão:
+A tarefa só está pronta quando o projeto estiver organizado, executável, testado, documentado, sem duplicidade evidente, com arquivos coesos, pipeline configurado ou planejado, observabilidade configurada ou documentada, diff revisado e pronto para pull request.</code></pre></div>
+        <h3>Prompt curto para criação rápida</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>Crie este projeto do zero seguindo um padrão profissional: arquitetura modular por features, arquivos pequenos, documentação base, testes, branch por tarefa, CI/CD, .env.example, README, feature map, regras para IA e pull request template. Não duplique funcionalidades, separe responsabilidades e entregue uma primeira versão executável com instruções claras.</code></pre></div>
+      </section>
+
+      <section id="checklists">
+        <div class="section-kicker">27. Controle operacional</div>
+        <h2>Checklists para a IA seguir</h2>
+        <h3>Checklist inicial de projeto</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>- [ ] Entendi o objetivo do projeto.
+- [ ] Defini usuários principais.
+- [ ] Defini escopo da primeira versão.
+- [ ] Registrei premissas.
+- [ ] Escolhi stack ou justifiquei proposta.
+- [ ] Defini arquitetura inicial.
+- [ ] Criei README.
+- [ ] Criei docs fundamentais.
+- [ ] Criei .env.example.
+- [ ] Criei .gitignore.
+- [ ] Criei estrutura modular.
+- [ ] Criei branch inicial.
+- [ ] Configurei testes.
+- [ ] Configurei lint/typecheck/build.
+- [ ] Configurei CI mínimo.
+- [ ] Entreguei instruções para rodar.</code></pre></div>
+        <h3>Checklist antes de criar uma feature</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>- [ ] A feature tem objetivo claro.
+- [ ] Existe especificação mínima.
+- [ ] Verifiquei se já existe feature parecida.
+- [ ] Verifiquei componentes, services, endpoints e tabelas existentes.
+- [ ] Criei ou selecionei branch correta.
+- [ ] Listei arquivos que serão alterados.
+- [ ] Planejei testes.
+- [ ] Confirmei impacto na documentação.</code></pre></div>
+        <h3>Checklist antes de finalizar uma tarefa</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>- [ ] O código está dentro do escopo.
+- [ ] Não há duplicidade evidente.
+- [ ] Arquivos estão pequenos e coesos.
+- [ ] Arquivos acima de 200 linhas foram justificados ou fragmentados.
+- [ ] Regras de negócio têm testes.
+- [ ] Bug corrigido tem teste de regressão.
+- [ ] Lint foi executado.
+- [ ] Typecheck foi executado, se aplicável.
+- [ ] Testes foram executados.
+- [ ] Build foi executado.
+- [ ] Documentação foi atualizada.
+- [ ] .env não contém segredo real commitado.
+- [ ] Processos iniciados durante a tarefa (testes, watchers, servers) foram encerrados.
+- [ ] Diff foi revisado.
+- [ ] Pull request pode ser aberto.</code></pre></div>
+      </section>
+
+      <section id="antipadroes">
+        <div class="section-kicker">28. O que evitar</div>
+        <h2>Anti-padrões que a IA deve detectar e corrigir</h2>
+        <table>
+          <thead>
+            <tr><th>Anti-padrão</th><th>Problema</th><th>Correção</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Arquivo gigante</td>
+              <td>Mistura responsabilidades e dificulta interpretação.</td>
+              <td>Dividir por camada, função ou feature.</td>
+            </tr>
+            <tr>
+              <td>Pasta <code>utils</code> enorme</td>
+              <td>Vira depósito sem dono.</td>
+              <td>Mover funções para features ou shared específico.</td>
+            </tr>
+            <tr>
+              <td>Duplicar tela ou service</td>
+              <td>Cria versões conflitantes da mesma funcionalidade.</td>
+              <td>Reutilizar, refatorar ou consolidar.</td>
+            </tr>
+            <tr>
+              <td>Controller com regra de negócio</td>
+              <td>Dificulta teste e reaproveitamento.</td>
+              <td>Mover regra para service/use case.</td>
+            </tr>
+            <tr>
+              <td>Repository com decisão de negócio</td>
+              <td>Acopla regra ao banco.</td>
+              <td>Mover decisão para service.</td>
+            </tr>
+            <tr>
+              <td>Sem testes</td>
+              <td>Regressões passam despercebidas.</td>
+              <td>Adicionar testes unitários e integração quando necessário.</td>
+            </tr>
+            <tr>
+              <td>Sem documentação</td>
+              <td>Próximas alterações viram adivinhação.</td>
+              <td>Criar docs mínimos e feature map.</td>
+            </tr>
+            <tr>
+              <td>Trabalhar direto na main</td>
+              <td>Remove segurança de revisão.</td>
+              <td>Usar branch e PR.</td>
+            </tr>
+            <tr>
+              <td>Merge substituindo tudo</td>
+              <td>Pode apagar trabalho paralelo.</td>
+              <td>Revisar diff e enviar apenas alterações necessárias.</td>
+            </tr>
+            <tr>
+              <td>Segredo no código</td>
+              <td>Risco grave de segurança.</td>
+              <td>Usar variáveis de ambiente e rotacionar segredo vazado.</td>
+            </tr>
+            <tr>
+              <td>Alterar projeto existente sem mapear</td>
+              <td>Gera duplicidade e quebra o que já funciona.</td>
+              <td>Mapear features, documentar contexto e verificar duplicidade antes de codar.</td>
+            </tr>
+            <tr>
+              <td>Documentação global única em projeto grande</td>
+              <td>Contexto difícil de achar e fácil de desatualizar.</td>
+              <td>Segregar documentação por feature, ao lado do código.</td>
+            </tr>
+            <tr>
+              <td>Sistema sem monitoramento</td>
+              <td>Falhas só são descobertas quando o usuário reclama.</td>
+              <td>Configurar observabilidade mínima: logs, métricas, alertas e crash analytics.</td>
+            </tr>
+            <tr>
+              <td>Watchers e workers órfãos abandonados</td>
+              <td>Processos sem dono consomem CPU indefinidamente e deixam a máquina lenta.</td>
+              <td>Encerrar todo processo iniciado ao fim da tarefa; usar execução única em automação; limpar órfãos (PPID=1).</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="pronto">
+        <div class="section-kicker">29. Critério final</div>
+        <h2>Definição de pronto</h2>
+        <p>Uma entrega da IA só pode ser considerada pronta quando atender aos critérios abaixo.</p>
+        <div class="callout ok">
+          <strong>Definição de pronto:</strong> projeto executável, organizado por módulos, documentado, testado, monitorável, sem duplicidade evidente, com arquivos coesos, validações passando e pronto para pull request ou deploy conforme o estágio do projeto.
+        </div>
+        <h3>Critérios finais</h3>
+        <div class="code-wrap"><button class="copy-btn" onclick="copyCode(this)">Copiar</button><pre><code>- [ ] Projeto tem README com instalação, execução, testes e build.
+- [ ] Projeto tem documentação técnica base em docs/.
+- [ ] Projeto tem arquitetura modular por features ou domínios.
+- [ ] Arquivos estão pequenos e com responsabilidade clara.
+- [ ] Não há duplicidade evidente de funcionalidades.
+- [ ] Branch principal não foi alterada diretamente.
+- [ ] Há branch específica para a entrega.
+- [ ] Pull request pode ser criado com descrição clara.
+- [ ] Código novo tem testes.
+- [ ] Correção de bug tem teste de regressão.
+- [ ] Lint passa.
+- [ ] Typecheck passa, se aplicável.
+- [ ] Testes passam.
+- [ ] Build passa.
+- [ ] CI/CD está configurado ou documentado.
+- [ ] Variáveis de ambiente estão documentadas.
+- [ ] Nenhum segredo real está versionado.
+- [ ] Feature map foi atualizado.
+- [ ] Decisões relevantes foram registradas.
+- [ ] Observabilidade mínima está configurada ou documentada (logs, métricas, alertas; crash analytics em apps).
+- [ ] Em projeto grande, a documentação está segregada por feature ou o plano de segregação está registrado.
+- [ ] Diff foi revisado.
+- [ ] Riscos e próximos passos foram documentados.</code></pre></div>
+        <h3>Conclusão operacional</h3>
+        <p>Este manual transforma a criação de projetos por IA em um processo disciplinado. A IA passa a trabalhar como uma equipe técnica: entende, planeja, estrutura, implementa, testa, documenta, revisa e prepara a entrega. A regra principal é simples: qualquer projeto deve nascer organizado para que possa crescer sem virar um conjunto de arquivos grandes, duplicados e difíceis de manter.</p>
+      </section>
+
+      <div class="footer">
+        Manual universal para criação e organização de projetos com IA · Documento autocontido e pronto para uso em qualquer repositório.
+        <br><br>
+        <strong>Onde este manual vive:</strong> em cada projeto, a cópia oficial fica em <code>docs/reference/Manual_Universal_IA_Criar_Projeto_Organizado.html</code>.
+        A fonte master fica em <code>/Volumes/DOCKER-SSD/00/willaudios/</code> — atualizações devem ser feitas na fonte e propagadas com <code>sync_manual.sh</code>, nunca editando as cópias diretamente.
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function copyCode(button) {
+      const wrap = button.closest('.code-wrap');
+      const code = wrap.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = button.innerText;
+        button.innerText = 'Copiado';
+        setTimeout(() => button.innerText = old, 1200);
+      });
+    }
+  </script>
+</body>
+</html>

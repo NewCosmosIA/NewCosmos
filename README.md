@@ -232,3 +232,12 @@ Para dúvidas técnicas sobre este setup:
 - Vercel docs: vercel.com/docs
 - 1Password CLI: developer.1password.com/docs/cli
 - Anthropic API: docs.anthropic.com
+
+---
+
+## DOCUMENTAÇÃO TÉCNICA (padrão Manual Universal IA)
+
+Este README é o guia de **deploy**. A documentação viva do projeto está em `docs/`:
+`PROJECT_BRIEF` · `ARCHITECTURE` · `FEATURE_MAP` · `API_CONTRACT` · `DATABASE` · `SECURITY` · `AI_PROJECT_RULES` · `TEST_STRATEGY` · `DECISIONS/`.
+
+Versionado no Gitea (`newcosmos/newcosmos`, origin); GitHub `NewCosmosIA/NewCosmos` mantido como backup. Trabalhar sempre em branch + PR — nunca direto na `main`.
