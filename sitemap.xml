@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.newcosmos.com.br/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://www.newcosmos.com.br/praticas-integrativas-online/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.newcosmos.com.br/es/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.newcosmos.com.br/es/practicas-integrativas-online/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.newcosmos.com.br/praticas-integrativas-online/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://www.newcosmos.com.br/meditacao-guiada-online/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.newcosmos.com.br/autoconhecimento/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.newcosmos.com.br/gestao-do-estresse/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -14,6 +12,20 @@
   <url><loc>https://www.newcosmos.com.br/equilibrio-emocional/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.newcosmos.com.br/recomeco-de-vida/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.newcosmos.com.br/rotina-de-bem-estar/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.newcosmos.com.br/privacidade.html</loc><lastmod>2026-07-11</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://www.newcosmos.com.br/termos.html</loc><lastmod>2026-07-11</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.newcosmos.com.br/privacidade.html</loc><lastmod>2026-07-12</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.newcosmos.com.br/termos.html</loc><lastmod>2026-07-12</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/</loc><lastmod>2026-07-12</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/practicas-integrativas-online/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/meditacion-guiada-online/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/autoconocimiento/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/gestion-del-estres/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/bienestar-con-ia/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/estres-en-el-trabajo/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/mente-acelerada/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/insomnio-y-sueno/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/equilibrio-emocional/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/recomenzar-en-la-vida/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/rutina-de-bienestar/</loc><lastmod>2026-07-12</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/privacidad.html</loc><lastmod>2026-07-12</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://www.newcosmos.com.br/es/terminos.html</loc><lastmod>2026-07-12</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
