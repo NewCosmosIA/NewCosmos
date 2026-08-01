@@ -1,11 +1,15 @@
 {
     "version": 2,
+    "crons": [
+          { "path": "/api/keepalive", "schedule": "0 8 * * *" }
+    ],
     "functions": {
           "api/chat.js": { "maxDuration": 30 },
           "api/validate-token.js": { "maxDuration": 10 },
           "api/webhook-hotmart.js": { "maxDuration": 15 },
           "api/webhook-calcom.js": { "maxDuration": 15 },
           "api/session-report.js": { "maxDuration": 30 },
-          "api/update-session.js": { "maxDuration": 10 }
+          "api/update-session.js": { "maxDuration": 10 },
+          "api/keepalive.js": { "maxDuration": 10 }
     }
 }
